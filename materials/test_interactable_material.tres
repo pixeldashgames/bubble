@@ -1,0 +1,8 @@
+[gd_resource type="SphereMesh" load_steps=2 format=3 uid="uid://cfjcoubychlji"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gybsi"]
+albedo_color = Color(0.62, 0.59954, 0.2108, 1)
+
+[resource]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_gybsi")

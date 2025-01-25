@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5cbdvhuyr2sb"]
+
+[ext_resource type="Script" path="res://scripts/player_inventory.gd" id="1_e7o61"]
+[ext_resource type="Script" path="res://scripts/game_resource.gd" id="2_n42ux"]
+[ext_resource type="Resource" uid="uid://bhcwmn3yhumwm" path="res://items/scrap_metal.tres" id="3_1rirq"]
+
+[node name="PlayerInventory" type="Node"]
+script = ExtResource("1_e7o61")
+initial_resources = Array[ExtResource("2_n42ux")]([ExtResource("3_1rirq")])
+initial_resources_amounts = Array[int]([25])

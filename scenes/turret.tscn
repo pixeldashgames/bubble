@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://bf0hydilsdven"]
+
+[ext_resource type="Script" path="res://scripts/turret.gd" id="1_2txny"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="2_n2asd"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3m4xu"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3htfd"]
+radius = 5.0
+
+[node name="Turret" type="Node3D" node_paths=PackedStringArray("turret_head", "turret_health")]
+script = ExtResource("1_2txny")
+turret_head = NodePath("TurretHead")
+turret_health = NodePath("Health")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_3m4xu")
+
+[node name="TurretHead" type="Node3D" parent="."]
+transform = Transform3D(0.999997, 0.00151934, -0.00200598, -0.00152264, 0.999997, -0.00163537, 0.00200347, 0.00163843, 0.999997, 0, 0, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="TurretHead"]
+transform = Transform3D(0.16, 0, 0, 0, -1.09278e-08, -0.16, 0, 0.25, -6.99382e-09, 0.25, 0.8, -0.5)
+mesh = SubResource("CylinderMesh_3m4xu")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="TurretHead"]
+transform = Transform3D(0.16, 0, 0, 0, -1.09278e-08, -0.16, 0, 0.25, -6.99382e-09, -0.25, 0.8, -0.5)
+mesh = SubResource("CylinderMesh_3m4xu")
+skeleton = NodePath("../..")
+
+[node name="Health" type="Node3D" parent="."]
+script = ExtResource("2_n2asd")
+team = "humans"
+max_health = 1000.0
+
+[node name="TurretAggro" type="Area3D" parent="."]
+transform = Transform3D(0.999988, -0.00450298, 0.00182985, 0.00449959, 0.999988, 0.00185503, -0.00183819, -0.00184677, 0.999997, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurretAggro"]
+shape = SubResource("SphereShape3D_3htfd")
+
+[connection signal="body_entered" from="TurretAggro" to="." method="_on_turret_aggro_body_entered"]
+[connection signal="body_exited" from="TurretAggro" to="." method="_on_turret_aggro_body_exited"]

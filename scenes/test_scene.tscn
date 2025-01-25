@@ -1,0 +1,254 @@
+[gd_scene load_steps=18 format=3 uid="uid://bxj4lrnmk5fvy"]
+
+[ext_resource type="PackedScene" uid="uid://biqd83slug8ur" path="res://scenes/player.tscn" id="3_hmcrv"]
+[ext_resource type="Material" uid="uid://4ftusght3jek" path="res://materials/outline_material.tres" id="4_217e3"]
+[ext_resource type="Script" path="res://scripts/interactable.gd" id="4_lo67t"]
+[ext_resource type="PackedScene" uid="uid://cniq1400kw76k" path="res://scenes/player_pov.tscn" id="4_yerw1"]
+[ext_resource type="Script" path="res://scripts/interactable_outline.gd" id="5_bipst"]
+[ext_resource type="Resource" uid="uid://bhcwmn3yhumwm" path="res://items/scrap_metal.tres" id="5_vf7b7"]
+[ext_resource type="SphereMesh" uid="uid://cfjcoubychlji" path="res://materials/test_interactable_material.tres" id="8_ucp3a"]
+[ext_resource type="Script" path="res://scripts/pickupable.gd" id="11_einyw"]
+[ext_resource type="PackedScene" uid="uid://b8cl3thkam01k" path="res://scenes/enemy.tscn" id="13_dhiyv"]
+[ext_resource type="PackedScene" uid="uid://bf0hydilsdven" path="res://scenes/turret.tscn" id="13_rkh1s"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7stjb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wd5lg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_672sx"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_1hc8m"]
+vertices = PackedVector3Array(2, 0.4, -5, 3.25, 0.4, -6.25, 2.75, 0.4, -7.75, 0.5, 0.4, -5.25, 3.75, 0.4, -8.5, 3.75, 0.4, -29.5, -4.5, 0.4, -1, -3.25, 0.4, -1, 0, 0.4, -4, -29.5, 0.4, 0, -4.75, 0.4, 0, -29.5, 0.4, -29.5, 4.25, 0.4, -8.5, 7.25, 0.4, -5.5, 29.5, 0.4, -5.5, 29.5, 0.4, -29.5, 4.5, 0.4, -2, 3.5, 0.4, -1.25, 3.75, 0.4, 0, 5, 0.4, 0.75, 6.5, 0.4, -4.25, 5, 0.4, 1.5, 29.5, 0.4, 1.5, 4.5, 0.4, -2.75, 5.5, 0.4, -4.25, 2.75, 0.4, -1.25, -3, 0.4, 1, -2.25, 0.4, 1.75, -1, 0.4, 1.5, -2.75, 0.4, -0.75, -0.25, 0.4, 2.75, 1, 0.4, 3, -2.75, 0.4, 3, -4.5, 0.4, 1, -29.5, 0.4, 29.5, -0.75, 0.4, 29.5, -1.25, 0.4, 3.75, -2, 0.4, 3.75, 2.5, 0.4, 4.5, 2, 0.4, 4.5, 2, 0.4, 29.5, 29.5, 0.4, 29.5, 1, 0.4, 4)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 2), PackedInt32Array(7, 6, 8), PackedInt32Array(8, 6, 3), PackedInt32Array(6, 10, 9), PackedInt32Array(3, 6, 2), PackedInt32Array(2, 6, 5), PackedInt32Array(5, 6, 9), PackedInt32Array(5, 9, 11), PackedInt32Array(12, 4, 5), PackedInt32Array(12, 5, 13), PackedInt32Array(13, 5, 14), PackedInt32Array(14, 5, 15), PackedInt32Array(17, 16, 18), PackedInt32Array(18, 16, 19), PackedInt32Array(19, 20, 21), PackedInt32Array(21, 20, 13), PackedInt32Array(21, 13, 14), PackedInt32Array(21, 14, 22), PackedInt32Array(23, 24, 16), PackedInt32Array(16, 24, 20), PackedInt32Array(16, 20, 19), PackedInt32Array(1, 24, 0), PackedInt32Array(0, 24, 23), PackedInt32Array(25, 17, 18), PackedInt32Array(27, 26, 28), PackedInt32Array(28, 26, 29), PackedInt32Array(31, 30, 28), PackedInt32Array(18, 31, 25), PackedInt32Array(25, 31, 28), PackedInt32Array(25, 28, 29), PackedInt32Array(25, 29, 8), PackedInt32Array(29, 7, 8), PackedInt32Array(27, 32, 26), PackedInt32Array(26, 32, 33), PackedInt32Array(33, 32, 9), PackedInt32Array(9, 32, 34), PackedInt32Array(34, 32, 35), PackedInt32Array(9, 10, 33), PackedInt32Array(37, 36, 35), PackedInt32Array(32, 37, 35), PackedInt32Array(40, 39, 38), PackedInt32Array(21, 22, 38), PackedInt32Array(38, 22, 40), PackedInt32Array(40, 22, 41), PackedInt32Array(31, 42, 30), PackedInt32Array(30, 42, 36), PackedInt32Array(42, 39, 36), PackedInt32Array(36, 39, 35), PackedInt32Array(35, 39, 40)]
+geometry_parsed_geometry_type = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5c07f"]
+size = Vector3(60, 0.1, 60)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mbuaf"]
+albedo_color = Color(0.027, 0.16875, 0.27, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_18650"]
+
+[node name="TestScene" type="Node3D"]
+
+[node name="InteractableOutline" type="Node" parent="." node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("5_bipst")
+interactable = NodePath("../InteractableTest4/Interactable")
+mesh = NodePath("../InteractableTest4")
+outline_material = ExtResource("4_217e3")
+
+[node name="Player" parent="." instance=ExtResource("3_hmcrv")]
+
+[node name="PlayerPOV" parent="." instance=ExtResource("4_yerw1")]
+
+[node name="InteractableTest" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.431, -0.000261664, 5.12116)
+mesh = ExtResource("8_ucp3a")
+skeleton = NodePath("Interactable/Shape")
+
+[node name="Interactable" type="StaticBody3D" parent="InteractableTest"]
+script = ExtResource("4_lo67t")
+
+[node name="Shape" type="CollisionShape3D" parent="InteractableTest/Interactable"]
+shape = SubResource("SphereShape3D_7stjb")
+
+[node name="InteractableOutline" type="Node" parent="InteractableTest" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("5_bipst")
+interactable = NodePath("../Interactable")
+mesh = NodePath("..")
+outline_material = ExtResource("4_217e3")
+
+[node name="Pickupable" type="Node" parent="InteractableTest" node_paths=PackedStringArray("interactable", "parent_node")]
+script = ExtResource("11_einyw")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("5_vf7b7")
+amount_range = Vector2i(10, 15)
+parent_node = NodePath("..")
+
+[node name="InteractableTest2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.163037, -0.000261664, 7.74136)
+mesh = ExtResource("8_ucp3a")
+skeleton = NodePath("Interactable/Shape")
+
+[node name="Interactable" type="StaticBody3D" parent="InteractableTest2"]
+script = ExtResource("4_lo67t")
+
+[node name="Shape" type="CollisionShape3D" parent="InteractableTest2/Interactable"]
+shape = SubResource("SphereShape3D_7stjb")
+
+[node name="InteractableOutline" type="Node" parent="InteractableTest2" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("5_bipst")
+interactable = NodePath("../Interactable")
+mesh = NodePath("..")
+outline_material = ExtResource("4_217e3")
+
+[node name="Pickupable" type="Node" parent="InteractableTest2" node_paths=PackedStringArray("interactable", "parent_node")]
+script = ExtResource("11_einyw")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("5_vf7b7")
+amount_range = Vector2i(10, 15)
+parent_node = NodePath("..")
+
+[node name="InteractableTest3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.66306, -0.000261664, 2.43853)
+mesh = ExtResource("8_ucp3a")
+skeleton = NodePath("Interactable/Shape")
+
+[node name="Interactable" type="StaticBody3D" parent="InteractableTest3"]
+script = ExtResource("4_lo67t")
+
+[node name="Shape" type="CollisionShape3D" parent="InteractableTest3/Interactable"]
+shape = SubResource("SphereShape3D_7stjb")
+
+[node name="InteractableOutline" type="Node" parent="InteractableTest3" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("5_bipst")
+interactable = NodePath("../Interactable")
+mesh = NodePath("..")
+outline_material = ExtResource("4_217e3")
+
+[node name="Pickupable" type="Node" parent="InteractableTest3" node_paths=PackedStringArray("interactable", "parent_node")]
+script = ExtResource("11_einyw")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("5_vf7b7")
+amount_range = Vector2i(10, 15)
+parent_node = NodePath("..")
+
+[node name="InteractableTest4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.18922, -0.000261664, -4.81272)
+mesh = ExtResource("8_ucp3a")
+skeleton = NodePath("Interactable/Shape")
+
+[node name="Interactable" type="StaticBody3D" parent="InteractableTest4"]
+script = ExtResource("4_lo67t")
+
+[node name="Shape" type="CollisionShape3D" parent="InteractableTest4/Interactable"]
+shape = SubResource("SphereShape3D_7stjb")
+
+[node name="Pickupable" type="Node" parent="InteractableTest4" node_paths=PackedStringArray("interactable", "parent_node")]
+script = ExtResource("11_einyw")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("5_vf7b7")
+amount_range = Vector2i(10, 15)
+parent_node = NodePath("..")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.784, 0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D"]
+shape = SubResource("BoxShape3D_wd5lg")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Environment/StaticBody3D"]
+mesh = SubResource("BoxMesh_672sx")
+skeleton = NodePath("")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(0.760077, 0, -0.649833, 0, 1, 0, 0.649833, 0, 0.760077, -1.50684, 0.5, 2.63106)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D2"]
+shape = SubResource("BoxShape3D_wd5lg")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Environment/StaticBody3D2"]
+mesh = SubResource("BoxMesh_672sx")
+skeleton = NodePath("")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(0.760077, 0, -2.53195, 0, 1, 0, 0.649833, 0, 2.96149, 2.98905, 0.5, 2.29997)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D3"]
+shape = SubResource("BoxShape3D_wd5lg")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Environment/StaticBody3D3"]
+mesh = SubResource("BoxMesh_672sx")
+skeleton = NodePath("")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(-0.649833, 0, -2.96149, 0, 1, 0, 0.760077, 0, -2.53195, 2.21224, 0.5, -3.23582)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D4"]
+shape = SubResource("BoxShape3D_wd5lg")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Environment/StaticBody3D4"]
+mesh = SubResource("BoxMesh_672sx")
+skeleton = NodePath("")
+
+[node name="StaticBody3D5" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(-0.649833, 0, -2.96149, 0, 1, 0, 0.760077, 0, -2.53195, 4.94958, 0.5, -6.32871)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D5"]
+shape = SubResource("BoxShape3D_wd5lg")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Environment/StaticBody3D5"]
+mesh = SubResource("BoxMesh_672sx")
+skeleton = NodePath("")
+
+[node name="StaticBody3D6" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(-0.649833, 0, -2.96149, 0, 1, 0, 0.760077, 0, -2.53195, 4.94958, 0.5, -6.32871)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D6"]
+shape = SubResource("BoxShape3D_wd5lg")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Environment/StaticBody3D6"]
+mesh = SubResource("BoxMesh_672sx")
+skeleton = NodePath("")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.814463, -0.107314, 0.570205, -0.197528, 0.87276, 0.446399, -0.545557, -0.476207, 0.689633, 0.023, 11.2066, -1)
+
+[node name="Turret" parent="." instance=ExtResource("13_rkh1s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09717, -4.76837e-07, 7.65959)
+fire_rate = 500.0
+damage = 20.0
+tracking_time = 1000.0
+
+[node name="Enemy" parent="." instance=ExtResource("13_dhiyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.7823, 0.5, -10.2601)
+
+[node name="Enemy2" parent="." instance=ExtResource("13_dhiyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4902, 0.5, -5.40872)
+
+[node name="Enemy3" parent="." instance=ExtResource("13_dhiyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.1674, 0.5, -11.1042)
+
+[node name="Enemy4" parent="." instance=ExtResource("13_dhiyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3223, 0.5, 7.59739)
+
+[node name="Enemy5" parent="." instance=ExtResource("13_dhiyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6422, 0.500001, 3.45783)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_1hc8m")
+
+[node name="StaticBody3D7" type="StaticBody3D" parent="NavigationRegion3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+shape = SubResource("BoxShape3D_5c07f")
+
+[node name="Floor" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D7"]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_mbuaf")
+mesh = SubResource("PlaneMesh_18650")
+skeleton = NodePath("../../..")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+vertices = PackedVector3Array(3.15515, 0, -7.23147, 6.0696, 0, -4.69529, 6.74019, 0, -5.44325, 3.79134, 0, -7.97943)
+affect_navigation_mesh = true
+
+[node name="NavigationObstacle3D2" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+vertices = PackedVector3Array(0.419478, 0, -4.12431, 1.06427, 0, -4.89806, 4.01311, 0, -2.37907, 3.35972, 0, -1.61392)
+affect_navigation_mesh = true
+
+[node name="NavigationObstacle3D3" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+vertices = PackedVector3Array(-4.2999, 0, -0.505377, -3.31122, 0, -0.49678, -3.25964, 0, 0.483302, -4.34289, 0, 0.474705)
+affect_navigation_mesh = true
+
+[node name="NavigationObstacle3D4" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+vertices = PackedVector3Array(-2.20488, 0, 2.6492, -1.56009, 0, 1.91844, -0.803532, 0, 2.56323, -1.46552, 0, 3.31978)
+affect_navigation_mesh = true
+
+[node name="NavigationObstacle3D5" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+vertices = PackedVector3Array(1.34088, 0, 3.44714, 3.89425, 0, 0.515494, 4.63361, 0, 1.14309, 2.10603, 0, 4.09193)
+affect_navigation_mesh = true

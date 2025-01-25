@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GameResource" load_steps=3 format=3 uid="uid://bhcwmn3yhumwm"]
+
+[ext_resource type="Script" path="res://scripts/game_resource.gd" id="1_cxp3x"]
+[ext_resource type="Texture2D" uid="uid://qiotkea8hn53" path="res://icon.svg" id="1_mv51k"]
+
+[resource]
+script = ExtResource("1_cxp3x")
+name = "Scrap Metal"
+icon = ExtResource("1_mv51k")

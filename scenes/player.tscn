@@ -1,0 +1,40 @@
+[gd_scene load_steps=10 format=3 uid="uid://biqd83slug8ur"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_lbjs0"]
+[ext_resource type="Script" path="res://addons/guide/guide_action.gd" id="3_0o0e0"]
+[ext_resource type="Resource" uid="uid://carlgot4k511r" path="res://input/interact_1st.tres" id="4_m02wa"]
+[ext_resource type="Script" path="res://scripts/interaction_system.gd" id="5_2y1bu"]
+[ext_resource type="Resource" uid="uid://bltfb8kk6gfor" path="res://input/interact_2nd.tres" id="5_a2hki"]
+[ext_resource type="Resource" uid="uid://bbq5fkkhhy4dh" path="res://input/interact_3rd.tres" id="6_7ugyo"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5qwvj"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_knf0s"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1oqna"]
+radius = 2.0
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_lbjs0")
+move_speed = 5.0
+max_speed_delta = 15.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_5qwvj")
+
+[node name="PlayerModel" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_knf0s")
+skeleton = NodePath("")
+
+[node name="InteractionSystem" type="Area3D" parent="."]
+script = ExtResource("5_2y1bu")
+interact_inputs = Array[ExtResource("3_0o0e0")]([ExtResource("4_m02wa"), ExtResource("5_a2hki"), ExtResource("6_7ugyo")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_1oqna")
+
+[connection signal="body_entered" from="InteractionSystem" to="InteractionSystem" method="_on_body_entered"]
+[connection signal="body_exited" from="InteractionSystem" to="InteractionSystem" method="_on_body_exited"]

@@ -1,0 +1,103 @@
+[gd_scene load_steps=12 format=3 uid="uid://ufcrewj0mtbx"]
+
+[ext_resource type="Script" path="res://scripts/turret_builder.gd" id="1_mirbi"]
+[ext_resource type="Script" path="res://scripts/interactable_outline.gd" id="2_ka3rg"]
+[ext_resource type="Material" uid="uid://4ftusght3jek" path="res://materials/outline_material.tres" id="3_7agbd"]
+[ext_resource type="Script" path="res://scripts/interactable.gd" id="4_cubaj"]
+[ext_resource type="PackedScene" uid="uid://bf0hydilsdven" path="res://scenes/turret.tscn" id="5_m2f0q"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_11lqj"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_itcw4"]
+material = SubResource("StandardMaterial3D_11lqj")
+inner_radius = 0.292
+outer_radius = 0.5
+rings = 32
+ring_segments = 16
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_frpbd"]
+
+[sub_resource type="Animation" id="Animation_f1a22"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Turret")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, -1.1, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Turret:enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_612nh"]
+resource_name = "build_turret"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Turret")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = PackedFloat32Array(0, 1, 0, -1.1, 0, 1, 1, 0, 0, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Turret:enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_54e38"]
+_data = {
+"RESET": SubResource("Animation_f1a22"),
+"build_turret": SubResource("Animation_612nh")
+}
+
+[node name="TurretBuilder" type="MeshInstance3D" node_paths=PackedStringArray("turret")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7901, 0, 3.06154)
+mesh = SubResource("TorusMesh_itcw4")
+skeleton = NodePath("Interactable")
+script = ExtResource("1_mirbi")
+turret = NodePath("Turret")
+
+[node name="InteractableOutline" type="Node" parent="." node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("2_ka3rg")
+interactable = NodePath("../Interactable")
+mesh = NodePath("..")
+outline_material = ExtResource("3_7agbd")
+
+[node name="Interactable" type="StaticBody3D" parent="."]
+script = ExtResource("4_cubaj")
+interactable_name = "Sitio de Torreta"
+input_names = Array[String](["Construir"])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
+shape = SubResource("SphereShape3D_frpbd")
+
+[node name="Turret" parent="." instance=ExtResource("5_m2f0q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1, 0)
+fire_rate = 250.0
+damage = 100.0
+tracking_time = 200.0
+enabled = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_54e38")
+}
+
+[connection signal="interact" from="Interactable" to="." method="_on_interactable_interact"]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8cl3thkam01k"]
+
+[ext_resource type="Script" path="res://scripts/destroyer.gd" id="1_kxwgr"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="2_xavrx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_15054"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4cqxd"]
+albedo_color = Color(0.51, 0.0561, 0.0561, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_ety27"]
+material = SubResource("StandardMaterial3D_4cqxd")
+
+[node name="Enemy" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.40934, 0.5, 5.82058)
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+script = ExtResource("1_kxwgr")
+movement_speed = 3.0
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+radius = 0.6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_15054")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00030899, 0.00646305, -0.00275278)
+mesh = SubResource("PrismMesh_ety27")
+
+[node name="Health" type="Node3D" parent="."]
+script = ExtResource("2_xavrx")
+team = "bugs"
+max_health = 100.0
+
+[connection signal="death" from="Health" to="." method="_on_health_death"]

@@ -1,0 +1,188 @@
+[gd_scene load_steps=12 format=3 uid="uid://caev6otsfk014"]
+
+[ext_resource type="Texture2D" uid="uid://qiotkea8hn53" path="res://icon.svg" id="1_dr6l8"]
+[ext_resource type="Script" path="res://scripts/player_hud.gd" id="1_ttdc3"]
+[ext_resource type="Script" path="res://addons/guide/guide_action.gd" id="2_1ea55"]
+[ext_resource type="Resource" uid="uid://carlgot4k511r" path="res://input/interact_1st.tres" id="3_0cu54"]
+[ext_resource type="Texture2D" uid="uid://c44r6gjupj2pp" path="res://art/ui/text_backdrop.png" id="3_htlpa"]
+[ext_resource type="Resource" uid="uid://bltfb8kk6gfor" path="res://input/interact_2nd.tres" id="4_fqcan"]
+[ext_resource type="Resource" uid="uid://bbq5fkkhhy4dh" path="res://input/interact_3rd.tres" id="5_fwv5t"]
+[ext_resource type="Resource" uid="uid://dkbql6i8l6tit" path="res://input/default_input_map.tres" id="6_s80km"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oyi8j"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_gpfy6"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_grd0a"]
+font_size = 24
+
+[node name="PlayerHUD" type="MarginContainer" node_paths=PackedStringArray("interactable_name_label", "interact_actions_labels", "interact_actions_spacers")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 10
+script = ExtResource("1_ttdc3")
+dialog_box_show_time = 1.0
+dialog_box_hide_time = 0.3
+dialog_time_per_character = 0.05
+dialog_min_time = 1.0
+interactable_name_label = NodePath("MarginContainer/InteractPrompts/Label")
+interact_actions_labels = [NodePath("MarginContainer/InteractPrompts/Inputs/FirstInputLabel"), NodePath("MarginContainer/InteractPrompts/Inputs/SecondInteractLabel"), NodePath("MarginContainer/InteractPrompts/Inputs/ThirdInteractLabel")]
+interact_input_actions = Array[ExtResource("2_1ea55")]([ExtResource("3_0cu54"), ExtResource("4_fqcan"), ExtResource("5_fwv5t")])
+interact_actions_spacers = [NodePath("MarginContainer/InteractPrompts/Inputs/Spacing"), NodePath("MarginContainer/InteractPrompts/Inputs/Spacing2")]
+input_context = ExtResource("6_s80km")
+
+[node name="Control" type="Control" parent="."]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="ScrapCounter" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = 25.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/ScrapCounter"]
+layout_mode = 2
+texture = ExtResource("1_dr6l8")
+expand_mode = 3
+
+[node name="ScrapCounterLabel" type="Label" parent="Control/ScrapCounter"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "x50"
+label_settings = SubResource("LabelSettings_oyi8j")
+
+[node name="EnergyCounter" type="HBoxContainer" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -75.0
+offset_right = 225.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/EnergyCounter"]
+layout_mode = 2
+texture = ExtResource("1_dr6l8")
+expand_mode = 3
+
+[node name="EnergyCounterLabel" type="Label" parent="Control/EnergyCounter"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "x50"
+label_settings = SubResource("LabelSettings_oyi8j")
+
+[node name="DialogBackdrop" type="TextureRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 8
+texture = ExtResource("3_htlpa")
+expand_mode = 1
+
+[node name="DialogText" type="Label" parent="DialogBackdrop"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 360.0
+offset_top = 50.0
+offset_right = 1560.0
+offset_bottom = 200.0
+size_flags_vertical = 8
+text = "Take this, it's dangerous to go alone"
+label_settings = SubResource("LabelSettings_gpfy6")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_bottom = 250
+
+[node name="InteractPrompts" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/InteractPrompts"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Torreta"
+label_settings = SubResource("LabelSettings_grd0a")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacing" type="Control" parent="MarginContainer/InteractPrompts"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="Inputs" type="HBoxContainer" parent="MarginContainer/InteractPrompts"]
+layout_mode = 2
+alignment = 1
+
+[node name="FirstInputLabel" type="RichTextLabel" parent="MarginContainer/InteractPrompts/Inputs"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+bbcode_enabled = true
+text = "[E] Construir"
+fit_content = true
+autowrap_mode = 0
+shortcut_keys_enabled = false
+
+[node name="Spacing" type="Control" parent="MarginContainer/InteractPrompts/Inputs"]
+visible = false
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="SecondInteractLabel" type="RichTextLabel" parent="MarginContainer/InteractPrompts/Inputs"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+bbcode_enabled = true
+text = "[D] Destruir"
+fit_content = true
+autowrap_mode = 0
+shortcut_keys_enabled = false
+
+[node name="Spacing2" type="Control" parent="MarginContainer/InteractPrompts/Inputs"]
+visible = false
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="ThirdInteractLabel" type="RichTextLabel" parent="MarginContainer/InteractPrompts/Inputs"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+bbcode_enabled = true
+text = "[R] Reparar"
+fit_content = true
+autowrap_mode = 0
+shortcut_keys_enabled = false

@@ -1,0 +1,105 @@
+[gd_scene load_steps=20 format=3 uid="uid://d2pfwry6bmgkr"]
+
+[ext_resource type="PackedScene" uid="uid://biqd83slug8ur" path="res://scenes/player.tscn" id="1_3e3sr"]
+[ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_ihkoc"]
+[ext_resource type="Resource" uid="uid://dkbql6i8l6tit" path="res://input/default_input_map.tres" id="2_1xdgf"]
+[ext_resource type="PackedScene" uid="uid://cniq1400kw76k" path="res://scenes/player_pov.tscn" id="2_2ubu4"]
+[ext_resource type="Script" path="res://scripts/dialog_system.gd" id="2_lyjif"]
+[ext_resource type="Resource" uid="uid://bscjkt0jyxrqj" path="res://input/move.tres" id="3_oh0tp"]
+[ext_resource type="PackedScene" uid="uid://caev6otsfk014" path="res://scenes/player_hud.tscn" id="3_rbf8o"]
+[ext_resource type="Script" path="res://scripts/interactable.gd" id="3_uewq7"]
+[ext_resource type="Resource" uid="uid://iuijv7rpx4ok" path="res://input/skip_dialog.tres" id="4_ouhxt"]
+[ext_resource type="Resource" uid="uid://bhcwmn3yhumwm" path="res://items/scrap_metal.tres" id="4_u8gfy"]
+[ext_resource type="PackedScene" uid="uid://c5cbdvhuyr2sb" path="res://scenes/player_inventory.tscn" id="5_6bl4v"]
+[ext_resource type="PackedScene" uid="uid://ufcrewj0mtbx" path="res://scenes/turret_builder.tscn" id="6_rjjmh"]
+[ext_resource type="Script" path="res://scripts/npc_dialog.gd" id="9_cl5pc"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_iu3bf"]
+vertices = PackedVector3Array(-49.5, 0.4, -49.5, -49.5, 0.4, 49.5, 49.5, 0.4, 49.5, 49.5, 0.4, -49.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+geometry_parsed_geometry_type = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vtied"]
+size = Vector3(100, 0.1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ipxfj"]
+albedo_color = Color(0.027, 0.16875, 0.27, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ijqov"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_segqg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xgqav"]
+
+[node name="GameScene" type="Node3D"]
+script = ExtResource("1_ihkoc")
+input_mapping_context = ExtResource("2_1xdgf")
+
+[node name="Player" parent="." node_paths=PackedStringArray("player_pov") instance=ExtResource("1_3e3sr")]
+player_pov = NodePath("../PlayerPOV")
+player_movement_input = ExtResource("3_oh0tp")
+
+[node name="DialogSystem" type="Node" parent="." node_paths=PackedStringArray("hud")]
+script = ExtResource("2_lyjif")
+hud = NodePath("../PlayerPOV/Camera3D/PlayerHUD")
+dialog_skip_input = ExtResource("4_ouhxt")
+
+[node name="PlayerPOV" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_2ubu4")]
+player = NodePath("../Player")
+
+[node name="Camera3D" type="Camera3D" parent="PlayerPOV"]
+transform = Transform3D(1, 0, 0, 0, 0.722967, 0.690882, 0, -0.690882, 0.722967, 0, 0, 7.70301)
+
+[node name="PlayerHUD" parent="PlayerPOV/Camera3D" node_paths=PackedStringArray("inventory") instance=ExtResource("3_rbf8o")]
+inventory = NodePath("../../../PlayerInventory")
+scrap_resource = ExtResource("4_u8gfy")
+dialog_box_show_time = 0.5
+
+[node name="PlayerInventory" parent="." instance=ExtResource("5_6bl4v")]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_iu3bf")
+
+[node name="StaticBody3D7" type="StaticBody3D" parent="NavigationRegion3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+shape = SubResource("BoxShape3D_vtied")
+
+[node name="Floor" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D7"]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ipxfj")
+mesh = SubResource("PlaneMesh_ijqov")
+skeleton = NodePath("../../..")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.814463, -0.107314, 0.570205, -0.197528, 0.87276, 0.446399, -0.545557, -0.476207, 0.689633, 0.023, 11.2066, -1)
+
+[node name="Buildables" type="Node3D" parent="."]
+
+[node name="TurretBuilder" parent="Buildables" instance=ExtResource("6_rjjmh")]
+
+[node name="TurretBuilder2" parent="Buildables" instance=ExtResource("6_rjjmh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.08225, 0, 3.06154)
+
+[node name="TurretBuilder3" parent="Buildables" instance=ExtResource("6_rjjmh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0168846, 0, 6.44179)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36721, -7.15985)
+mesh = SubResource("PrismMesh_segqg")
+
+[node name="Interactable" type="StaticBody3D" parent="MeshInstance3D"]
+script = ExtResource("3_uewq7")
+interactable_name = "LA Piramide"
+input_names = Array[String](["Hablar?"])
+interactable_priority = 100
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Interactable"]
+shape = SubResource("BoxShape3D_xgqav")
+
+[node name="NPCDialog" type="Node" parent="MeshInstance3D" node_paths=PackedStringArray("intectable")]
+script = ExtResource("9_cl5pc")
+intectable = NodePath("../Interactable")
+dialogs = Array[String](["Hola", "Yo soy una piramide", "No un cubo", "Una piramide... digo", "LA PIRAMIDE", "Que haces hablando con una piramide?", "Es que ya no te hacen caso los prismas?", "Dejame tranquilo, ve ha hablar con el anillo de Torus, el sabe darle la vuelta a las cosas", "Piedritas papa"])
+repeat_start_index = 5
