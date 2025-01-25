@@ -28,9 +28,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_knf0s")
 skeleton = NodePath("")
 
-[node name="InteractionSystem" type="Area3D" parent="."]
+[node name="InteractionSystem" type="Area3D" parent="." node_paths=PackedStringArray("player_movement")]
 script = ExtResource("5_2y1bu")
 interact_inputs = Array[ExtResource("3_0o0e0")]([ExtResource("4_m02wa"), ExtResource("5_a2hki"), ExtResource("6_7ugyo")])
+player_movement = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionSystem"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

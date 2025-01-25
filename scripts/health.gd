@@ -18,6 +18,7 @@ func damage(amount: float):
 	health = clampf(health - amount, 0, max_health)
 	if health <= 0.0001:
 		is_dead = true
+		health = 0
 		death.emit()
 
 func heal(amount: float):

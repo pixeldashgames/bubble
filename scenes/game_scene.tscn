@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://d2pfwry6bmgkr"]
+[gd_scene load_steps=26 format=3 uid="uid://d2pfwry6bmgkr"]
 
 [ext_resource type="PackedScene" uid="uid://biqd83slug8ur" path="res://scenes/player.tscn" id="1_3e3sr"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_ihkoc"]
@@ -13,6 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://c5cbdvhuyr2sb" path="res://scenes/player_inventory.tscn" id="5_6bl4v"]
 [ext_resource type="PackedScene" uid="uid://ufcrewj0mtbx" path="res://scenes/turret_builder.tscn" id="6_rjjmh"]
 [ext_resource type="Script" path="res://scripts/npc_dialog.gd" id="9_cl5pc"]
+[ext_resource type="Script" path="res://scripts/pickupable.gd" id="13_v1k18"]
+[ext_resource type="Script" path="res://scripts/interactable_outline.gd" id="15_hjkye"]
+[ext_resource type="Material" uid="uid://4ftusght3jek" path="res://materials/outline_material.tres" id="16_gwu6i"]
+[ext_resource type="PackedScene" uid="uid://d3iiik7hema8m" path="res://scenes/extractor_builder.tscn" id="17_2tcv2"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_iu3bf"]
 vertices = PackedVector3Array(-49.5, 0.4, -49.5, -49.5, 0.4, 49.5, 49.5, 0.4, 49.5, 49.5, 0.4, -49.5)
@@ -30,6 +34,16 @@ albedo_color = Color(0.027, 0.16875, 0.27, 1)
 [sub_resource type="PrismMesh" id="PrismMesh_segqg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xgqav"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wdxos"]
+albedo_color = Color(0.85, 0.8075, 0, 1)
+emission_enabled = true
+emission = Color(0.79, 0.647932, 0.1343, 1)
+emission_energy_multiplier = 2.47
+rim_tint = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_s1srb"]
+material = SubResource("StandardMaterial3D_wdxos")
 
 [node name="GameScene" type="Node3D"]
 script = ExtResource("1_ihkoc")
@@ -52,7 +66,6 @@ transform = Transform3D(1, 0, 0, 0, 0.722967, 0.690882, 0, -0.690882, 0.722967, 
 
 [node name="PlayerHUD" parent="PlayerPOV/Camera3D" node_paths=PackedStringArray("inventory") instance=ExtResource("3_rbf8o")]
 inventory = NodePath("../../../PlayerInventory")
-scrap_resource = ExtResource("4_u8gfy")
 dialog_box_show_time = 0.5
 
 [node name="PlayerInventory" parent="." instance=ExtResource("5_6bl4v")]
@@ -103,3 +116,116 @@ script = ExtResource("9_cl5pc")
 intectable = NodePath("../Interactable")
 dialogs = Array[String](["Hola", "Yo soy una piramide", "No un cubo", "Una piramide... digo", "LA PIRAMIDE", "Que haces hablando con una piramide?", "Es que ya no te hacen caso los prismas?", "Dejame tranquilo, ve ha hablar con el anillo de Torus, el sabe darle la vuelta a las cosas", "Piedritas papa"])
 repeat_start_index = 5
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.61573, 1.36721, -3.02144)
+mesh = SubResource("SphereMesh_s1srb")
+
+[node name="Interactable" type="StaticBody3D" parent="MeshInstance3D2"]
+script = ExtResource("3_uewq7")
+interactable_name = "BrilliBrilli"
+input_names = Array[String](["Recoger"])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/Interactable"]
+shape = SubResource("BoxShape3D_xgqav")
+
+[node name="Pickupable" type="Node" parent="MeshInstance3D2" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
+script = ExtResource("13_v1k18")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("4_u8gfy")
+inventory = NodePath("../../PlayerInventory")
+amount_range = Vector2i(30, 50)
+parent_node = NodePath("..")
+
+[node name="InteractableOutline" type="Node" parent="MeshInstance3D2" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("15_hjkye")
+interactable = NodePath("../Interactable")
+mesh = NodePath("..")
+outline_material = ExtResource("16_gwu6i")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.06225, 1.36721, -2.41184)
+mesh = SubResource("SphereMesh_s1srb")
+
+[node name="Interactable" type="StaticBody3D" parent="MeshInstance3D3"]
+script = ExtResource("3_uewq7")
+interactable_name = "BrilliBrilli"
+input_names = Array[String](["Recoger"])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3/Interactable"]
+shape = SubResource("BoxShape3D_xgqav")
+
+[node name="Pickupable" type="Node" parent="MeshInstance3D3" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
+script = ExtResource("13_v1k18")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("4_u8gfy")
+inventory = NodePath("../../PlayerInventory")
+amount_range = Vector2i(30, 50)
+parent_node = NodePath("..")
+
+[node name="InteractableOutline" type="Node" parent="MeshInstance3D3" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("15_hjkye")
+interactable = NodePath("../Interactable")
+mesh = NodePath("..")
+outline_material = ExtResource("16_gwu6i")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.47482, 1.36721, -3.85687)
+mesh = SubResource("SphereMesh_s1srb")
+
+[node name="Interactable" type="StaticBody3D" parent="MeshInstance3D4"]
+script = ExtResource("3_uewq7")
+interactable_name = "BrilliBrilli"
+input_names = Array[String](["Recoger"])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D4/Interactable"]
+shape = SubResource("BoxShape3D_xgqav")
+
+[node name="Pickupable" type="Node" parent="MeshInstance3D4" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
+script = ExtResource("13_v1k18")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("4_u8gfy")
+inventory = NodePath("../../PlayerInventory")
+amount_range = Vector2i(30, 50)
+parent_node = NodePath("..")
+
+[node name="InteractableOutline" type="Node" parent="MeshInstance3D4" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("15_hjkye")
+interactable = NodePath("../Interactable")
+mesh = NodePath("..")
+outline_material = ExtResource("16_gwu6i")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.33071, 1.36721, 1.05999)
+mesh = SubResource("SphereMesh_s1srb")
+
+[node name="Interactable" type="StaticBody3D" parent="MeshInstance3D5"]
+script = ExtResource("3_uewq7")
+interactable_name = "BrilliBrilli"
+input_names = Array[String](["Recoger"])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D5/Interactable"]
+shape = SubResource("BoxShape3D_xgqav")
+
+[node name="Pickupable" type="Node" parent="MeshInstance3D5" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
+script = ExtResource("13_v1k18")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("4_u8gfy")
+inventory = NodePath("../../PlayerInventory")
+amount_range = Vector2i(30, 50)
+parent_node = NodePath("..")
+
+[node name="InteractableOutline" type="Node" parent="MeshInstance3D5" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("15_hjkye")
+interactable = NodePath("../Interactable")
+mesh = NodePath("..")
+outline_material = ExtResource("16_gwu6i")
+
+[node name="ExtractorBuilder" parent="." instance=ExtResource("17_2tcv2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.24476, 1.8999e-07, 4.35161)
+
+[node name="ExtractorBuilder2" parent="." instance=ExtResource("17_2tcv2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.66216, 1.8999e-07, 6.35903)
+
+[node name="ExtractorBuilder3" parent="." instance=ExtResource("17_2tcv2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.248006, 1.8999e-07, 9.10809)

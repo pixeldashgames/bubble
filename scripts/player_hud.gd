@@ -8,11 +8,13 @@ static var Instance: PlayerHUD
 @export var dialog_box_hide_time: float
 @export var dialog_time_per_character: float
 @export var dialog_min_time: float
-@export var interactable_name_label: Label
+@export var interactable_name_label: RichTextLabel
 @export var interact_actions_labels: Array[RichTextLabel]
 @export var interact_input_actions: Array[GUIDEAction]
 @export var interact_actions_spacers: Array[Control]
 @export var input_context: GUIDEMappingContext
+@export var interaction_progress_bar: ProgressBar
+@export var disabled_interaction_color: Color
 
 var dialog_tween: Tween = null
 var hide_tween: Tween = null
@@ -43,7 +45,7 @@ func _exit_tree() -> void:
 func _process(_delta: float) -> void:
 	%ScrapCounterLabel.text = "x %d" % inventory.get_resource_amount(scrap_resource)
 
-func show_interactable(interactable_name: String, input_names: Array[String]):
+func show_interactable(interactable_name: String, input_names: Array[String], interactions_enabled: Array[bool]):
 	hide_interactable()
 	interactable_name_label.text = interactable_name
 	interactable_name_label.show()
@@ -57,8 +59,18 @@ func show_interactable(interactable_name: String, input_names: Array[String]):
 	interact_actions_labels[0].text = interact_input_texts[0] + " " + input_names[0]
 	interact_actions_labels[0].show()
 	
+	if interactions_enabled[0]:
+		interact_actions_labels[0].modulate = Color.WHITE
+	else:
+		interact_actions_labels[0].modulate = disabled_interaction_color
+	
 	for i in range(1, input_names.size()):
 		interact_actions_labels[i].text = interact_input_texts[i] + " " + input_names[i]
+		if interactions_enabled[i]:
+			interact_actions_labels[i].modulate = Color.WHITE
+		else:
+			interact_actions_labels[i].modulate = disabled_interaction_color
+			
 		interact_actions_labels[i].show()
 		interact_actions_spacers[i - 1].show()
 
@@ -68,6 +80,13 @@ func hide_interactable():
 		label.hide()
 	for spacer in interact_actions_spacers:
 		spacer.hide()
+
+func show_interaction_progress(progress: float):
+	interaction_progress_bar.value = progress
+	interaction_progress_bar.show()
+
+func hide_interaction_progress():
+	interaction_progress_bar.hide()
 
 func skip_dialog():
 	if hide_tween != null and is_instance_valid(hide_tween) and hide_tween.is_running():

@@ -33,7 +33,7 @@ skeleton = NodePath("../..")
 [node name="Health" type="Node3D" parent="."]
 script = ExtResource("2_n2asd")
 team = "humans"
-max_health = 1000.0
+max_health = 300.0
 
 [node name="TurretAggro" type="Area3D" parent="."]
 transform = Transform3D(0.999988, -0.00450298, 0.00182985, 0.00449959, 0.999988, 0.00185503, -0.00183819, -0.00184677, 0.999997, 0, 0, 0)

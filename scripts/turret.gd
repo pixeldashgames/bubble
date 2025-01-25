@@ -1,4 +1,4 @@
-extends Node3D
+class_name Turret extends Node3D
 
 @export var fire_rate: float
 @export var damage: float
@@ -13,7 +13,15 @@ var current_target: Health = null
 var last_attack_time: float = -10000
 var started_tracking_time: float = -10000
 
-func check_nearest_target():		
+func upgrade(new_fire_rate: float, new_damage: float, new_tracking_time: float, new_health: float):
+	fire_rate = new_fire_rate
+	damage = new_damage
+	tracking_time = new_tracking_time
+	var new_current_health = new_health * (turret_health.health / turret_health.max_health)
+	turret_health.max_health = new_health
+	turret_health.health = new_current_health
+
+func check_nearest_target():
 	var closest_target_squared: float = 10000000
 	var last_target := current_target
 	current_target = null
@@ -37,6 +45,9 @@ func check_nearest_target():
 		started_tracking_time = Time.get_ticks_msec()
 
 func _process(_delta: float) -> void:
+	if turret_health.health == 0:
+		return
+	
 	if not enabled:
 		return
 		
@@ -68,7 +79,6 @@ func _process(_delta: float) -> void:
 		
 		current_target.damage(damage)
 
-
 func _on_turret_aggro_body_entered(body: Node3D) -> void:
 	var health_node: Health = body.get_node_or_null("Health")
 	
@@ -76,7 +86,6 @@ func _on_turret_aggro_body_entered(body: Node3D) -> void:
 		return
 	
 	targets.append(health_node)
-
 
 func _on_turret_aggro_body_exited(body: Node3D) -> void:
 	var health_node = body.get_node_or_null("Health")

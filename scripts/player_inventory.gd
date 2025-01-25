@@ -26,6 +26,11 @@ func add_resource(res: GameResource, amount: int) -> void:
 	else:
 		inventory[res] = amount
 
+func extract_resource(res: GameResource, amount: int) -> void:
+	assert(inventory.has(res), "Tried to extract non-existent resource from inventory")
+	assert(inventory[res] >= amount, "Tried to extract from inventory more resource than is available")
+	
+	inventory[res] -= amount
 
 func get_resource_amount(res: GameResource) -> int:
 	if not inventory.has(res):
