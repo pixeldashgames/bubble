@@ -11,6 +11,8 @@ static var Instance: GameController = null
 
 @export var background_music_player: AudioStreamPlayer
 
+var overworld_music_substituted: AudioStream
+
 var allow_combat_music := false
 var current_wave := 0
 var in_preparation := true
@@ -41,8 +43,14 @@ func on_pause() -> void:
 	InGameMenus.Instance.show_pause_menu()
 
 func change_background_music(music_stream: AudioStream) -> void:
-	if allow_combat_music and music_stream != combat_music:
+	if music_stream == combat_music:
+		overworld_music_substituted = background_music_player.stream
+	elif allow_combat_music and not in_preparation:
+		overworld_music_substituted = music_stream
 		music_stream = combat_music
+	else:
+		overworld_music_substituted = null
+		
 	
 	if changing_music:
 		return
@@ -98,6 +106,10 @@ func on_enemy_killed():
 			return
 		
 		in_preparation = true
+		
+		if overworld_music_substituted != null:
+			change_background_music(overworld_music_substituted)
+		
 		preparation_end_time = Time.get_ticks_msec() + waves[current_wave].preparation_time
 
 

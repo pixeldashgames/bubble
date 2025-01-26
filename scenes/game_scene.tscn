@@ -1,9 +1,10 @@
-[gd_scene load_steps=74 format=3 uid="uid://d2pfwry6bmgkr"]
+[gd_scene load_steps=75 format=3 uid="uid://d2pfwry6bmgkr"]
 
 [ext_resource type="PackedScene" uid="uid://biqd83slug8ur" path="res://scenes/player.tscn" id="1_3e3sr"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_ihkoc"]
 [ext_resource type="Resource" uid="uid://dkbql6i8l6tit" path="res://input/default_input_map.tres" id="2_1xdgf"]
 [ext_resource type="PackedScene" uid="uid://cniq1400kw76k" path="res://scenes/player_pov.tscn" id="2_2ubu4"]
+[ext_resource type="AudioStream" uid="uid://cpvqdqdoj8vyq" path="res://audio/final y creditos.wav" id="2_dt7id"]
 [ext_resource type="Script" path="res://scripts/dialog_system.gd" id="2_lyjif"]
 [ext_resource type="Script" path="res://scripts/wave_definition.gd" id="3_a6w0s"]
 [ext_resource type="PackedScene" uid="uid://caev6otsfk014" path="res://scenes/player_hud.tscn" id="3_rbf8o"]
@@ -116,6 +117,7 @@ radius = 0.290166
 
 [node name="GameScene" type="Node3D" node_paths=PackedStringArray("spawn_points", "background_music_player")]
 script = ExtResource("1_ihkoc")
+combat_music = ExtResource("2_dt7id")
 input_mapping_context = ExtResource("2_1xdgf")
 waves = Array[ExtResource("3_a6w0s")]([ExtResource("4_haa7r"), ExtResource("5_8q463"), ExtResource("6_s4bxr"), ExtResource("7_ccdbt"), ExtResource("8_8648l"), ExtResource("9_nbcxd"), ExtResource("10_v5ekj"), ExtResource("11_vyjkf"), ExtResource("12_okbi0"), ExtResource("13_6cng4")])
 spawn_points = [NodePath("Spawners/EnemySpawner"), NodePath("Spawners/EnemySpawner2"), NodePath("Spawners/EnemySpawner4"), NodePath("Spawners/EnemySpawner3")]
@@ -1007,6 +1009,7 @@ target_pov_height = 7.0
 target_pov_angle = -30.0
 target_background_music = ExtResource("24_xps1u")
 interact_sound = NodePath("../AudioStreamPlayer3D")
+allow_combat_music = true
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="BubbleDoorExit"]
 stream = ExtResource("23_7vqle")
