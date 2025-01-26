@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dhq5v2py60dhk"
+path="res://.godot/imported/reina noyses.wav-7c942de5a9903147738f95b9b30c6c0c.sample"
+
+[deps]
+
+source_file="res://audio/NPC/reina noyses.wav"
+dest_files=["res://.godot/imported/reina noyses.wav-7c942de5a9903147738f95b9b30c6c0c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

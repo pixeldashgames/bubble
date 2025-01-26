@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ij31jvpntsp7"
+path="res://.godot/imported/prueba scary noyses.wav-2bced6d397ae72f3507dba89cd55f2c1.sample"
+
+[deps]
+
+source_file="res://audio/prueba scary noyses.wav"
+dest_files=["res://.godot/imported/prueba scary noyses.wav-2bced6d397ae72f3507dba89cd55f2c1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop_mode=1
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dqfia6rxdtkjp"
+path="res://.godot/imported/enemy stun player.wav-4b89e3d75879d08ad23eb6d8ec5b60d7.sample"
+
+[deps]
+
+source_file="res://audio/enemy stun player.wav"
+dest_files=["res://.godot/imported/enemy stun player.wav-4b89e3d75879d08ad23eb6d8ec5b60d7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

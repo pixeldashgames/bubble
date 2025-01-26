@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://d2pfwry6bmgkr"]
+[gd_scene load_steps=53 format=3 uid="uid://d2pfwry6bmgkr"]
 
 [ext_resource type="PackedScene" uid="uid://biqd83slug8ur" path="res://scenes/player.tscn" id="1_3e3sr"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_ihkoc"]
@@ -8,25 +8,35 @@
 [ext_resource type="Script" path="res://scripts/wave_definition.gd" id="3_a6w0s"]
 [ext_resource type="PackedScene" uid="uid://caev6otsfk014" path="res://scenes/player_hud.tscn" id="3_rbf8o"]
 [ext_resource type="Script" path="res://scripts/interactable.gd" id="3_uewq7"]
+[ext_resource type="Resource" uid="uid://bl82v17wf77ot" path="res://waves/wave0.tres" id="4_haa7r"]
 [ext_resource type="Resource" uid="uid://iuijv7rpx4ok" path="res://input/skip_dialog.tres" id="4_ouhxt"]
 [ext_resource type="Resource" uid="uid://bhcwmn3yhumwm" path="res://items/scrap_metal.tres" id="4_u8gfy"]
 [ext_resource type="PackedScene" uid="uid://c5cbdvhuyr2sb" path="res://scenes/player_inventory.tscn" id="5_6bl4v"]
+[ext_resource type="Resource" uid="uid://b50khdwg4wssb" path="res://input/pause.tres" id="5_c4gxv"]
+[ext_resource type="AudioStream" uid="uid://duhn7qqaqdl70" path="res://audio/ambiente bueno y chil de cojones.wav" id="5_xhu3m"]
 [ext_resource type="PackedScene" uid="uid://ufcrewj0mtbx" path="res://scenes/turret_builder.tscn" id="6_rjjmh"]
-[ext_resource type="Script" path="res://scripts/npc_dialog.gd" id="9_cl5pc"]
 [ext_resource type="Script" path="res://scripts/teleporter.gd" id="11_5654p"]
+[ext_resource type="PackedScene" uid="uid://dksn55e1gxbrx" path="res://scenes/InGameMenus.tscn" id="12_3jy1a"]
 [ext_resource type="Script" path="res://scripts/pickupable.gd" id="13_v1k18"]
+[ext_resource type="PackedScene" uid="uid://drfc710nwaawe" path="res://art/3d/mineral peque.glb" id="14_fjlco"]
 [ext_resource type="Script" path="res://scripts/interactable_outline.gd" id="15_hjkye"]
+[ext_resource type="PackedScene" uid="uid://c2dh4o820vpgu" path="res://scenes/weakpoint.tscn" id="16_7xal1"]
 [ext_resource type="Material" uid="uid://4ftusght3jek" path="res://materials/outline_material.tres" id="16_gwu6i"]
-[ext_resource type="PackedScene" uid="uid://b4gl5yssugjbg" path="res://art/3d/BIG FBX SCENE HUGE.fbx" id="17_srk2m"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="18_aoh4n"]
+[ext_resource type="PackedScene" uid="uid://dismerdhl7ocr" path="res://art/3d/Ciudad de Last Hope .fbx" id="18_dhxsf"]
 [ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="18_mrggo"]
-[ext_resource type="PackedScene" uid="uid://b8cl3thkam01k" path="res://scenes/enemy.tscn" id="19_0epkk"]
-
-[sub_resource type="Resource" id="Resource_orvva"]
-script = ExtResource("3_a6w0s")
-spawn_rates = Array[float]([100.0, 200.0, 50.0])
-spawn_counts = Array[int]([10, 5, 30])
-preparation_time = 10000.0
+[ext_resource type="AudioStream" uid="uid://0spmed6dvrbj" path="res://audio/compuerta.wav" id="23_7vqle"]
+[ext_resource type="PackedScene" uid="uid://d3iiik7hema8m" path="res://scenes/extractor_builder.tscn" id="23_ieyqq"]
+[ext_resource type="AudioStream" uid="uid://dnixw71jaqyfm" path="res://audio/ambiente hostil exterior planeta.wav" id="24_xps1u"]
+[ext_resource type="AudioStream" uid="uid://c7atkrql7ckl2" path="res://audio/yudaiSOsorryFORYU.wav" id="25_j88x4"]
+[ext_resource type="PackedScene" uid="uid://bw1ooviv4m585" path="res://scenes/npc_5_el_barrista.tscn" id="29_3boxp"]
+[ext_resource type="AudioStream" uid="uid://sclrm21kp576" path="res://audio/NPC/señor de la limpieza 5.wav" id="30_0ul3i"]
+[ext_resource type="Script" path="res://scripts/npc_dialog.gd" id="30_j50ir"]
+[ext_resource type="AudioStream" uid="uid://ci8xctcp83xyh" path="res://audio/NPC/señor de la limpieza 2.wav" id="31_ddllv"]
+[ext_resource type="AudioStream" uid="uid://djgbnd7dqbj7l" path="res://audio/NPC/señor de la limpieza 3.wav" id="32_0fef0"]
+[ext_resource type="AudioStream" uid="uid://joegp1lhx5pv" path="res://audio/NPC/señor de la limpieza 4.wav" id="33_fwrax"]
+[ext_resource type="AudioStream" uid="uid://bsq16gdesq504" path="res://audio/NPC/señor de la limpieza 6.wav" id="35_i6vg1"]
+[ext_resource type="AudioStream" uid="uid://btfwbdnjg70f0" path="res://audio/NPC/señor de la limpieza.wav" id="37_gfks4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ptx60"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -63,36 +73,45 @@ radius = 1.35431
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7qbk1"]
 radius = 0.218277
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_lcg8h"]
-size = Vector3(1.83868, 1.93213, 0.272583)
+[sub_resource type="BoxShape3D" id="BoxShape3D_5dhl8"]
+size = Vector3(30, 0.919, 50)
 
-[sub_resource type="PrismMesh" id="PrismMesh_segqg"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3t1b8"]
+disable_receive_shadows = true
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_xgqav"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wdxos"]
-albedo_color = Color(0.85, 0.8075, 0, 1)
-emission_enabled = true
-emission = Color(0.79, 0.647932, 0.1343, 1)
-emission_energy_multiplier = 2.47
-rim_tint = 1.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_s1srb"]
-material = SubResource("StandardMaterial3D_wdxos")
+[sub_resource type="PlaneMesh" id="PlaneMesh_6b852"]
+material = SubResource("StandardMaterial3D_3t1b8")
+size = Vector2(60, 60)
 
 [sub_resource type="PrismMesh" id="PrismMesh_7e2yd"]
 
-[node name="GameScene" type="Node3D" node_paths=PackedStringArray("spawn_points")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_ayq12"]
+radius = 0.275763
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lcg8h"]
+size = Vector3(1.83868, 1.93213, 0.272583)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_j66uc"]
+radius = 0.290166
+
+[node name="GameScene" type="Node3D" node_paths=PackedStringArray("spawn_points", "background_music_player")]
 script = ExtResource("1_ihkoc")
 input_mapping_context = ExtResource("2_1xdgf")
-waves = Array[ExtResource("3_a6w0s")]([SubResource("Resource_orvva")])
-spawn_points = [NodePath("Spawners/EnemySpawner"), NodePath("Spawners/EnemySpawner2"), NodePath("Spawners/EnemySpawner3")]
+waves = Array[ExtResource("3_a6w0s")]([ExtResource("4_haa7r")])
+spawn_points = [NodePath("Spawners/EnemySpawner"), NodePath("Spawners/EnemySpawner2"), NodePath("Spawners/EnemySpawner4"), NodePath("Spawners/EnemySpawner3")]
+pause_action = ExtResource("5_c4gxv")
+background_music_player = NodePath("BackgroundMusic")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_xhu3m")
+volume_db = -25.109
+autoplay = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mii8t")
 
 [node name="Player" parent="." node_paths=PackedStringArray("player_pov") instance=ExtResource("1_3e3sr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3818, -0.222234, 3.07724)
 player_pov = NodePath("../PlayerPOV")
 
 [node name="DialogSystem" type="Node" parent="." node_paths=PackedStringArray("hud")]
@@ -100,10 +119,13 @@ script = ExtResource("2_lyjif")
 hud = NodePath("../PlayerPOV/Camera3D/PlayerHUD")
 dialog_skip_input = ExtResource("4_ouhxt")
 
-[node name="PlayerPOV" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_2ubu4")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11, 6, -15)
+[node name="PlayerPOV" parent="." node_paths=PackedStringArray("player", "camera") instance=ExtResource("2_2ubu4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 player = NodePath("../Player")
-offset = Vector3(6, 6, 0)
+camera = NodePath("Camera3D")
+player_distance = 4.0
+height = 5.0
+angle = -30.0
 
 [node name="Camera3D" type="Camera3D" parent="PlayerPOV"]
 transform = Transform3D(1, 0, 0, 0, 0.722967, 0.690882, 0, -0.690882, 0.722967, 0, 0, 0)
@@ -111,6 +133,8 @@ transform = Transform3D(1, 0, 0, 0, 0.722967, 0.690882, 0, -0.690882, 0.722967, 
 [node name="PlayerHUD" parent="PlayerPOV/Camera3D" node_paths=PackedStringArray("inventory") instance=ExtResource("3_rbf8o")]
 inventory = NodePath("../../../PlayerInventory")
 dialog_box_show_time = 0.5
+
+[node name="InGameMenus" parent="PlayerPOV/Camera3D" instance=ExtResource("12_3jy1a")]
 
 [node name="PlayerInventory" parent="." instance=ExtResource("5_6bl4v")]
 
@@ -290,26 +314,572 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 4.5911
 depth = 10.0
 polygon = PackedVector2Array(-39.8469, -24.5072, -42.6091, -20.3086, -44.3217, -20.1429, -44.5426, -17.5464, -43.493, -15.6129, -40.6756, -13.7346, -41.3937, -11.0829, -42.3881, -8.65219, -44.0454, -7.87878, -46.0342, -7.76829, -49.5698, -6.00049, -49.9565, -4.50891, -48.7964, -2.90684, -46.9734, -2.68586, -43.7692, -2.13343, -40.7308, 0.518276, -40.7308, 3.61193, -41.449, 5.71119, -41.449, 7.31326, -42.9958, 8.36289, -43.2168, 9.24679, -44.1559, 10.0754, -44.3769, 11.2356, -43.493, 11.8985, -43.3273, 12.2852, -43.2168, 13.4453, -42.9958, 14.1635, -41.8909, 14.274, -17.0865, 14.8264, -19.9592, 18.8592, -22.0032, 23.6102, -22.9423, 28.3611, -53.0502, 28.9136, -51.0614, -32.0203, -42.6091, -30.5287)
 
+[node name="LabColliders" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.51945, 0, 74.2023)
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Environment/LabColliders"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.90087, 0)
+depth = 5.0
+polygon = PackedVector2Array(-5.66637, -6.9397, -7.78909, -6.97905, -7.85977, -4.45229, -6.9056, -3.46278, -6.92327, -3.00337, -7.80676, -2.22591, -7.78909, -1.50145, -6.95861, -0.653305, -6.94094, 0.106491, -8.10714, 0.883957, -7.99588, 1.81876, -8.62793, 4.53185, -7.22706, 4.71866, -6.44824, 3.97151, -5.64441, 3.93448, -5.70406, -1.27174, -5.27999, -1.25407, -5.33524, 4.1099, -5.67171, 4.10299, -5.64206, 4.55106, -5.64118, 5.6147, -6.87553, 5.6283, -6.7496, 9.4393, -6.00171, 10.2794, -6.06024, 12.1084, -10.8539, 10.8422, -10.6516, 2.98665, -9.98013, -8.58699, -6.30483, -9.71785, 1.4875, -9.57649, 1.60575, 3.90703, 0.879852, 10.0904, -6.63284, 13.6987, -5.9086, 9.83363, -4.85787, 8.75174, -3.39039, 8.50884, -2.04747, 8.93661, -1.28868, 9.69299, -0.301474, 9.76405, -0.261508, 5.08323, -1.054, 4.2633, -1.78105, 4.13629, -1.79906, -1.34242, -1.46334, -1.28941, -1.33965, -6.90837, -1.76373, -6.87303, -1.73569, -9.53181, -5.5626, -9.40125)
+
+[node name="CollisionPolygon3D7" type="CollisionPolygon3D" parent="Environment/LabColliders"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -3.71067, 0.42735, -8.3754)
+depth = 4.1
+polygon = PackedVector2Array(-3.17951, -0.956896, -2.08198, -0.644667, -1.2011, -0.654914, -0.0163174, 0.107471, 1.49647, 0.121235, 2.03161, -0.965599)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/LabColliders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.980827, 0)
+shape = SubResource("BoxShape3D_5dhl8")
+
+[node name="LabCover" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 8.74228e-08, 0, 8.74228e-08, -1, 2.06093, 9.42113, 76.065)
+cast_shadow = 3
+mesh = SubResource("PlaneMesh_6b852")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0203, 4.30803, 85.0584)
+light_color = Color(0.196, 0.98, 0, 1)
+light_energy = 6.742
+omni_range = 6.98705
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.52746, -0.0698111, 79.7244)
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Environment/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.424, -0.0153542, 0.411003)
+polygon = PackedVector2Array(3.40721, 4.23597, 2.73759, 4.86314, -3.04005, 4.87589, -3.6765, 4.23576, -3.82772, -1.14119, -3.01144, -1.87895, -2.01834, -1.85415, -2.04761, -3.77587, 1.75118, -3.75965, 1.76805, -1.87645, 2.47623, -1.83829, 3.43108, -0.940468)
+
+[node name="CollisionPolygon3D2" type="CollisionPolygon3D" parent="Environment/StaticBody3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.54913, 1.22288, 0.194008)
+depth = 3.8
+polygon = PackedVector2Array(3.54018, -0.688888, 6.98223, -1.66843, 2.77797, -1.50535)
+
 [node name="Buildables" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.92761, 0, -22.5124)
 
 [node name="TurretBuilder2" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5915, 0, 14.2435)
+transform = Transform3D(-0.977287, 0, 0.211922, 0, 1, 0, -0.211922, 0, -0.977287, -14.6832, 9.53674e-07, -22.4497)
+
+[node name="TurretBuilder6" parent="Buildables" instance=ExtResource("6_rjjmh")]
+transform = Transform3D(0.578641, 0, -0.815583, 0, 1, 0, 0.815583, 0, 0.578641, 7.26989, 7.15256e-07, -16.7783)
+
+[node name="TurretBuilder7" parent="Buildables" instance=ExtResource("6_rjjmh")]
+transform = Transform3D(0.884605, 0, 0.46634, 0, 1, 0, -0.46634, 0, 0.884605, -6.78744, 1.66893e-06, -17.4491)
+
+[node name="TurretBuilder8" parent="Buildables" instance=ExtResource("6_rjjmh")]
+transform = Transform3D(-0.135646, 0, -0.990757, 0, 1, 0, 0.990757, 0, -0.135646, -6.14434, 1.66893e-06, 10.158)
+
+[node name="TurretBuilder9" parent="Buildables" instance=ExtResource("6_rjjmh")]
+transform = Transform3D(0.105882, 0, 0.994379, 0, 1, 0, -0.994379, 0, 0.105882, -0.880545, 1.66893e-06, 9.97684)
 
 [node name="TurretBuilder4" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0405, 0, 9.86723)
+transform = Transform3D(-0.619697, 0, 0.784841, 0, 1, 0, -0.784841, 0, -0.619697, 15.2233, 0, 23.0721)
+
+[node name="TurretBuilder10" parent="Buildables" instance=ExtResource("6_rjjmh")]
+transform = Transform3D(-0.14002, 0, 0.990149, 0, 1, 0, -0.990149, 0, -0.14002, 7.10723, 0, 16.5992)
+
+[node name="TurretBuilder19" parent="Buildables" instance=ExtResource("6_rjjmh")]
+transform = Transform3D(-0.14002, 0, 0.990149, 0, 1, 0, -0.990149, 0, -0.14002, 13.7016, 0, 17.2383)
+
+[node name="TurretBuilder20" parent="Buildables" instance=ExtResource("6_rjjmh")]
+transform = Transform3D(0.110255, 0, 0.993904, 0, 1, 0, -0.993904, 0, 0.110255, -14.2207, 0, 16.6905)
+
+[node name="TurretBuilder13" parent="Buildables" instance=ExtResource("6_rjjmh")]
+transform = Transform3D(0.94211, 0, 0.335304, 0, 1, 0, -0.335304, 0, 0.94211, -34.9754, 0, -10.5824)
 
 [node name="TurretBuilder3" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2599, 0, 16.4876)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8799, 0, 9.35834)
+
+[node name="TurretBuilder15" parent="Buildables" instance=ExtResource("6_rjjmh")]
+transform = Transform3D(0.452917, 0, -0.891553, 0, 1, 0, 0.891553, 0, 0.452917, -15.0949, 0, -11.6675)
+
+[node name="TurretBuilder16" parent="Buildables" instance=ExtResource("6_rjjmh")]
+transform = Transform3D(0.452917, 0, -0.891553, 0, 1, 0, 0.891553, 0, 0.452917, -1.28861, 0, -4.23594)
+
+[node name="TurretBuilder17" parent="Buildables" instance=ExtResource("6_rjjmh")]
+transform = Transform3D(-0.631921, 0, -0.775033, 0, 1, 0, 0.775033, 0, -0.631921, -27.4445, -1.90735e-06, 5.62446)
+
+[node name="TurretBuilder11" parent="Buildables" instance=ExtResource("6_rjjmh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.7126, 0, 2.78823)
+
+[node name="TurretBuilder18" parent="Buildables" instance=ExtResource("6_rjjmh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.9573, 0, -5.70484)
+
+[node name="TurretBuilder12" parent="Buildables" instance=ExtResource("6_rjjmh")]
+transform = Transform3D(0.221566, 0, -0.975145, 0, 1, 0, 0.975145, 0, 0.221566, 32.4796, 0, 12.9863)
 
 [node name="TurretBuilder5" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.5745, 0, 19.785)
+transform = Transform3D(-0.927282, 0, 0.374364, 0, 1, 0, -0.374364, 0, -0.927282, -22.9453, 0, 20.7358)
+
+[node name="TurretBuilder14" parent="Buildables" instance=ExtResource("6_rjjmh")]
+transform = Transform3D(-0.927282, 0, 0.374364, 0, 1, 0, -0.374364, 0, -0.927282, -39.9108, 0, 18.9278)
+
+[node name="ExtractorBuilder" parent="Buildables" instance=ExtResource("23_ieyqq")]
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, -15.9708, -0.350836, -27.1516)
+
+[node name="ExtractorBuilder6" parent="Buildables" instance=ExtResource("23_ieyqq")]
+transform = Transform3D(0.500741, 0, -0.865597, 0, 1, 0, 0.865597, 0, 0.500741, -40.3817, -0.350837, -9.93161)
+
+[node name="ExtractorBuilder7" parent="Buildables" instance=ExtResource("23_ieyqq")]
+transform = Transform3D(-0.656665, 0, -0.754183, 0, 1, 0, 0.754183, 0, -0.656665, -30.4789, -0.350836, -7.54859)
+
+[node name="ExtractorBuilder4" parent="Buildables" instance=ExtResource("23_ieyqq")]
+transform = Transform3D(-0.999668, 0, 0.0257756, 0, 1, 0, -0.0257756, 0, -0.999668, 32.6604, -0.350837, 19.2755)
+
+[node name="ExtractorBuilder10" parent="Buildables" instance=ExtResource("23_ieyqq")]
+transform = Transform3D(-0.685158, 0, 0.728395, 0, 1, 0, -0.728395, 0, -0.685158, 30.9826, -0.350837, 25.4453)
+
+[node name="ExtractorBuilder11" parent="Buildables" instance=ExtResource("23_ieyqq")]
+transform = Transform3D(-0.999335, 0, -0.0364694, 0, 1, 0, 0.0364694, 0, -0.999335, 31.2839, -0.350835, 1.40472)
+
+[node name="ExtractorBuilder5" parent="Buildables" instance=ExtResource("23_ieyqq")]
+transform = Transform3D(-0.106108, 0, -0.994355, 0, 1, 0, 0.994355, 0, -0.106108, 15.4841, -0.350836, 1.6916)
+
+[node name="ExtractorBuilder2" parent="Buildables" instance=ExtResource("23_ieyqq")]
+transform = Transform3D(-0.902931, 0, 0.429786, 0, 1, 0, -0.429786, 0, -0.902931, 11.4484, -0.350836, -19.6157)
+
+[node name="ExtractorBuilder8" parent="Buildables" instance=ExtResource("23_ieyqq")]
+transform = Transform3D(-0.0175572, 0, 0.999846, 0, 1, 0, -0.999846, 0, -0.0175572, -29.3247, -0.350837, 21.1272)
+
+[node name="ExtractorManagement" parent="Buildables/ExtractorBuilder8" index="3" node_paths=PackedStringArray("animation_players")]
+animation_players = [NodePath("../Extractor Simple/AnimationPlayer"), null]
+start_built = true
+
+[node name="ExtractorBuilder9" parent="Buildables" instance=ExtResource("23_ieyqq")]
+transform = Transform3D(-0.0175572, 0, 0.999846, 0, 1, 0, -0.999846, 0, -0.0175572, -35.1275, -0.350837, 21.3967)
+
+[node name="ExtractorBuilder3" parent="Buildables" instance=ExtResource("23_ieyqq")]
+transform = Transform3D(-0.848427, 0, -0.529312, 0, 1, 0, 0.529312, 0, -0.848427, 9.91626, -0.350836, -24.2087)
+
+[node name="EnemyObjectives" type="Node3D" parent="."]
+
+[node name="Weakpoint" parent="EnemyObjectives" instance=ExtResource("16_7xal1")]
+
+[node name="WeakpointB" type="MeshInstance3D" parent="EnemyObjectives"]
+transform = Transform3D(1, 0, 0, 0, 2.45078, 0, 0, 0, 1, 15.1363, 1.2757, -0.998057)
+mesh = SubResource("PrismMesh_7e2yd")
+
+[node name="Health" type="Node3D" parent="EnemyObjectives/WeakpointB"]
+script = ExtResource("18_aoh4n")
+team = "weakpoints"
+max_health = 15000.0
+
+[node name="Spawners" type="Node3D" parent="."]
+
+[node name="EnemySpawner" type="Node3D" parent="Spawners" node_paths=PackedStringArray("general_enemy_objective")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.0612, 0, -18.5781)
+script = ExtResource("18_mrggo")
+spawner_radius = 0.25
+general_enemy_objective = NodePath("")
+
+[node name="EnemySpawner2" type="Node3D" parent="Spawners" node_paths=PackedStringArray("general_enemy_objective")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5846, -1.90735e-06, -54.3525)
+script = ExtResource("18_mrggo")
+spawner_radius = 0.25
+general_enemy_objective = NodePath("")
+
+[node name="EnemySpawner4" type="Node3D" parent="Spawners" node_paths=PackedStringArray("general_enemy_objective")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.413058, -1.90735e-06, -53.8899)
+script = ExtResource("18_mrggo")
+spawner_radius = 0.25
+general_enemy_objective = NodePath("../../EnemyObjectives/WeakpointB/Health")
+
+[node name="EnemySpawner3" type="Node3D" parent="Spawners" node_paths=PackedStringArray("general_enemy_objective")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.2019, -1.90735e-06, -44.5267)
+script = ExtResource("18_mrggo")
+spawner_radius = 0.25
+general_enemy_objective = NodePath("../../EnemyObjectives/WeakpointB/Health")
+
+[node name="Pickupables" type="Node3D" parent="."]
+
+[node name="Pickup" type="Node3D" parent="Pickupables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.05761, -0.341412, -22.4625)
+
+[node name="mineral peque" parent="Pickupables/Pickup" instance=ExtResource("14_fjlco")]
+
+[node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup"]
+script = ExtResource("3_uewq7")
+interactable_name = "BrilliBrilli"
+input_names = Array[String](["Recoger"])
+info_title = "Brilli Brilli"
+info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup/Interactable"]
+shape = SubResource("SphereShape3D_ayq12")
+
+[node name="Pickupable" type="Node" parent="Pickupables/Pickup" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
+script = ExtResource("13_v1k18")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("4_u8gfy")
+inventory = NodePath("../../../PlayerInventory")
+amount_range = Vector2i(10, 15)
+parent_node = NodePath("..")
+
+[node name="InteractableOutline" type="Node" parent="Pickupables/Pickup" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("15_hjkye")
+interactable = NodePath("../Interactable")
+mesh = NodePath("../mineral peque/Icosphere_011")
+outline_material = ExtResource("16_gwu6i")
+
+[node name="Pickup4" type="Node3D" parent="Pickupables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.25956, -0.341412, -31.6246)
+
+[node name="mineral peque" parent="Pickupables/Pickup4" instance=ExtResource("14_fjlco")]
+
+[node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup4"]
+script = ExtResource("3_uewq7")
+interactable_name = "BrilliBrilli"
+input_names = Array[String](["Recoger"])
+info_title = "Brilli Brilli"
+info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup4/Interactable"]
+shape = SubResource("SphereShape3D_ayq12")
+
+[node name="Pickupable" type="Node" parent="Pickupables/Pickup4" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
+script = ExtResource("13_v1k18")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("4_u8gfy")
+inventory = NodePath("../../../PlayerInventory")
+amount_range = Vector2i(10, 15)
+parent_node = NodePath("..")
+
+[node name="InteractableOutline" type="Node" parent="Pickupables/Pickup4" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("15_hjkye")
+interactable = NodePath("../Interactable")
+mesh = NodePath("../mineral peque/Icosphere_011")
+outline_material = ExtResource("16_gwu6i")
+
+[node name="Pickup5" type="Node3D" parent="Pickupables"]
+transform = Transform3D(-0.256138, 0, -0.96664, 0, 1, 0, 0.96664, 0, -0.256138, 3.55538, -0.341412, -53.8886)
+
+[node name="mineral peque" parent="Pickupables/Pickup5" instance=ExtResource("14_fjlco")]
+
+[node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup5"]
+script = ExtResource("3_uewq7")
+interactable_name = "BrilliBrilli"
+input_names = Array[String](["Recoger"])
+info_title = "Brilli Brilli"
+info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup5/Interactable"]
+shape = SubResource("SphereShape3D_ayq12")
+
+[node name="Pickupable" type="Node" parent="Pickupables/Pickup5" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
+script = ExtResource("13_v1k18")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("4_u8gfy")
+inventory = NodePath("../../../PlayerInventory")
+amount_range = Vector2i(10, 15)
+parent_node = NodePath("..")
+
+[node name="InteractableOutline" type="Node" parent="Pickupables/Pickup5" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("15_hjkye")
+interactable = NodePath("../Interactable")
+mesh = NodePath("../mineral peque/Icosphere_011")
+outline_material = ExtResource("16_gwu6i")
+
+[node name="Pickup6" type="Node3D" parent="Pickupables"]
+transform = Transform3D(-0.256138, 0, -0.96664, 0, 1, 0, 0.96664, 0, -0.256138, -16.9055, -0.341412, -55.5639)
+
+[node name="mineral peque" parent="Pickupables/Pickup6" instance=ExtResource("14_fjlco")]
+
+[node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup6"]
+script = ExtResource("3_uewq7")
+interactable_name = "BrilliBrilli"
+input_names = Array[String](["Recoger"])
+info_title = "Brilli Brilli"
+info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup6/Interactable"]
+shape = SubResource("SphereShape3D_ayq12")
+
+[node name="Pickupable" type="Node" parent="Pickupables/Pickup6" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
+script = ExtResource("13_v1k18")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("4_u8gfy")
+inventory = NodePath("../../../PlayerInventory")
+amount_range = Vector2i(10, 15)
+parent_node = NodePath("..")
+
+[node name="InteractableOutline" type="Node" parent="Pickupables/Pickup6" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("15_hjkye")
+interactable = NodePath("../Interactable")
+mesh = NodePath("../mineral peque/Icosphere_011")
+outline_material = ExtResource("16_gwu6i")
+
+[node name="Pickup7" type="Node3D" parent="Pickupables"]
+transform = Transform3D(0.886276, 0, -0.463157, 0, 1, 0, 0.463157, 0, 0.886276, -25.7853, -0.341412, -48.2173)
+
+[node name="mineral peque" parent="Pickupables/Pickup7" instance=ExtResource("14_fjlco")]
+
+[node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup7"]
+script = ExtResource("3_uewq7")
+interactable_name = "BrilliBrilli"
+input_names = Array[String](["Recoger"])
+info_title = "Brilli Brilli"
+info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup7/Interactable"]
+shape = SubResource("SphereShape3D_ayq12")
+
+[node name="Pickupable" type="Node" parent="Pickupables/Pickup7" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
+script = ExtResource("13_v1k18")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("4_u8gfy")
+inventory = NodePath("../../../PlayerInventory")
+amount_range = Vector2i(10, 15)
+parent_node = NodePath("..")
+
+[node name="InteractableOutline" type="Node" parent="Pickupables/Pickup7" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("15_hjkye")
+interactable = NodePath("../Interactable")
+mesh = NodePath("../mineral peque/Icosphere_011")
+outline_material = ExtResource("16_gwu6i")
+
+[node name="Pickup8" type="Node3D" parent="Pickupables"]
+transform = Transform3D(0.886276, 0, -0.463157, 0, 1, 0, 0.463157, 0, 0.886276, -36.4111, -0.341411, -25.0841)
+
+[node name="mineral peque" parent="Pickupables/Pickup8" instance=ExtResource("14_fjlco")]
+
+[node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup8"]
+script = ExtResource("3_uewq7")
+interactable_name = "BrilliBrilli"
+input_names = Array[String](["Recoger"])
+info_title = "Brilli Brilli"
+info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup8/Interactable"]
+shape = SubResource("SphereShape3D_ayq12")
+
+[node name="Pickupable" type="Node" parent="Pickupables/Pickup8" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
+script = ExtResource("13_v1k18")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("4_u8gfy")
+inventory = NodePath("../../../PlayerInventory")
+amount_range = Vector2i(10, 15)
+parent_node = NodePath("..")
+
+[node name="InteractableOutline" type="Node" parent="Pickupables/Pickup8" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("15_hjkye")
+interactable = NodePath("../Interactable")
+mesh = NodePath("../mineral peque/Icosphere_011")
+outline_material = ExtResource("16_gwu6i")
+
+[node name="Pickup9" type="Node3D" parent="Pickupables"]
+transform = Transform3D(0.754274, 0, 0.656559, 0, 1, 0, -0.656559, 0, 0.754274, -26.3061, -0.341411, -10.5872)
+
+[node name="mineral peque" parent="Pickupables/Pickup9" instance=ExtResource("14_fjlco")]
+
+[node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup9"]
+script = ExtResource("3_uewq7")
+interactable_name = "BrilliBrilli"
+input_names = Array[String](["Recoger"])
+info_title = "Brilli Brilli"
+info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup9/Interactable"]
+shape = SubResource("SphereShape3D_ayq12")
+
+[node name="Pickupable" type="Node" parent="Pickupables/Pickup9" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
+script = ExtResource("13_v1k18")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("4_u8gfy")
+inventory = NodePath("../../../PlayerInventory")
+amount_range = Vector2i(10, 15)
+parent_node = NodePath("..")
+
+[node name="InteractableOutline" type="Node" parent="Pickupables/Pickup9" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("15_hjkye")
+interactable = NodePath("../Interactable")
+mesh = NodePath("../mineral peque/Icosphere_011")
+outline_material = ExtResource("16_gwu6i")
+
+[node name="Pickup10" type="Node3D" parent="Pickupables"]
+transform = Transform3D(0.754274, 0, 0.656559, 0, 1, 0, -0.656559, 0, 0.754274, -37.628, -0.341411, -4.79079)
+
+[node name="mineral peque" parent="Pickupables/Pickup10" instance=ExtResource("14_fjlco")]
+
+[node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup10"]
+script = ExtResource("3_uewq7")
+interactable_name = "BrilliBrilli"
+input_names = Array[String](["Recoger"])
+info_title = "Brilli Brilli"
+info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup10/Interactable"]
+shape = SubResource("SphereShape3D_ayq12")
+
+[node name="Pickupable" type="Node" parent="Pickupables/Pickup10" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
+script = ExtResource("13_v1k18")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("4_u8gfy")
+inventory = NodePath("../../../PlayerInventory")
+amount_range = Vector2i(10, 15)
+parent_node = NodePath("..")
+
+[node name="InteractableOutline" type="Node" parent="Pickupables/Pickup10" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("15_hjkye")
+interactable = NodePath("../Interactable")
+mesh = NodePath("../mineral peque/Icosphere_011")
+outline_material = ExtResource("16_gwu6i")
+
+[node name="Pickup11" type="Node3D" parent="Pickupables"]
+transform = Transform3D(0.754274, 0, 0.656559, 0, 1, 0, -0.656559, 0, 0.754274, -4.61729, -0.341411, -4.72132)
+
+[node name="mineral peque" parent="Pickupables/Pickup11" instance=ExtResource("14_fjlco")]
+
+[node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup11"]
+script = ExtResource("3_uewq7")
+interactable_name = "BrilliBrilli"
+input_names = Array[String](["Recoger"])
+info_title = "Brilli Brilli"
+info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup11/Interactable"]
+shape = SubResource("SphereShape3D_ayq12")
+
+[node name="Pickupable" type="Node" parent="Pickupables/Pickup11" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
+script = ExtResource("13_v1k18")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("4_u8gfy")
+inventory = NodePath("../../../PlayerInventory")
+amount_range = Vector2i(10, 15)
+parent_node = NodePath("..")
+
+[node name="InteractableOutline" type="Node" parent="Pickupables/Pickup11" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("15_hjkye")
+interactable = NodePath("../Interactable")
+mesh = NodePath("../mineral peque/Icosphere_011")
+outline_material = ExtResource("16_gwu6i")
+
+[node name="Pickup12" type="Node3D" parent="Pickupables"]
+transform = Transform3D(0.754274, 0, 0.656559, 0, 1, 0, -0.656559, 0, 0.754274, 16.4616, -0.341411, -27.0961)
+
+[node name="mineral peque" parent="Pickupables/Pickup12" instance=ExtResource("14_fjlco")]
+
+[node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup12"]
+script = ExtResource("3_uewq7")
+interactable_name = "BrilliBrilli"
+input_names = Array[String](["Recoger"])
+info_title = "Brilli Brilli"
+info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup12/Interactable"]
+shape = SubResource("SphereShape3D_ayq12")
+
+[node name="Pickupable" type="Node" parent="Pickupables/Pickup12" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
+script = ExtResource("13_v1k18")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("4_u8gfy")
+inventory = NodePath("../../../PlayerInventory")
+amount_range = Vector2i(10, 15)
+parent_node = NodePath("..")
+
+[node name="InteractableOutline" type="Node" parent="Pickupables/Pickup12" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("15_hjkye")
+interactable = NodePath("../Interactable")
+mesh = NodePath("../mineral peque/Icosphere_011")
+outline_material = ExtResource("16_gwu6i")
+
+[node name="Pickup13" type="Node3D" parent="Pickupables"]
+transform = Transform3D(0.754274, 0, 0.656559, 0, 1, 0, -0.656559, 0, 0.754274, 23.7431, -0.341411, -31.6297)
+
+[node name="mineral peque" parent="Pickupables/Pickup13" instance=ExtResource("14_fjlco")]
+
+[node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup13"]
+script = ExtResource("3_uewq7")
+interactable_name = "BrilliBrilli"
+input_names = Array[String](["Recoger"])
+info_title = "Brilli Brilli"
+info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup13/Interactable"]
+shape = SubResource("SphereShape3D_ayq12")
+
+[node name="Pickupable" type="Node" parent="Pickupables/Pickup13" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
+script = ExtResource("13_v1k18")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("4_u8gfy")
+inventory = NodePath("../../../PlayerInventory")
+amount_range = Vector2i(10, 15)
+parent_node = NodePath("..")
+
+[node name="InteractableOutline" type="Node" parent="Pickupables/Pickup13" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("15_hjkye")
+interactable = NodePath("../Interactable")
+mesh = NodePath("../mineral peque/Icosphere_011")
+outline_material = ExtResource("16_gwu6i")
+
+[node name="Pickup2" type="Node3D" parent="Pickupables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.07767, -0.341413, -35.6421)
+
+[node name="mineral peque" parent="Pickupables/Pickup2" instance=ExtResource("14_fjlco")]
+
+[node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup2"]
+script = ExtResource("3_uewq7")
+interactable_name = "BrilliBrilli"
+input_names = Array[String](["Recoger"])
+info_title = "Brilli Brilli"
+info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup2/Interactable"]
+shape = SubResource("SphereShape3D_ayq12")
+
+[node name="Pickupable" type="Node" parent="Pickupables/Pickup2" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
+script = ExtResource("13_v1k18")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("4_u8gfy")
+inventory = NodePath("../../../PlayerInventory")
+amount_range = Vector2i(10, 15)
+parent_node = NodePath("..")
+
+[node name="InteractableOutline" type="Node" parent="Pickupables/Pickup2" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("15_hjkye")
+interactable = NodePath("../Interactable")
+mesh = NodePath("../mineral peque/Icosphere_011")
+outline_material = ExtResource("16_gwu6i")
+
+[node name="Pickup3" type="Node3D" parent="Pickupables"]
+transform = Transform3D(-0.549285, 0, -0.835635, 0, 1, 0, 0.835635, 0, -0.549285, -8.47659, -0.341413, -35.1382)
+
+[node name="mineral peque" parent="Pickupables/Pickup3" instance=ExtResource("14_fjlco")]
+
+[node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup3"]
+script = ExtResource("3_uewq7")
+interactable_name = "BrilliBrilli"
+input_names = Array[String](["Recoger"])
+info_title = "Brilli Brilli"
+info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup3/Interactable"]
+shape = SubResource("SphereShape3D_ayq12")
+
+[node name="Pickupable" type="Node" parent="Pickupables/Pickup3" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
+script = ExtResource("13_v1k18")
+interactable = NodePath("../Interactable")
+game_resource = ExtResource("4_u8gfy")
+inventory = NodePath("../../../PlayerInventory")
+amount_range = Vector2i(10, 15)
+parent_node = NodePath("..")
+
+[node name="InteractableOutline" type="Node" parent="Pickupables/Pickup3" node_paths=PackedStringArray("interactable", "mesh")]
+script = ExtResource("15_hjkye")
+interactable = NodePath("../Interactable")
+mesh = NodePath("../mineral peque/Icosphere_011")
+outline_material = ExtResource("16_gwu6i")
 
 [node name="BubbleEntryPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2539, -0.146578, -1.81602)
 
 [node name="BubbleExitPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2539, -0.132802, -7.54917)
+
+[node name="LabEntryPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.70339, 0.618843, 65.3311)
+
+[node name="LabExitPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.70339, 0.617606, 18.5625)
 
 [node name="BubbleDoorEntry" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15453, 1.01207, -5.8151)
@@ -325,12 +895,51 @@ offer_info = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0269649, -0.112421, 0.293051)
 shape = SubResource("BoxShape3D_lcg8h")
 
-[node name="Teleporter" type="Node" parent="BubbleDoorEntry" node_paths=PackedStringArray("interactable", "player_movement", "player_pov", "target_pos")]
+[node name="Teleporter" type="Node" parent="BubbleDoorEntry" node_paths=PackedStringArray("interactable", "player_movement", "player_pov", "target_pos", "interact_sound")]
 script = ExtResource("11_5654p")
 interactable = NodePath("..")
 player_movement = NodePath("../../Player")
 player_pov = NodePath("../../PlayerPOV")
 target_pos = NodePath("../../BubbleEntryPoint")
+target_pov_distance = 4.0
+target_pov_height = 5.0
+target_pov_angle = -30.0
+target_background_music = ExtResource("5_xhu3m")
+interact_sound = NodePath("../AudioStreamPlayer3D")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="BubbleDoorEntry"]
+stream = ExtResource("23_7vqle")
+volume_db = -3.913
+
+[node name="LabExit" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.68853, 1.6915, 64.8278)
+script = ExtResource("3_uewq7")
+interactable_name = "Puerta"
+input_names = Array[String](["Entrar"])
+interactable_priority = -100
+disable_player_on_interaction = true
+disable_interaction_system_on_interaction = true
+offer_info = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LabExit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0269649, -0.112421, 0.293051)
+shape = SubResource("BoxShape3D_lcg8h")
+
+[node name="Teleporter" type="Node" parent="LabExit" node_paths=PackedStringArray("interactable", "player_movement", "player_pov", "target_pos", "interact_sound")]
+script = ExtResource("11_5654p")
+interactable = NodePath("..")
+player_movement = NodePath("../../Player")
+player_pov = NodePath("../../PlayerPOV")
+target_pos = NodePath("../../LabExitPoint")
+target_pov_distance = 4.0
+target_pov_height = 5.0
+target_pov_angle = -30.0
+target_background_music = ExtResource("5_xhu3m")
+interact_sound = NodePath("../AudioStreamPlayer3D")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="LabExit"]
+stream = ExtResource("23_7vqle")
+volume_db = -3.913
 
 [node name="BubbleDoorExit" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15453, 1.01207, -4.0214)
@@ -346,186 +955,92 @@ offer_info = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0269649, -0.112421, 0.293051)
 shape = SubResource("BoxShape3D_lcg8h")
 
-[node name="Teleporter" type="Node" parent="BubbleDoorExit" node_paths=PackedStringArray("interactable", "player_movement", "player_pov", "target_pos")]
+[node name="Teleporter" type="Node" parent="BubbleDoorExit" node_paths=PackedStringArray("interactable", "player_movement", "player_pov", "target_pos", "interact_sound")]
 script = ExtResource("11_5654p")
 interactable = NodePath("..")
 player_movement = NodePath("../../Player")
 player_pov = NodePath("../../PlayerPOV")
 target_pos = NodePath("../../BubbleExitPoint")
+target_pov_distance = 6.0
+target_pov_height = 7.0
+target_pov_angle = -30.0
+target_background_music = ExtResource("24_xps1u")
+interact_sound = NodePath("../AudioStreamPlayer3D")
 
-[node name="NPC" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.38511, 1.36721, -27.5285)
-mesh = SubResource("PrismMesh_segqg")
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="BubbleDoorExit"]
+stream = ExtResource("23_7vqle")
+volume_db = -3.913
 
-[node name="Interactable" type="StaticBody3D" parent="NPC"]
+[node name="LabEntry" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.91329, 1.01207, 19.2102)
 script = ExtResource("3_uewq7")
-interactable_name = "LA Piramide"
-input_names = Array[String](["Hablar?"])
-interactable_priority = 100
+interactable_name = "Laboratorio"
+input_names = Array[String](["Entrar"])
+interactable_priority = -100
+disable_player_on_interaction = true
+disable_interaction_system_on_interaction = true
 offer_info = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NPC/Interactable"]
-shape = SubResource("BoxShape3D_xgqav")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LabEntry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0269649, -0.112421, 0.293051)
+shape = SubResource("BoxShape3D_lcg8h")
 
-[node name="NPCDialog" type="Node" parent="NPC" node_paths=PackedStringArray("intectable")]
-script = ExtResource("9_cl5pc")
+[node name="Teleporter" type="Node" parent="LabEntry" node_paths=PackedStringArray("interactable", "player_movement", "player_pov", "target_pos", "interact_sound")]
+script = ExtResource("11_5654p")
+interactable = NodePath("..")
+player_movement = NodePath("../../Player")
+player_pov = NodePath("../../PlayerPOV")
+target_pos = NodePath("../../LabEntryPoint")
+target_pov_distance = 4.0
+target_pov_height = 5.0
+target_pov_angle = -30.0
+target_background_music = ExtResource("25_j88x4")
+interact_sound = NodePath("../AudioStreamPlayer3D")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="LabEntry"]
+stream = ExtResource("23_7vqle")
+volume_db = -3.913
+
+[node name="Ciudad de Last Hope " parent="." instance=ExtResource("18_dhxsf")]
+
+[node name="NPC 5 EL barrista" parent="." instance=ExtResource("29_3boxp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.30462, -0.155762, -0.947092)
+
+[node name="Interactable" type="StaticBody3D" parent="NPC 5 EL barrista"]
+script = ExtResource("3_uewq7")
+interactable_name = "El Barrista"
+input_names = Array[String](["Hablar"])
+offer_info = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPC 5 EL barrista/Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.296078, 0)
+shape = SubResource("CylinderShape3D_j66uc")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="NPC 5 EL barrista"]
+volume_db = -10.0
+
+[node name="NPCDialog" type="Node" parent="NPC 5 EL barrista" node_paths=PackedStringArray("intectable", "dialog_sound_source")]
+script = ExtResource("30_j50ir")
 intectable = NodePath("../Interactable")
-dialogs = Array[String](["Hola", "Yo soy una piramide", "No un cubo", "Una piramide... digo", "LA PIRAMIDE", "Que haces hablando con una piramide?", "Es que ya no te hacen caso los prismas?", "Dejame tranquilo, ve ha hablar con el anillo de Torus, el sabe darle la vuelta a las cosas", "Piedritas papa"])
-repeat_start_index = 5
+dialogs = Array[String](["¡La araña también es un ser vivo!", "Las arañas son como tú y como yo, solo que tienen muchas patas y son muy feas", "¡Vuestras decisiones nos han metido en este lío!", "No recuerdo lo que es el aire puro", "Si no fuera por vosotros y vuestro estúpido plan de robar los huevos  a la reina, hubiéramos encontrado el desarrollo sostenible", "¡Burbuja en decadeeeeencia!"])
+dialog_sounds = Array[AudioStream]([ExtResource("31_ddllv"), ExtResource("32_0fef0"), ExtResource("33_fwrax"), ExtResource("35_i6vg1"), ExtResource("30_0ul3i"), ExtResource("37_gfks4")])
+dialog_sound_source = NodePath("../AudioStreamPlayer3D")
 
-[node name="Pickup" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22437, 0.880197, -23.3901)
-mesh = SubResource("SphereMesh_s1srb")
+[connection signal="death" from="EnemyObjectives/WeakpointB/Health" to="." method="on_base_destruction"]
 
-[node name="Interactable" type="StaticBody3D" parent="Pickup"]
-script = ExtResource("3_uewq7")
-interactable_name = "BrilliBrilli"
-input_names = Array[String](["Recoger"])
-info_title = "Brilli Brilli"
-info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickup/Interactable"]
-shape = SubResource("BoxShape3D_xgqav")
-
-[node name="Pickupable" type="Node" parent="Pickup" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
-script = ExtResource("13_v1k18")
-interactable = NodePath("../Interactable")
-game_resource = ExtResource("4_u8gfy")
-inventory = NodePath("../../PlayerInventory")
-amount_range = Vector2i(30, 50)
-parent_node = NodePath("..")
-
-[node name="InteractableOutline" type="Node" parent="Pickup" node_paths=PackedStringArray("interactable", "mesh")]
-script = ExtResource("15_hjkye")
-interactable = NodePath("../Interactable")
-mesh = NodePath("..")
-outline_material = ExtResource("16_gwu6i")
-
-[node name="Pickup2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.06877, 0.880197, -23.6272)
-mesh = SubResource("SphereMesh_s1srb")
-
-[node name="Interactable" type="StaticBody3D" parent="Pickup2"]
-script = ExtResource("3_uewq7")
-interactable_name = "BrilliBrilli"
-input_names = Array[String](["Recoger"])
-info_title = "Brilli Brilli"
-info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickup2/Interactable"]
-shape = SubResource("BoxShape3D_xgqav")
-
-[node name="Pickupable" type="Node" parent="Pickup2" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
-script = ExtResource("13_v1k18")
-interactable = NodePath("../Interactable")
-game_resource = ExtResource("4_u8gfy")
-inventory = NodePath("../../PlayerInventory")
-amount_range = Vector2i(30, 50)
-parent_node = NodePath("..")
-
-[node name="InteractableOutline" type="Node" parent="Pickup2" node_paths=PackedStringArray("interactable", "mesh")]
-script = ExtResource("15_hjkye")
-interactable = NodePath("../Interactable")
-mesh = NodePath("..")
-outline_material = ExtResource("16_gwu6i")
-
-[node name="Pickup3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2997, 0.880197, -22.691)
-mesh = SubResource("SphereMesh_s1srb")
-
-[node name="Interactable" type="StaticBody3D" parent="Pickup3"]
-script = ExtResource("3_uewq7")
-interactable_name = "BrilliBrilli"
-input_names = Array[String](["Recoger"])
-info_title = "Brilli Brilli"
-info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickup3/Interactable"]
-shape = SubResource("BoxShape3D_xgqav")
-
-[node name="Pickupable" type="Node" parent="Pickup3" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
-script = ExtResource("13_v1k18")
-interactable = NodePath("../Interactable")
-game_resource = ExtResource("4_u8gfy")
-inventory = NodePath("../../PlayerInventory")
-amount_range = Vector2i(30, 50)
-parent_node = NodePath("..")
-
-[node name="InteractableOutline" type="Node" parent="Pickup3" node_paths=PackedStringArray("interactable", "mesh")]
-script = ExtResource("15_hjkye")
-interactable = NodePath("../Interactable")
-mesh = NodePath("..")
-outline_material = ExtResource("16_gwu6i")
-
-[node name="Pickup4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0662, 0.880197, -16.6119)
-mesh = SubResource("SphereMesh_s1srb")
-
-[node name="Interactable" type="StaticBody3D" parent="Pickup4"]
-script = ExtResource("3_uewq7")
-interactable_name = "BrilliBrilli"
-input_names = Array[String](["Recoger"])
-info_title = "Brilli Brilli"
-info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickup4/Interactable"]
-shape = SubResource("BoxShape3D_xgqav")
-
-[node name="Pickupable" type="Node" parent="Pickup4" node_paths=PackedStringArray("interactable", "inventory", "parent_node")]
-script = ExtResource("13_v1k18")
-interactable = NodePath("../Interactable")
-game_resource = ExtResource("4_u8gfy")
-inventory = NodePath("../../PlayerInventory")
-amount_range = Vector2i(30, 50)
-parent_node = NodePath("..")
-
-[node name="InteractableOutline" type="Node" parent="Pickup4" node_paths=PackedStringArray("interactable", "mesh")]
-script = ExtResource("15_hjkye")
-interactable = NodePath("../Interactable")
-mesh = NodePath("..")
-outline_material = ExtResource("16_gwu6i")
-
-[node name="BIG FBX SCENE HUGE" parent="." instance=ExtResource("17_srk2m")]
-
-[node name="EnemyObjectives" type="Node3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="EnemyObjectives"]
-transform = Transform3D(1, 0, 0, 0, 2.45078, 0, 0, 0, 1, -9.20821, 1.2757, -2.25698)
-mesh = SubResource("PrismMesh_7e2yd")
-
-[node name="Health" type="Node3D" parent="EnemyObjectives/MeshInstance3D"]
-script = ExtResource("18_aoh4n")
-team = "weakpoints"
-max_health = 15000.0
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="EnemyObjectives"]
-transform = Transform3D(1, 0, 0, 0, 2.45078, 0, 0, 0, 1, 15.1363, 1.2757, -0.998057)
-mesh = SubResource("PrismMesh_7e2yd")
-
-[node name="Health" type="Node3D" parent="EnemyObjectives/MeshInstance3D2"]
-script = ExtResource("18_aoh4n")
-team = "weakpoints"
-max_health = 15000.0
-
-[node name="Spawners" type="Node3D" parent="."]
-
-[node name="EnemySpawner" type="Node3D" parent="Spawners" node_paths=PackedStringArray("general_enemy_objective")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.0612, 0, -18.5781)
-script = ExtResource("18_mrggo")
-enemy_scene = ExtResource("19_0epkk")
-spawner_radius = 0.25
-general_enemy_objective = NodePath("../../EnemyObjectives/MeshInstance3D/Health")
-
-[node name="EnemySpawner2" type="Node3D" parent="Spawners" node_paths=PackedStringArray("general_enemy_objective")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5846, -1.90735e-06, -54.3525)
-script = ExtResource("18_mrggo")
-enemy_scene = ExtResource("19_0epkk")
-spawner_radius = 0.25
-general_enemy_objective = NodePath("../../EnemyObjectives/MeshInstance3D/Health")
-
-[node name="EnemySpawner3" type="Node3D" parent="Spawners" node_paths=PackedStringArray("general_enemy_objective")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.2019, -1.90735e-06, -44.5267)
-script = ExtResource("18_mrggo")
-enemy_scene = ExtResource("19_0epkk")
-spawner_radius = 0.25
-general_enemy_objective = NodePath("../../EnemyObjectives/MeshInstance3D2/Health")
+[editable path="Buildables/ExtractorBuilder8"]
+[editable path="Buildables/ExtractorBuilder8/Extractor Simple"]
+[editable path="Buildables/ExtractorBuilder8/Extractor Pro"]
+[editable path="Pickupables/Pickup/mineral peque"]
+[editable path="Pickupables/Pickup4/mineral peque"]
+[editable path="Pickupables/Pickup5/mineral peque"]
+[editable path="Pickupables/Pickup6/mineral peque"]
+[editable path="Pickupables/Pickup7/mineral peque"]
+[editable path="Pickupables/Pickup8/mineral peque"]
+[editable path="Pickupables/Pickup9/mineral peque"]
+[editable path="Pickupables/Pickup10/mineral peque"]
+[editable path="Pickupables/Pickup11/mineral peque"]
+[editable path="Pickupables/Pickup12/mineral peque"]
+[editable path="Pickupables/Pickup13/mineral peque"]
+[editable path="Pickupables/Pickup2/mineral peque"]
+[editable path="Pickupables/Pickup3/mineral peque"]

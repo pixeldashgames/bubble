@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cy5ef11rieq4h"
+path="res://.godot/imported/ia las torretas estan bajo ataque.wav-1782d61879c10be904589bf3790dbc4f.sample"
+
+[deps]
+
+source_file="res://audio/NPC/ia las torretas estan bajo ataque.wav"
+dest_files=["res://.godot/imported/ia las torretas estan bajo ataque.wav-1782d61879c10be904589bf3790dbc4f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

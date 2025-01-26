@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cwpvy7drrj8ac"
+path="res://.godot/imported/muerte de bichos.wav-7b25dd5baad55859318d93efc152e276.sample"
+
+[deps]
+
+source_file="res://audio/muerte de bichos.wav"
+dest_files=["res://.godot/imported/muerte de bichos.wav-7b25dd5baad55859318d93efc152e276.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

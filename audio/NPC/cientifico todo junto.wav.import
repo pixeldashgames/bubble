@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ben36x8clvbrs"
+path="res://.godot/imported/cientifico todo junto.wav-10a3db3a1016f85a546112c8bba5cc69.sample"
+
+[deps]
+
+source_file="res://audio/NPC/cientifico todo junto.wav"
+dest_files=["res://.godot/imported/cientifico todo junto.wav-10a3db3a1016f85a546112c8bba5cc69.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

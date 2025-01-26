@@ -91,6 +91,8 @@ func _on_long_interactable_long_interact(action_index: int) -> void:
 			
 			await animation_tree.animation_finished
 			
+			turret_health.enabled = true
+			
 			animation_tree.set("parameters/conditions/build", false)
 			
 			turret_interactable.interactable_name = interactable_name + " Lv. 1"

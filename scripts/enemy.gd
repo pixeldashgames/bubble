@@ -12,6 +12,9 @@ class_name Enemy extends CharacterBody3D
 @export var attack_animation_name: String
 @export var move_animation_name: String
 
+@export var attack_audio: AudioStreamPlayer3D
+@export var death_audio: AudioStreamPlayer3D
+
 @export var animation_player: AnimationPlayer
 @onready var navigation_agent: NavigationAgent3D = get_node("NavigationAgent3D")
 
@@ -44,7 +47,9 @@ func check_targets() -> void:
 	
 	for i in targets.size():
 		var target := targets[i]
-		if target == null or not is_instance_valid(target) or target.is_dead:
+		if target.is_dead or not target.enabled:
+			continue
+		if target == null or not is_instance_valid(target):
 			remove_indexes.append(i)
 			continue
 		
@@ -94,7 +99,8 @@ func _process(_delta: float) -> void:
 	last_attack_time = time
 	
 	target.damage(attack_damage)
-	
+	attack_audio.pitch_scale = attack_audio.pitch_scale + (randf() - 0.5) * 0.3
+	attack_audio.play()
 	animation_player.play(attack_animation_name)
 	
 
@@ -144,6 +150,9 @@ func _on_velocity_computed(safe_velocity: Vector3):
 
 func _on_health_death() -> void:
 	enabled = false
+	death_audio.pitch_scale = death_audio.pitch_scale + (randf() - 0.5)
+	death_audio.play()
+	
 	velocity = Vector3.ZERO
 	animation_player.play(death_animation_name)
 	GameController.Instance.on_enemy_killed()

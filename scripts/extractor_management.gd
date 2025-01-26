@@ -11,7 +11,7 @@ extends Node
 @export var storages: Array[int]
 @export var healths: Array[float]
 @export var extractor_health: Health
-@export var animation: AnimationPlayer
+@export var animation_players: Array[AnimationPlayer]
 
 @export var extractor_meshes: Array[Node3D]
 
@@ -25,6 +25,9 @@ extends Node
 @export var repair_cancel_name: String
 @export var upgrade_time: float
 @export var repair_time: float
+@export var start_built: bool
+@export var running_animation_name: String
+@export var stopped_animation_name: String
 
 @export var repair_fraction: float
 
@@ -33,9 +36,11 @@ var upgrading = false
 
 func _ready() -> void:
 	extractor_interactable.input_names = [extractor_interactable.input_names[0] + " (x%d[img=32]%s[/img])" % [build_cost, scrap_resource.icon.resource_path]]
-
+	if start_built:
+		_on_long_interactable_long_interact(0)
+		
 func get_extractor_info() -> String:
-	var string = "Salud       %d/%d\n" % [extractor.extractor_health.health, extractor.extractor_health.max_health]
+	var string = "Salud       %d/%d\n" % [extractor_health.health, extractor_health.max_health]
 	string +=    "Almacen.    %d/%d\n" % [extractor.accumulated_scrap, extractor.max_scrap_storage]
 	
 	string +=   "\nTiempo de Ext.    %d" % roundi(extractor.extraction_interval)
@@ -56,10 +61,10 @@ func get_extractor_info() -> String:
 		if value != extractor.max_scrap_storage:
 			string += "  →   [color=green]%d[/color]" % value
 	
-	string +=   "\nSalud Máx.    %d" % roundi(extractor.extractor_health.max_health)
+	string +=   "\nSalud Máx.    %d" % roundi(extractor_health.max_health)
 	if current_level < extraction_intervals.size():
 		var value = roundi(healths[current_level])
-		if not is_equal_approx(value, roundi(extractor.extractor_health.max_health)):
+		if not is_equal_approx(value, roundi(extractor_health.max_health)):
 			string += "  →   [color=green]%d[/color]" % value
 	return string
 
@@ -74,11 +79,11 @@ func _process(_delta: float) -> void:
 		return
 	elif current_level < extraction_intervals.size():
 		extractor_interactable.interactions_enabled[0] = scrap >= upgrade_costs[current_level]
-		extractor_interactable.interactions_enabled[1] = extractor.extractor_health.health < extractor.extractor_health.max_health
+		extractor_interactable.interactions_enabled[1] = extractor_health.health < extractor_health.max_health
 		extractor_interactable.interactions_enabled[2] = extractor.accumulated_scrap > 0
 		extractor_interactable.info_details = get_extractor_info()
 	else:
-		extractor_interactable.interactions_enabled[0] = extractor.extractor_health.health < extractor.extractor_health.max_health
+		extractor_interactable.interactions_enabled[0] = extractor_health.health < extractor_health.max_health
 		extractor_interactable.interactions_enabled[1] = extractor.accumulated_scrap > 0
 		extractor_interactable.info_details = get_extractor_info()
 
@@ -87,20 +92,18 @@ func _on_long_interactable_long_interact(action_index: int) -> void:
 	if action_index == 0:
 		upgrading = true
 		if current_level < 0:
-			PlayerInventory.Instance.extract_resource(scrap_resource, build_cost)
+			if not start_built:
+				PlayerInventory.Instance.extract_resource(scrap_resource, build_cost)
 			
-			animation.play("build_extractor")
-			extractor_interactable.can_interact = false
-			await animation.animation_finished
+			#animation_players[0].play(running_animation_name)
 			
 			extractor_interactable.interactable_name = interactable_name + " Lv. 1"
 			extractor_interactable.info_title = extractor_interactable.interactable_name
 			extractor_interactable.interactions_enabled = [false, false, false] as Array[bool]
 			extractor_interactable.input_names = [upgrade_action_name + " (x%d[img=32]%s[/img])" % [upgrade_costs[0], scrap_resource.icon.resource_path], repair_action_name, collect_action_name]
 			
+			extractor_health.enabled = true
 			extractor_meshes[0].show()
-			
-			extractor_interactable.can_interact = true
 			
 			extractor_long_interactable.cancel_input_names = [upgrade_cancel_name, repair_cancel_name]
 			extractor_long_interactable.interaction_times = [upgrade_time, repair_time]
@@ -110,14 +113,11 @@ func _on_long_interactable_long_interact(action_index: int) -> void:
 		elif current_level < extraction_intervals.size():
 			PlayerInventory.Instance.extract_resource(scrap_resource, build_cost)
 			
-			animation.play("upgrade_extractor")
-			extractor_interactable.can_interact = false
-			extractor.enabled = false
-			
+			#if not extractor_health.is_dead:
+				#animation_players[current_level + 1].play(running_animation_name)
+
 			extractor_meshes[current_level].hide()
 			extractor_meshes[current_level + 1].show()
-			
-			await animation.animation_finished
 			
 			if current_level + 1 == extraction_intervals.size():
 				extractor_interactable.interactable_name = interactable_name + " Lv. MAX"
@@ -142,12 +142,10 @@ func _on_long_interactable_long_interact(action_index: int) -> void:
 				extractor_long_interactable.intercept_actions = [true] as Array[bool]
 			else:
 				extractor_interactable.input_names[0] = upgrade_action_name + " (x%d[img=32]%s[/img])" % [upgrade_costs[current_level], scrap_resource.icon.resource_path] 
-			extractor_interactable.can_interact = true
-			extractor.enabled = true
 		upgrading = false
 		extractor_interactable.info_details = get_extractor_info()
 	elif action_index == 1:
-		extractor.extractor_health.heal(extractor.extractor_health.max_health * repair_fraction)
+		extractor_health.heal(extractor_health.max_health * repair_fraction)
 
 
 func _on_interactable_interact(input_index: int) -> void:
@@ -167,7 +165,9 @@ func _on_interactable_interact(input_index: int) -> void:
 
 func _on_health_death() -> void:
 	extractor.enabled = false
+	#animation_players[].play(stopped_animation_name)
 
 
 func _on_health_revive() -> void:
-	extractor.enabled = false
+	extractor.enabled = true
+	#animation_players[].play(running_animation_name)

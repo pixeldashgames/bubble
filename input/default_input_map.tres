@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=69 format=3 uid="uid://dkbql6i8l6tit"]
+[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=72 format=3 uid="uid://dkbql6i8l6tit"]
 
 [ext_resource type="Script" path="res://addons/guide/guide_action_mapping.gd" id="1_77umf"]
 [ext_resource type="Script" path="res://addons/guide/guide_mapping_context.gd" id="2_arjwm"]
@@ -18,6 +18,7 @@
 [ext_resource type="Resource" uid="uid://bbq5fkkhhy4dh" path="res://input/interact_3rd.tres" id="13_glaak"]
 [ext_resource type="Resource" uid="uid://jrxta1mia7dk" path="res://input/sprint.tres" id="14_gvid7"]
 [ext_resource type="Script" path="res://addons/guide/triggers/guide_trigger_released.gd" id="14_wiu70"]
+[ext_resource type="Resource" uid="uid://b50khdwg4wssb" path="res://input/pause.tres" id="18_m3y8x"]
 
 [sub_resource type="Resource" id="Resource_bbp4v"]
 script = ExtResource("4_tws6m")
@@ -135,25 +136,6 @@ input = SubResource("Resource_twa6v")
 modifiers = Array[ExtResource("5_2uuh4")]([])
 triggers = Array[ExtResource("6_m33eu")]([SubResource("Resource_balru")])
 
-[sub_resource type="Resource" id="Resource_mrlyb"]
-script = ExtResource("4_tws6m")
-key = 4194305
-shift = false
-control = false
-alt = false
-meta = false
-allow_additional_modifiers = true
-
-[sub_resource type="Resource" id="Resource_v3w71"]
-script = ExtResource("10_wnpu0")
-actuation_threshold = 0.5
-
-[sub_resource type="Resource" id="Resource_rtgu5"]
-script = ExtResource("3_4ivf2")
-input = SubResource("Resource_mrlyb")
-modifiers = Array[ExtResource("5_2uuh4")]([])
-triggers = Array[ExtResource("6_m33eu")]([SubResource("Resource_v3w71")])
-
 [sub_resource type="Resource" id="Resource_b78w6"]
 script = ExtResource("12_7qbob")
 button = 1
@@ -172,7 +154,7 @@ triggers = Array[ExtResource("6_m33eu")]([SubResource("Resource_tyvr8")])
 [sub_resource type="Resource" id="Resource_v7wvv"]
 script = ExtResource("1_77umf")
 action = ExtResource("11_ftm58")
-input_mappings = Array[ExtResource("3_4ivf2")]([SubResource("Resource_o4263"), SubResource("Resource_rtgu5"), SubResource("Resource_rhf06")])
+input_mappings = Array[ExtResource("3_4ivf2")]([SubResource("Resource_o4263"), SubResource("Resource_rhf06")])
 
 [sub_resource type="Resource" id="Resource_tjw7h"]
 script = ExtResource("4_tws6m")
@@ -318,8 +300,39 @@ script = ExtResource("1_77umf")
 action = ExtResource("14_gvid7")
 input_mappings = Array[ExtResource("3_4ivf2")]([SubResource("Resource_hke4w"), SubResource("Resource_hp3xv")])
 
+[sub_resource type="Resource" id="Resource_oigm8"]
+script = ExtResource("4_tws6m")
+key = 4194305
+shift = false
+control = false
+alt = false
+meta = false
+allow_additional_modifiers = true
+
+[sub_resource type="Resource" id="Resource_2dgef"]
+script = ExtResource("3_4ivf2")
+input = SubResource("Resource_oigm8")
+modifiers = Array[ExtResource("5_2uuh4")]([])
+triggers = Array[ExtResource("6_m33eu")]([])
+
+[sub_resource type="Resource" id="Resource_8gmd1"]
+script = ExtResource("12_7qbob")
+button = 6
+joy_index = -1
+
+[sub_resource type="Resource" id="Resource_w2ngt"]
+script = ExtResource("3_4ivf2")
+input = SubResource("Resource_8gmd1")
+modifiers = Array[ExtResource("5_2uuh4")]([])
+triggers = Array[ExtResource("6_m33eu")]([])
+
+[sub_resource type="Resource" id="Resource_8jsge"]
+script = ExtResource("1_77umf")
+action = ExtResource("18_m3y8x")
+input_mappings = Array[ExtResource("3_4ivf2")]([SubResource("Resource_2dgef"), SubResource("Resource_w2ngt")])
+
 [resource]
 script = ExtResource("2_arjwm")
 display_name = ""
-mappings = Array[ExtResource("1_77umf")]([SubResource("Resource_np628"), SubResource("Resource_v7wvv"), SubResource("Resource_d3fho"), SubResource("Resource_c18kb"), SubResource("Resource_nftlu"), SubResource("Resource_riysv")])
+mappings = Array[ExtResource("1_77umf")]([SubResource("Resource_np628"), SubResource("Resource_v7wvv"), SubResource("Resource_d3fho"), SubResource("Resource_c18kb"), SubResource("Resource_nftlu"), SubResource("Resource_riysv"), SubResource("Resource_8jsge")])
 metadata/_guide_action_mappings_collapsed = false

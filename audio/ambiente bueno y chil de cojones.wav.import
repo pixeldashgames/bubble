@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://duhn7qqaqdl70"
+path="res://.godot/imported/ambiente bueno y chil de cojones.wav-5b81d216159efa4fda9319efe7c1d96a.sample"
+
+[deps]
+
+source_file="res://audio/ambiente bueno y chil de cojones.wav"
+dest_files=["res://.godot/imported/ambiente bueno y chil de cojones.wav-5b81d216159efa4fda9319efe7c1d96a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

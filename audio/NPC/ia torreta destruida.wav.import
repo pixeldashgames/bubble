@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c86mbuhnb24t8"
+path="res://.godot/imported/ia torreta destruida.wav-e06f3d399ab751e3a795fa7b925d5e04.sample"
+
+[deps]
+
+source_file="res://audio/NPC/ia torreta destruida.wav"
+dest_files=["res://.godot/imported/ia torreta destruida.wav-e06f3d399ab751e3a795fa7b925d5e04.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cnxfdl7tkhxl8"
+path="res://.godot/imported/ia mineral extraido.wav-070535722ef983fa96cc24cda7eb091b.sample"
+
+[deps]
+
+source_file="res://audio/NPC/ia mineral extraido.wav"
+dest_files=["res://.godot/imported/ia mineral extraido.wav-070535722ef983fa96cc24cda7eb091b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

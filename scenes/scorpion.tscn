@@ -1,0 +1,110 @@
+[gd_scene load_steps=8 format=3 uid="uid://f07yehnktbnp"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_ugaeq"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="2_15erj"]
+[ext_resource type="AudioStream" uid="uid://b0cye4lsaufaf" path="res://audio/aguijonazo enemy.wav" id="2_o2vjy"]
+[ext_resource type="AudioStream" uid="uid://cwpvy7drrj8ac" path="res://audio/muerte de bichos.wav" id="3_82025"]
+[ext_resource type="PackedScene" uid="uid://4lmvq3c48b7g" path="res://art/3d/Scorpion.glb" id="3_hwbml"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vblri"]
+height = 0.682743
+radius = 0.609601
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kqtbl"]
+radius = 10.0
+
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("attack_audio", "death_audio", "animation_player")]
+collision_layer = 2
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+script = ExtResource("1_ugaeq")
+attack_damage = 200.0
+attack_interval = 2000.0
+target_teams = Array[String](["turrets", "extractors"])
+team_priorities = Array[int]([3, 2])
+movement_speed = 2.0
+death_animation_name = "Muerte Scorpion"
+idle_animation_name = "IDLE Scorpion"
+attack_animation_name = "Ataque Scorpion"
+move_animation_name = "WalkScorpion"
+attack_audio = NodePath("AttackAudio")
+death_audio = NodePath("DeathAudio")
+animation_player = NodePath("Scorpion/AnimationPlayer")
+
+[node name="AttackAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_o2vjy")
+volume_db = -11.707
+pitch_scale = 0.72
+max_polyphony = 10
+
+[node name="DeathAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_82025")
+volume_db = -24.665
+pitch_scale = 1.4
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 2.0
+path_max_distance = 10.01
+avoidance_enabled = true
+radius = 0.35
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.160243, 0)
+shape = SubResource("CylinderShape3D_vblri")
+
+[node name="Health" type="Node3D" parent="."]
+script = ExtResource("2_15erj")
+team = "bugs"
+max_health = 300.0
+
+[node name="Scorpion" parent="." instance=ExtResource("3_hwbml")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.105, 0, 0)
+
+[node name="Skeleton3D" parent="Scorpion/huesos escroprion" index="0"]
+bones/0/position = Vector3(0.132858, 0.0468367, 0.470909)
+bones/0/rotation = Quaternion(-0.499929, 0.473941, -0.433488, 0.580981)
+bones/1/rotation = Quaternion(0.0581247, 0.477091, -0.201841, 0.853385)
+bones/4/rotation = Quaternion(-0.460909, 0.292263, 0.474271, 0.690805)
+bones/5/rotation = Quaternion(0.596671, 0.604937, -0.518394, -0.0964525)
+bones/6/rotation = Quaternion(0.000602184, -0.106187, 0.104968, 0.98879)
+bones/7/rotation = Quaternion(-0.600143, 0.365711, 0.222728, 0.67563)
+bones/8/rotation = Quaternion(0.638369, 0.607825, -0.229648, 0.412668)
+bones/9/rotation = Quaternion(0.165543, -0.0319386, 0.057, 0.984036)
+bones/10/position = Vector3(-0.00305422, 0.758305, -0.233132)
+bones/10/rotation = Quaternion(-0.26152, 0.449747, 0.411101, 0.748553)
+bones/11/rotation = Quaternion(0.73138, 0.309088, -0.4132, 0.445886)
+bones/12/rotation = Quaternion(0.102836, -0.190015, 0.00484605, 0.976369)
+bones/13/rotation = Quaternion(-0.447787, 0.720665, 0.478168, 0.226901)
+bones/14/rotation = Quaternion(-0.613353, 0.582381, -0.512066, 0.149731)
+bones/15/rotation = Quaternion(0.023381, 0.103214, -0.133147, 0.98543)
+bones/16/rotation = Quaternion(-0.338608, 0.783201, 0.505561, 0.12786)
+bones/17/rotation = Quaternion(-0.594743, 0.619846, -0.448472, -0.246868)
+bones/18/rotation = Quaternion(0.208698, 0.0284781, -0.0948512, 0.972953)
+bones/19/rotation = Quaternion(-0.382325, 0.827129, 0.287335, 0.295167)
+bones/20/rotation = Quaternion(0.719613, -0.285763, 0.432279, 0.462204)
+bones/21/rotation = Quaternion(0.128064, 0.186916, -0.0328955, 0.973437)
+bones/23/rotation = Quaternion(0.107857, -0.000844326, -0.115398, 0.987446)
+bones/24/rotation = Quaternion(0.13209, -0.000396714, -0.108422, 0.98529)
+bones/25/rotation = Quaternion(0.34523, -0.000415242, -0.283291, 0.894741)
+bones/26/rotation = Quaternion(0.281037, -0.000309257, -0.230444, 0.931619)
+bones/27/rotation = Quaternion(0.413921, -0.00013381, -0.339458, 0.844652)
+bones/28/position = Vector3(0.708518, -0.337784, -0.930826)
+bones/30/position = Vector3(1.43135, -0.176801, 0.644069)
+bones/30/rotation = Quaternion(0.410663, -0.380247, -0.55223, 0.617907)
+bones/31/position = Vector3(-0.491068, -0.337784, -0.937884)
+bones/32/position = Vector3(-1.07652, -0.337784, -0.324927)
+bones/33/position = Vector3(-1.21926, -0.337784, 0.580151)
+
+[node name="AnimationPlayer" parent="Scorpion" index="1"]
+speed_scale = 0.8
+
+[node name="EnemyAggro" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyAggro"]
+shape = SubResource("SphereShape3D_kqtbl")
+
+[connection signal="death" from="Health" to="." method="_on_health_death"]
+[connection signal="body_entered" from="EnemyAggro" to="." method="_on_enemy_aggro_body_entered"]
+[connection signal="body_exited" from="EnemyAggro" to="." method="_on_enemy_aggro_body_exited"]
+
+[editable path="Scorpion"]

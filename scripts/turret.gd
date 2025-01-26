@@ -8,6 +8,7 @@ class_name Turret extends Node3D
 @export var beams_spawn_point: Node3D
 @export var beam_scene: PackedScene
 @export var animation_tree: AnimationTree
+@export var shot_audio: AudioStreamPlayer3D
 @export var enabled := true
 
 var targets: Array[Health]
@@ -29,7 +30,7 @@ func check_nearest_target():
 	var remove_indexes: Array[int] = []
 	for i in targets.size():
 		var target := targets[i]
-		if targets[i] == null or not is_instance_valid(targets[i]) or target.is_dead:
+		if targets[i] == null or not is_instance_valid(targets[i]) or target.is_dead or not target.enabled:
 			remove_indexes.append(i)
 			continue
 		
@@ -78,6 +79,9 @@ func _process(_delta: float) -> void:
 		last_attack_time = time
 		
 		current_target.damage(damage)
+		
+		shot_audio.pitch_scale = shot_audio.pitch_scale + (randf() - 0.5) * 0.1
+		shot_audio.play()
 		
 		var beam = beam_scene.instantiate() as Node3D
 		beams_spawn_point.add_child(beam)

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b0imbjnntcdo0"
+path="res://.godot/imported/bicho fallecido.wav-2c581854e921ebd1949c309dde60cc30.sample"
+
+[deps]
+
+source_file="res://audio/NPC/bicho fallecido.wav"
+dest_files=["res://.godot/imported/bicho fallecido.wav-2c581854e921ebd1949c309dde60cc30.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,11 +1,11 @@
 class_name EnemySpawner extends Node3D
 
-@export var enemy_scene: PackedScene
 @export var spawner_radius: float
 @export var general_enemy_objective: Health
 
 var last_spawn_time := 0.0
 
+var enemy_scene: PackedScene
 var spawn_rate := 0.0
 var spawn_count := 0
 
@@ -29,7 +29,8 @@ func _process(delta: float) -> void:
 	inst.global_position = pos
 	inst.set_general_objective(general_enemy_objective)
 
-func start_wave(enemies_count: int, rate: float):
+func start_wave(enemy: PackedScene, enemies_count: int, rate: float):
+	enemy_scene = enemy
 	spawn_count = enemies_count
 	spawn_rate = rate
 	last_spawn_time = Time.get_ticks_msec()

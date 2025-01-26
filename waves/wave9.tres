@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WaveDefinition" load_steps=3 format=3 uid="uid://bmropm1so6dqs"]
+
+[ext_resource type="PackedScene" uid="uid://f07yehnktbnp" path="res://scenes/scorpion.tscn" id="1_gvdvj"]
+[ext_resource type="Script" path="res://scripts/wave_definition.gd" id="2_rtwuq"]
+
+[resource]
+script = ExtResource("2_rtwuq")
+spawn_rates = Array[float]([500.0, 500.0, 500.0, 500.0])
+spawn_counts = Array[int]([50, 50, 50, 50])
+enemies = Array[PackedScene]([ExtResource("1_gvdvj"), ExtResource("1_gvdvj"), ExtResource("1_gvdvj"), ExtResource("1_gvdvj")])
+preparation_time = 120000.0

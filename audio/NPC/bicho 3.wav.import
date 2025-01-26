@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://v8pvp1xva68j"
+path="res://.godot/imported/bicho 3.wav-8054fc6c7625660b102959821b21f6e5.sample"
+
+[deps]
+
+source_file="res://audio/NPC/bicho 3.wav"
+dest_files=["res://.godot/imported/bicho 3.wav-8054fc6c7625660b102959821b21f6e5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

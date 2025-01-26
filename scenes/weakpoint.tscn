@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://c2dh4o820vpgu"]
+
+[ext_resource type="Script" path="res://scripts/interactable.gd" id="1_yedha"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="2_ogb0p"]
+[ext_resource type="Script" path="res://scripts/weakpoint.gd" id="3_yo4si"]
+[ext_resource type="Script" path="res://scripts/long_interactable.gd" id="4_um1l5"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_7e2yd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kj5m0"]
+
+[node name="Weakpoint" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 2.45078, 0, 0, 0, 1, -9.20821, 1.2757, -2.25698)
+mesh = SubResource("PrismMesh_7e2yd")
+
+[node name="Interactable" type="StaticBody3D" parent="."]
+script = ExtResource("1_yedha")
+interactable_name = "Punto Débil"
+input_names = Array[String](["Reparar"])
+interactable_priority = 10
+info_title = "Punto Débil"
+
+[node name="Health" type="Node3D" parent="Interactable"]
+script = ExtResource("2_ogb0p")
+team = "weakpoints"
+max_health = 15000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
+shape = SubResource("BoxShape3D_kj5m0")
+
+[node name="Weakpoint" type="Node" parent="." node_paths=PackedStringArray("long_interactable", "interactable", "health")]
+script = ExtResource("3_yo4si")
+long_interactable = NodePath("../LongInteractable")
+interactable = NodePath("../Interactable")
+repair_fraction = 0.1
+health = NodePath("../Interactable/Health")
+
+[node name="LongInteractable" type="Node" parent="." node_paths=PackedStringArray("interactable")]
+script = ExtResource("4_um1l5")
+interactable = NodePath("../Interactable")
+cancel_input_names = Array[String](["Cancelar Reparación"])
+interaction_names = Array[String](["Reparando..."])
+interaction_times = Array[float]([10000.0])
+intercept_actions = Array[bool]([true])

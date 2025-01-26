@@ -5,6 +5,9 @@ static var Instance: GameController = null
 @export var input_mapping_context: GUIDEMappingContext
 @export var waves: Array[WaveDefinition]
 @export var spawn_points: Array[EnemySpawner]
+@export var pause_action: GUIDEAction
+
+@export var background_music_player: AudioStreamPlayer
 
 var current_wave := 0
 var in_preparation := true
@@ -21,6 +24,22 @@ func _exit_tree() -> void:
 func _ready() -> void:
 	GUIDE.enable_mapping_context(input_mapping_context)
 	preparation_end_time = Time.get_ticks_msec() + waves[0].preparation_time
+	pause_action.triggered.connect(on_pause)
+
+func on_pause() -> void:
+	InGameMenus.Instance.show_pause_menu()
+
+func change_background_music(music_stream: AudioStream) -> void:
+	var volume = background_music_player.volume_db
+	
+	var tween = create_tween()
+	await tween.tween_property(background_music_player, "volume_db", -50, 1).finished
+	
+	background_music_player.stream = music_stream
+	background_music_player.play()
+	tween = create_tween()
+	await tween.tween_property(background_music_player, "volume_db", volume, 1).finished
+	
 
 func _process(delta: float) -> void:
 	if in_preparation:	
@@ -36,7 +55,7 @@ func _process(delta: float) -> void:
 		for i in spawn_points.size():
 			var count = wave.spawn_counts[i]
 			total_enemy_count += count
-			spawn_points[i].start_wave(count, wave.spawn_rates[i])
+			spawn_points[i].start_wave(wave.enemies[i], count, wave.spawn_rates[i])
 		
 		PlayerHUD.Instance.update_wave_hud(total_enemy_count)
 		
@@ -59,8 +78,7 @@ func on_enemy_killed():
 
 
 func on_base_destruction():
-	pass
-
+	InGameMenus.Instance.show_game_over_menu()
 
 func victory():
-	pass
+	InGameMenus.Instance.show_victory_menu()

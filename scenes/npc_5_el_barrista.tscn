@@ -1,0 +1,83 @@
+[gd_scene load_steps=6 format=3 uid="uid://bw1ooviv4m585"]
+
+[ext_resource type="PackedScene" uid="uid://dqca7tyqfpfur" path="res://art/3d/NPC 5 EL barrista.glb" id="1_fcu13"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_rpewp"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ju84v"]
+animation = &"Barrer"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7pjlf"]
+animation = &"IDLE"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_jdvhi"]
+graph_offset = Vector2(-430.4, 33.6)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_rpewp")
+nodes/Add2/position = Vector2(64, 144)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_7pjlf")
+nodes/Animation/position = Vector2(-180, 140)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_ju84v")
+"nodes/Animation 2/position" = Vector2(-180, 300)
+node_connections = [&"Add2", 0, &"Animation", &"Add2", 1, &"Animation 2", &"output", 0, &"Add2"]
+
+[node name="NPC 5 EL barrista" instance=ExtResource("1_fcu13")]
+
+[node name="Empty_009" parent="." index="0"]
+transform = Transform3D(0.57655, 0, 0, 0, -6.87301e-08, -0.57655, 0, 0.57655, -6.87301e-08, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Empty_009/elkebarre" index="0"]
+bones/0/position = Vector3(1.52588e-05, -1.98286e-13, -7.10543e-15)
+bones/0/rotation = Quaternion(-0.0297818, -3.38442e-27, 9.28959e-18, 0.999556)
+bones/1/position = Vector3(1.52588e-05, 0.529625, -3.96599e-09)
+bones/1/rotation = Quaternion(-0.229041, -0.145489, 0.23173, 0.93417)
+bones/1/scale = Vector3(1, 1, 1)
+bones/2/rotation = Quaternion(-0.0179247, 2.92801e-11, -1.13524e-08, 0.999839)
+bones/3/rotation = Quaternion(-0.648762, -9.33706e-15, -1.54677e-07, 0.760992)
+bones/4/scale = Vector3(1, 1, 1)
+bones/5/rotation = Quaternion(0.76511, 0.559945, 0.0517498, -0.313672)
+bones/5/scale = Vector3(1, 1, 1)
+bones/6/rotation = Quaternion(-0.00424571, -0.120442, 0.992681, -0.00774102)
+bones/6/scale = Vector3(1, 1, 1)
+bones/7/rotation = Quaternion(-0.320607, -0.00123663, -0.060529, 0.945276)
+bones/7/scale = Vector3(1, 1, 1)
+bones/8/rotation = Quaternion(-0.124324, -0.24687, 0.175148, 0.944946)
+bones/9/rotation = Quaternion(-0.199942, -0.229676, 0.908692, 0.285573)
+bones/9/scale = Vector3(0.0665521, 0.124303, 0.0665519)
+bones/10/position = Vector3(-0.452908, 0.381761, 0.0686899)
+bones/10/rotation = Quaternion(-0.150647, -0.21314, 0.938357, -0.226636)
+bones/10/scale = Vector3(1, 1, 1)
+bones/11/position = Vector3(-2.86688e-05, 0.466802, 7.05459e-06)
+bones/11/rotation = Quaternion(-0.224269, 0.00147571, 0.0435896, 0.973551)
+bones/11/scale = Vector3(1, 1, 1)
+bones/12/position = Vector3(-2.31839e-05, 0.625559, 1.19901e-05)
+bones/12/rotation = Quaternion(-0.000387359, 1.16859e-07, -0.00206482, 0.999998)
+bones/13/position = Vector3(1.52588e-05, 5.89477e-10, 0.277164)
+bones/13/rotation = Quaternion(-4.38526e-10, 0.999997, -0.00225223, 1.94707e-07)
+bones/13/scale = Vector3(1, 1, 1)
+bones/14/position = Vector3(0.170558, 0.000525355, 0.000298389)
+bones/14/rotation = Quaternion(0.714547, -0.0269016, 0.698545, -0.0270768)
+bones/14/scale = Vector3(1, 1, 1)
+bones/15/position = Vector3(3.26606e-06, 0.544617, -1.68676e-05)
+bones/15/rotation = Quaternion(0.0244221, 0.00186283, -0.134132, 0.990661)
+bones/15/scale = Vector3(1, 1, 1)
+bones/16/rotation = Quaternion(-0.0142161, 0.117309, 0.750262, 0.650495)
+bones/16/scale = Vector3(1, 1, 1)
+bones/17/position = Vector3(-0.171278, 0.000525355, 0.00029839)
+bones/17/rotation = Quaternion(0.714547, 0.0269016, -0.698545, -0.0270768)
+bones/17/scale = Vector3(1, 1, 1)
+bones/18/position = Vector3(-1.60617e-06, 0.544617, -1.6895e-05)
+bones/18/rotation = Quaternion(-0.00162809, -8.41139e-05, 0.103758, 0.994601)
+bones/18/scale = Vector3(1, 1, 1)
+bones/19/rotation = Quaternion(0.0599557, -0.0679766, -0.707476, 0.700901)
+bones/19/scale = Vector3(1, 1, 1)
+
+[node name="Cube_232" parent="Empty_009/elkebarre/Skeleton3D" index="0"]
+transform = Transform3D(0.0452114, -0.0639684, 0.0348157, 0.0225501, 0.105946, 0.0265164, -0.0433202, -0.0116113, 0.050139, 1.10274, -0.53727, -0.182236)
+
+[node name="AnimationPlayer" parent="." index="1"]
+speed_scale = 0.6
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeBlendTree_jdvhi")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Add2/add_amount = 1.0

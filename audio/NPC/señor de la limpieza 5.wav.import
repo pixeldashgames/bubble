@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://sclrm21kp576"
+path="res://.godot/imported/señor de la limpieza 5.wav-34e63e32f6fcea6599f284dd0df35f34.sample"
+
+[deps]
+
+source_file="res://audio/NPC/señor de la limpieza 5.wav"
+dest_files=["res://.godot/imported/señor de la limpieza 5.wav-34e63e32f6fcea6599f284dd0df35f34.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

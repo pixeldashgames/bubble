@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8cl3thkam01k"]
+[gd_scene load_steps=8 format=3 uid="uid://b8cl3thkam01k"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_kxwgr"]
+[ext_resource type="AudioStream" uid="uid://b0cye4lsaufaf" path="res://audio/aguijonazo enemy.wav" id="2_47eyo"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_xavrx"]
 [ext_resource type="PackedScene" uid="uid://bnl5mvvytme77" path="res://art/3d/ARANIA BASICA fixed.glb" id="3_hklg8"]
+[ext_resource type="AudioStream" uid="uid://cwpvy7drrj8ac" path="res://audio/muerte de bichos.wav" id="3_x1ebb"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vblri"]
 height = 0.682743
@@ -11,7 +13,7 @@ radius = 0.409227
 [sub_resource type="SphereShape3D" id="SphereShape3D_kqtbl"]
 radius = 10.0
 
-[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("animation_player")]
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("attack_audio", "death_audio", "animation_player")]
 collision_layer = 2
 axis_lock_angular_x = true
 axis_lock_angular_z = true
@@ -20,13 +22,25 @@ attack_damage = 50.0
 attack_interval = 1000.0
 target_teams = Array[String](["turrets", "extractors"])
 team_priorities = Array[int]([3, 2])
-avoidance_distance_range = Vector2(0.2, 0.35)
+avoidance_distance_range = Vector2(0.1, 0.2)
 movement_speed = 5.0
 death_animation_name = "MUERTE ARANIA"
 idle_animation_name = "IDLE Spider Basic"
 attack_animation_name = "Atack  SpiderBasic"
 move_animation_name = "Caminar Spider basica 2"
+attack_audio = NodePath("AttackAudio")
+death_audio = NodePath("DeathAudio")
 animation_player = NodePath("ARANIA BASICA fixed/AnimationPlayer")
+
+[node name="AttackAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_47eyo")
+volume_db = -11.707
+max_polyphony = 10
+
+[node name="DeathAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_x1ebb")
+volume_db = -24.665
+pitch_scale = 1.81
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 target_desired_distance = 2.0

@@ -5,6 +5,7 @@ signal revive
 
 @export var team: String
 @export var max_health: float
+@export var enabled := true
 
 var health: float
 var is_dead := false

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://digvoat607kjs"
+path="res://.godot/imported/pasos loop.wav-43d8b710d02326996fa30b5482403d0a.sample"
+
+[deps]
+
+source_file="res://audio/pasos loop.wav"
+dest_files=["res://.godot/imported/pasos loop.wav-43d8b710d02326996fa30b5482403d0a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

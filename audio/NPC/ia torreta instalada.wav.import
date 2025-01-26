@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d2j2kt4fuh213"
+path="res://.godot/imported/ia torreta instalada.wav-48233f0bf9b0660c12b6aa75965cfaae.sample"
+
+[deps]
+
+source_file="res://audio/NPC/ia torreta instalada.wav"
+dest_files=["res://.godot/imported/ia torreta instalada.wav-48233f0bf9b0660c12b6aa75965cfaae.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

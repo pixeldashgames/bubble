@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WaveDefinition" load_steps=3 format=3 uid="uid://bmue0abjtqb1"]
+
+[ext_resource type="PackedScene" uid="uid://b8cl3thkam01k" path="res://scenes/enemy.tscn" id="2_t4g3o"]
+[ext_resource type="Script" path="res://scripts/wave_definition.gd" id="3_06ii3"]
+
+[resource]
+script = ExtResource("3_06ii3")
+spawn_rates = Array[float]([3000.0, 4000.0, 3500.0, 4500.0])
+spawn_counts = Array[int]([3, 3, 3, 3])
+enemies = Array[PackedScene]([ExtResource("2_t4g3o"), ExtResource("2_t4g3o"), ExtResource("2_t4g3o"), ExtResource("2_t4g3o")])
+preparation_time = 30000.0
