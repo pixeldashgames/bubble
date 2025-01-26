@@ -11,7 +11,7 @@ height = 0.682743
 radius = 0.409227
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kqtbl"]
-radius = 10.0
+radius = 20.0
 
 [node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("attack_audio", "death_audio", "animation_player")]
 collision_layer = 2
@@ -22,6 +22,8 @@ attack_damage = 50.0
 attack_interval = 1000.0
 target_teams = Array[String](["turrets", "extractors"])
 team_priorities = Array[int]([3, 2])
+team_target_distances = Array[float]([2.0, 2.0])
+general_target_distance = 5.0
 avoidance_distance_range = Vector2(0.1, 0.2)
 movement_speed = 5.0
 death_animation_name = "MUERTE ARANIA"
@@ -43,7 +45,7 @@ volume_db = -24.665
 pitch_scale = 1.81
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-target_desired_distance = 2.0
+target_desired_distance = 5.0
 path_max_distance = 10.01
 avoidance_enabled = true
 radius = 0.35

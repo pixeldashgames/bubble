@@ -8,5 +8,5 @@
 script = ExtResource("3_sdkyv")
 spawn_rates = Array[float]([1000.0, 1000.0, 100.0, 100.0])
 spawn_counts = Array[int]([30, 30, 150, 100])
-enemies = Array[PackedScene]([ExtResource("1_4ksjd"), ExtResource("1_4ksjd"), ExtResource("2_ljcyh"), ExtResource("2_ljcyh")])
+enemies = Array[PackedScene]([ExtResource("1_4ksjd"), ExtResource("2_ljcyh"), ExtResource("1_4ksjd"), ExtResource("2_ljcyh")])
 preparation_time = 45000.0

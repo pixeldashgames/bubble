@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://caev6otsfk014"]
+[gd_scene load_steps=18 format=3 uid="uid://caev6otsfk014"]
 
 [ext_resource type="Texture2D" uid="uid://qiotkea8hn53" path="res://icon.svg" id="1_dr6l8"]
 [ext_resource type="Script" path="res://scripts/player_hud.gd" id="1_ttdc3"]
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://dkbql6i8l6tit" path="res://input/default_input_map.tres" id="6_s80km"]
 [ext_resource type="Resource" uid="uid://cce0upekf2w1b" path="res://input/skip_preparation.tres" id="7_fsl5v"]
 [ext_resource type="Texture2D" uid="uid://bshgbadvi3dow" path="res://art/ui/wave_status_backdrop.png" id="8_unpod"]
+[ext_resource type="Texture2D" uid="uid://bki30wpv072a1" path="res://art/ui/Mineral.png" id="10_ha70n"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ssshh"]
 font_size = 24
@@ -177,7 +178,7 @@ alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="Resources/ScrapCounter"]
 layout_mode = 2
-texture = ExtResource("1_dr6l8")
+texture = ExtResource("10_ha70n")
 expand_mode = 3
 
 [node name="ScrapCounterLabel" type="Label" parent="Resources/ScrapCounter"]

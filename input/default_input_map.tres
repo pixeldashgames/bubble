@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=80 format=3 uid="uid://dkbql6i8l6tit"]
+[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=82 format=3 uid="uid://dkbql6i8l6tit"]
 
 [ext_resource type="Script" path="res://addons/guide/guide_action_mapping.gd" id="1_77umf"]
 [ext_resource type="Script" path="res://addons/guide/guide_mapping_context.gd" id="2_arjwm"]
@@ -363,10 +363,21 @@ input = SubResource("Resource_5kcy6")
 modifiers = Array[ExtResource("5_2uuh4")]([])
 triggers = Array[ExtResource("6_m33eu")]([SubResource("Resource_8gmsy")])
 
+[sub_resource type="Resource" id="Resource_xlful"]
+script = ExtResource("12_7qbob")
+button = 8
+joy_index = -1
+
+[sub_resource type="Resource" id="Resource_3xg2b"]
+script = ExtResource("3_4ivf2")
+input = SubResource("Resource_xlful")
+modifiers = Array[ExtResource("5_2uuh4")]([])
+triggers = Array[ExtResource("6_m33eu")]([])
+
 [sub_resource type="Resource" id="Resource_ue0rs"]
 script = ExtResource("1_77umf")
 action = ExtResource("19_w340i")
-input_mappings = Array[ExtResource("3_4ivf2")]([SubResource("Resource_mt4we")])
+input_mappings = Array[ExtResource("3_4ivf2")]([SubResource("Resource_mt4we"), SubResource("Resource_3xg2b")])
 
 [resource]
 script = ExtResource("2_arjwm")

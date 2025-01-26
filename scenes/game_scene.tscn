@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://d2pfwry6bmgkr"]
+[gd_scene load_steps=74 format=3 uid="uid://d2pfwry6bmgkr"]
 
 [ext_resource type="PackedScene" uid="uid://biqd83slug8ur" path="res://scenes/player.tscn" id="1_3e3sr"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_ihkoc"]
@@ -12,12 +12,22 @@
 [ext_resource type="Resource" uid="uid://iuijv7rpx4ok" path="res://input/skip_dialog.tres" id="4_ouhxt"]
 [ext_resource type="Resource" uid="uid://bhcwmn3yhumwm" path="res://items/scrap_metal.tres" id="4_u8gfy"]
 [ext_resource type="PackedScene" uid="uid://c5cbdvhuyr2sb" path="res://scenes/player_inventory.tscn" id="5_6bl4v"]
+[ext_resource type="Resource" uid="uid://cf0mt5k0yqjy6" path="res://waves/wave1.tres" id="5_8q463"]
 [ext_resource type="Resource" uid="uid://b50khdwg4wssb" path="res://input/pause.tres" id="5_c4gxv"]
 [ext_resource type="AudioStream" uid="uid://duhn7qqaqdl70" path="res://audio/ambiente bueno y chil de cojones.wav" id="5_xhu3m"]
 [ext_resource type="Script" path="res://scripts/ai_assistant_voice.gd" id="6_253ym"]
+[ext_resource type="Resource" uid="uid://cce0upekf2w1b" path="res://input/skip_preparation.tres" id="6_dtfwu"]
 [ext_resource type="PackedScene" uid="uid://ufcrewj0mtbx" path="res://scenes/turret_builder.tscn" id="6_rjjmh"]
+[ext_resource type="Resource" uid="uid://uehl4uinlnqc" path="res://waves/wave2.tres" id="6_s4bxr"]
+[ext_resource type="Resource" uid="uid://cnaqrce6r4ban" path="res://waves/wave3.tres" id="7_ccdbt"]
+[ext_resource type="Resource" uid="uid://p0r1bcmyrxkq" path="res://waves/wave4.tres" id="8_8648l"]
+[ext_resource type="Resource" uid="uid://dctp6gqw6ep5d" path="res://waves/wave5.tres" id="9_nbcxd"]
+[ext_resource type="Resource" uid="uid://lfjfxjppgw3e" path="res://waves/wave6.tres" id="10_v5ekj"]
 [ext_resource type="Script" path="res://scripts/teleporter.gd" id="11_5654p"]
+[ext_resource type="Resource" uid="uid://dgupdd75vp1rf" path="res://waves/wave7.tres" id="11_vyjkf"]
 [ext_resource type="PackedScene" uid="uid://dksn55e1gxbrx" path="res://scenes/InGameMenus.tscn" id="12_3jy1a"]
+[ext_resource type="Resource" uid="uid://bmue0abjtqb1" path="res://waves/wave8.tres" id="12_okbi0"]
+[ext_resource type="Resource" uid="uid://bmropm1so6dqs" path="res://waves/wave9.tres" id="13_6cng4"]
 [ext_resource type="Script" path="res://scripts/pickupable.gd" id="13_v1k18"]
 [ext_resource type="PackedScene" uid="uid://drfc710nwaawe" path="res://art/3d/mineral peque.glb" id="14_fjlco"]
 [ext_resource type="Script" path="res://scripts/interactable_outline.gd" id="15_hjkye"]
@@ -107,9 +117,10 @@ radius = 0.290166
 [node name="GameScene" type="Node3D" node_paths=PackedStringArray("spawn_points", "background_music_player")]
 script = ExtResource("1_ihkoc")
 input_mapping_context = ExtResource("2_1xdgf")
-waves = Array[ExtResource("3_a6w0s")]([ExtResource("4_haa7r")])
+waves = Array[ExtResource("3_a6w0s")]([ExtResource("4_haa7r"), ExtResource("5_8q463"), ExtResource("6_s4bxr"), ExtResource("7_ccdbt"), ExtResource("8_8648l"), ExtResource("9_nbcxd"), ExtResource("10_v5ekj"), ExtResource("11_vyjkf"), ExtResource("12_okbi0"), ExtResource("13_6cng4")])
 spawn_points = [NodePath("Spawners/EnemySpawner"), NodePath("Spawners/EnemySpawner2"), NodePath("Spawners/EnemySpawner4"), NodePath("Spawners/EnemySpawner3")]
 pause_action = ExtResource("5_c4gxv")
+skip_preparation_action = ExtResource("6_dtfwu")
 background_music_player = NodePath("BackgroundMusic")
 
 [node name="AIAssistantVoice" type="Node" parent="." node_paths=PackedStringArray("voice_source")]
@@ -154,7 +165,6 @@ dialog_box_show_time = 0.5
 [node name="InGameMenus" parent="PlayerPOV/Camera3D" instance=ExtResource("12_3jy1a")]
 
 [node name="PlayerInventory" parent="." instance=ExtResource("5_6bl4v")]
-initial_resources_amounts = Array[int]([99999])
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -456,7 +466,7 @@ transform = Transform3D(-0.902931, 0, 0.429786, 0, 1, 0, -0.429786, 0, -0.902931
 [node name="ExtractorBuilder8" parent="Buildables" instance=ExtResource("23_ieyqq")]
 transform = Transform3D(-0.0175572, 0, 0.999846, 0, 1, 0, -0.999846, 0, -0.0175572, -29.3247, -0.350837, 21.1272)
 
-[node name="ExtractorManagement" parent="Buildables/ExtractorBuilder8" index="3"]
+[node name="ExtractorManagement" parent="Buildables/ExtractorBuilder8" index="4"]
 start_built = true
 
 [node name="ExtractorBuilder9" parent="Buildables" instance=ExtResource("23_ieyqq")]
@@ -1073,7 +1083,7 @@ shape = SubResource("CylinderShape3D_j66uc")
 [node name="NPCDialog" type="Node" parent="NPC 3 Cientifico" node_paths=PackedStringArray("intectable", "dialog_sound_source")]
 script = ExtResource("30_j50ir")
 intectable = NodePath("../Interactable")
-dialogs = Array[String](["Se nos acercan los aráneus, activa las defensas terrestres, deberás proveer a los ingenieros de titanita. Es un mineral que solo podrás encontrar en las rocas del exterior"])
+dialogs = Array[String](["Se nos acercan los aráneus, activa las defensas terrestres, deberás proveer a los ingenieros de titanita. Es un mineral que solo podrás encontrar en las rocas del exterior", "Debes defender el molino al norte de la Burbuja, así como tanques de energía al sur", "Al norte encontrarás un extractor, asegúrate de defenderlo.", "Puedes construir, mejorar y reparar torretas y extractores, solo acércate a un sitio correspondiente y sabrás qué hacer", "Podrás encontrar algunos trozos de mineral esparcidos por el campo, no es mucho pero te ayudarán al comienzo", "No temas de los aráneus, no te atacarán, así que puedes reparar tus instrumentos durante el combate", "Sobrevive a las oleadas de enemigos, con suerte nos libraremos de ellos algún día"])
 dialog_sounds = Array[AudioStream]([ExtResource("41_l7m38")])
 dialog_sound_source = NodePath("../AudioStreamPlayer3D")
 

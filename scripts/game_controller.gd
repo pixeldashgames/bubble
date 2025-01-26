@@ -2,6 +2,7 @@ class_name GameController extends Node3D
 
 static var Instance: GameController = null
 
+@export var combat_music: AudioStream
 @export var input_mapping_context: GUIDEMappingContext
 @export var waves: Array[WaveDefinition]
 @export var spawn_points: Array[EnemySpawner]
@@ -10,10 +11,12 @@ static var Instance: GameController = null
 
 @export var background_music_player: AudioStreamPlayer
 
+var allow_combat_music := false
 var current_wave := 0
 var in_preparation := true
 var total_enemy_count := 0
 var preparation_end_time: float
+var changing_music := false
 
 func _enter_tree() -> void:
 	assert(Instance == null, "Tried to instance a GameController but there is one already")
@@ -38,15 +41,25 @@ func on_pause() -> void:
 	InGameMenus.Instance.show_pause_menu()
 
 func change_background_music(music_stream: AudioStream) -> void:
-	var volume = background_music_player.volume_db
+	if allow_combat_music and music_stream != combat_music:
+		music_stream = combat_music
 	
+	if changing_music:
+		return
+	
+	if background_music_player.stream == music_stream:
+		return
+	
+	var volume = background_music_player.volume_db
+	changing_music = true
 	var tween = create_tween()
-	await tween.tween_property(background_music_player, "volume_db", -50, 1).finished
+	await tween.tween_property(background_music_player, "volume_db", -50, 0.5).finished
 	
 	background_music_player.stream = music_stream
 	background_music_player.play()
 	tween = create_tween()
-	await tween.tween_property(background_music_player, "volume_db", volume, 1).finished
+	await tween.tween_property(background_music_player, "volume_db", volume, 0.5).finished
+	changing_music = false
 	
 
 func _process(_delta: float) -> void:
@@ -68,6 +81,9 @@ func _process(_delta: float) -> void:
 		PlayerHUD.Instance.update_wave_hud(total_enemy_count)
 		
 		in_preparation = false
+		
+		if allow_combat_music:
+			change_background_music(combat_music)
 	
 
 func on_enemy_killed():

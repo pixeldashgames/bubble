@@ -4,6 +4,8 @@ class_name Enemy extends CharacterBody3D
 @export var attack_interval: float
 @export var target_teams: Array[String]
 @export var team_priorities: Array[int]
+@export var team_target_distances: Array[float]
+@export var general_target_distance: float
 @export var avoidance_distance_range: Vector2
 @export var movement_speed: float = 4.0
 
@@ -44,6 +46,7 @@ func check_targets() -> void:
 	current_target = null
 	
 	var remove_indexes: Array[int] = []
+	var target_distance: float
 	
 	for i in targets.size():
 		var target := targets[i]
@@ -61,14 +64,19 @@ func check_targets() -> void:
 			highest_priority_target = priority
 			closest_target_distance = distance
 			current_target = target
+			target_distance = team_target_distances[team_index]
 		elif priority == highest_priority_target and distance < closest_target_distance:
 			closest_target_distance = distance
 			current_target = target
+			target_distance = team_target_distances[team_index]
 	
 	var removed := 0
 	for index in remove_indexes:
 		targets.remove_at(index - removed)
 		removed += 1
+	
+	if current_target != null:
+		navigation_agent.target_desired_distance = target_distance
 
 func set_general_objective(objective: Health):
 	general_objective = objective
@@ -82,7 +90,8 @@ func _process(_delta: float) -> void:
 	var target = current_target
 	if target == null:
 		target = general_objective
-	
+		navigation_agent.target_desired_distance = general_target_distance
+		
 	if target == null:
 		return
 		
@@ -157,6 +166,12 @@ func _on_health_death() -> void:
 	velocity = Vector3.ZERO
 	animation_player.play(death_animation_name)
 	GameController.Instance.on_enemy_killed()
+	
+	await animation_player.animation_finished
+	
+	await get_tree().create_timer(10).timeout
+	
+	queue_free()
 
 func _on_enemy_aggro_body_entered(body: Node3D) -> void:
 	var health_node: Health = body.get_node_or_null("Health")

@@ -13,6 +13,8 @@ extends Node
 @export var extractor_health: Health
 @export var animation_players: Array[AnimationPlayer]
 
+@export var drilling_sound: AudioStreamPlayer3D
+
 @export var extractor_meshes: Array[Node3D]
 
 @export var interactable_name: String
@@ -93,6 +95,7 @@ func _process(_delta: float) -> void:
 	
 	if not stopped_full and current_level >= 0 and extractor.accumulated_scrap >= extractor.max_scrap_storage:
 		animation_players[current_level].play(stopped_animation_name)
+		drilling_sound.stop()
 		stopped_full = true
 		AIAssistantVoice.Instance.enqueue_notif(full_notification)
 		
@@ -106,6 +109,7 @@ func _on_long_interactable_long_interact(action_index: int) -> void:
 				PlayerInventory.Instance.extract_resource(scrap_resource, build_cost)
 			
 			animation_players[0].play(running_animation_name)
+			drilling_sound.play()
 			
 			extractor_interactable.interactable_name = interactable_name + " Lv. 1"
 			extractor_interactable.info_title = extractor_interactable.interactable_name
@@ -126,6 +130,8 @@ func _on_long_interactable_long_interact(action_index: int) -> void:
 			
 			if not extractor_health.is_dead:
 				animation_players[current_level + 1].play(running_animation_name)
+				if stopped_full:
+					drilling_sound.play()
 			else:
 				animation_players[current_level + 1].play(stopped_animation_name)
 			
@@ -180,8 +186,10 @@ func _on_interactable_interact(input_index: int) -> void:
 		if input_index == 1:
 			if extractor.accumulated_scrap == extractor.max_scrap_storage and not extractor_health.is_dead:
 				animation_players[current_level].play(running_animation_name)
-			
+				drilling_sound.play()
+				
 			stopped_full = false
+			
 				
 			PlayerInventory.Instance.add_resource(scrap_resource, extractor.accumulated_scrap)
 			extractor.accumulated_scrap = 0
@@ -191,9 +199,12 @@ func _on_interactable_interact(input_index: int) -> void:
 func _on_health_death() -> void:
 	extractor.enabled = false
 	animation_players[current_level].play(stopped_animation_name)
+	drilling_sound.stop()
+	
 
 
 func _on_health_revive() -> void:
 	extractor.enabled = true
 	if extractor.accumulated_scrap < extractor.max_scrap_storage:
 		animation_players[current_level].play(running_animation_name)
+		drilling_sound.play()

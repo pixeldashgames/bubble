@@ -10,6 +10,7 @@ class_name Teleporter extends Node
 @export var target_pov_angle: float
 @export var target_background_music: AudioStream
 @export var interact_sound: AudioStreamPlayer3D
+@export var allow_combat_music := false
 
 func _ready() -> void:
 	interactable.interact.connect(on_interact)
@@ -20,6 +21,7 @@ func on_interact(action: int):
 	if action != 0:
 		return
 	
+	GameController.Instance.allow_combat_music = allow_combat_music
 	GameController.Instance.change_background_music(target_background_music)
 	interact_sound.play()
 	

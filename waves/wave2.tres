@@ -7,6 +7,6 @@
 [resource]
 script = ExtResource("2_olro3")
 spawn_rates = Array[float]([5000.0, 300.0, 0.0, 0.0])
-spawn_counts = Array[int]([3, 25, 0, 0])
+spawn_counts = Array[int]([3, 20, 0, 0])
 enemies = Array[PackedScene]([ExtResource("2_fuuec"), ExtResource("1_txh0s"), ExtResource("1_txh0s"), ExtResource("1_txh0s")])
-preparation_time = 30000.0
+preparation_time = 45000.0

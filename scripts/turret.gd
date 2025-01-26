@@ -103,9 +103,6 @@ func _on_turret_aggro_body_entered(body: Node3D) -> void:
 	if health_node == null or health_node.is_dead or not target_teams.has(health_node.team):
 		return
 	
-	if not can_see_target(body):
-		return
-	
 	targets.append(health_node)
 
 func can_see_target(target: Node3D) -> bool:
@@ -114,7 +111,7 @@ func can_see_target(target: Node3D) -> bool:
 	query.exclude = [ raycast_exclude_body.get_rid() ]
 	query.collision_mask = raycast_mask
 	var result := space_state.intersect_ray(query)
-	return result.collider == target
+	return result.is_empty()
 
 func _on_turret_aggro_body_exited(body: Node3D) -> void:
 	var health_node = body.get_node_or_null("Health")

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/turret.gd" id="1_2txny"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3htfd"]
-radius = 7.5
+radius = 20.0
 
 [node name="Turret" type="Node3D"]
 script = ExtResource("1_2txny")

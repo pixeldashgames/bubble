@@ -182,11 +182,16 @@ func _on_health_death() -> void:
 	turret.enabled = false
 	AIAssistantVoice.Instance.enqueue_notif(turret_destroyed_notif)
 	
+	if turret_long_interactable.running:
+		turret_long_interactable.on_interact(0)
+	
+	turret_interactable.can_interact = false
 	animation_tree.set("parameters/conditions/upgrade", true)
 
 	await animation_tree.animation_finished
 	
 	animation_tree.set("parameters/conditions/upgrade", false)
+	turret_interactable.can_interact = true
 	
 
 func _on_health_revive() -> void:

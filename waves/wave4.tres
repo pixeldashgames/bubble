@@ -7,6 +7,6 @@
 [resource]
 script = ExtResource("3_752pp")
 spawn_rates = Array[float]([3000.0, 200.0, 200.0, 3000.0])
-spawn_counts = Array[int]([5, 40, 40, 5])
+spawn_counts = Array[int]([5, 35, 25, 5])
 enemies = Array[PackedScene]([ExtResource("2_736dp"), ExtResource("1_krh27"), ExtResource("1_krh27"), ExtResource("2_736dp")])
-preparation_time = 30000.0
+preparation_time = 45000.0
