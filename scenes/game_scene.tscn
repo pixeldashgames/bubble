@@ -542,9 +542,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.05761, -0.341412, -22.4625
 
 [node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup"]
 script = ExtResource("3_uewq7")
-interactable_name = "BrilliBrilli"
+interactable_name = "Trozos de Titanita"
 input_names = Array[String](["Recoger"])
-info_title = "Brilli Brilli"
+info_title = "Trozos de Titanita"
 info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup/Interactable"]
@@ -571,9 +571,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.25956, -0.341412, -31.6246
 
 [node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup4"]
 script = ExtResource("3_uewq7")
-interactable_name = "BrilliBrilli"
+interactable_name = "Trozos de Titanita"
 input_names = Array[String](["Recoger"])
-info_title = "Brilli Brilli"
+info_title = "Trozos de Titanita"
 info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup4/Interactable"]
@@ -600,9 +600,9 @@ transform = Transform3D(-0.256138, 0, -0.96664, 0, 1, 0, 0.96664, 0, -0.256138, 
 
 [node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup5"]
 script = ExtResource("3_uewq7")
-interactable_name = "BrilliBrilli"
+interactable_name = "Trozos de Titanita"
 input_names = Array[String](["Recoger"])
-info_title = "Brilli Brilli"
+info_title = "Trozos de Titanita"
 info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup5/Interactable"]
@@ -629,9 +629,9 @@ transform = Transform3D(-0.256138, 0, -0.96664, 0, 1, 0, 0.96664, 0, -0.256138, 
 
 [node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup6"]
 script = ExtResource("3_uewq7")
-interactable_name = "BrilliBrilli"
+interactable_name = "Trozos de Titanita"
 input_names = Array[String](["Recoger"])
-info_title = "Brilli Brilli"
+info_title = "Trozos de Titanita"
 info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup6/Interactable"]
@@ -658,9 +658,9 @@ transform = Transform3D(0.886276, 0, -0.463157, 0, 1, 0, 0.463157, 0, 0.886276, 
 
 [node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup7"]
 script = ExtResource("3_uewq7")
-interactable_name = "BrilliBrilli"
+interactable_name = "Trozos de Titanita"
 input_names = Array[String](["Recoger"])
-info_title = "Brilli Brilli"
+info_title = "Trozos de Titanita"
 info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup7/Interactable"]
@@ -687,9 +687,9 @@ transform = Transform3D(0.886276, 0, -0.463157, 0, 1, 0, 0.463157, 0, 0.886276, 
 
 [node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup8"]
 script = ExtResource("3_uewq7")
-interactable_name = "BrilliBrilli"
+interactable_name = "Trozos de Titanita"
 input_names = Array[String](["Recoger"])
-info_title = "Brilli Brilli"
+info_title = "Trozos de Titanita"
 info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup8/Interactable"]
@@ -716,9 +716,9 @@ transform = Transform3D(0.754274, 0, 0.656559, 0, 1, 0, -0.656559, 0, 0.754274, 
 
 [node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup9"]
 script = ExtResource("3_uewq7")
-interactable_name = "BrilliBrilli"
+interactable_name = "Trozos de Titanita"
 input_names = Array[String](["Recoger"])
-info_title = "Brilli Brilli"
+info_title = "Trozos de Titanita"
 info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup9/Interactable"]
@@ -745,9 +745,9 @@ transform = Transform3D(0.754274, 0, 0.656559, 0, 1, 0, -0.656559, 0, 0.754274, 
 
 [node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup10"]
 script = ExtResource("3_uewq7")
-interactable_name = "BrilliBrilli"
+interactable_name = "Trozos de Titanita"
 input_names = Array[String](["Recoger"])
-info_title = "Brilli Brilli"
+info_title = "Trozos de Titanita"
 info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup10/Interactable"]
@@ -774,9 +774,9 @@ transform = Transform3D(0.754274, 0, 0.656559, 0, 1, 0, -0.656559, 0, 0.754274, 
 
 [node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup11"]
 script = ExtResource("3_uewq7")
-interactable_name = "BrilliBrilli"
+interactable_name = "Trozos de Titanita"
 input_names = Array[String](["Recoger"])
-info_title = "Brilli Brilli"
+info_title = "Trozos de Titanita"
 info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup11/Interactable"]
@@ -803,9 +803,9 @@ transform = Transform3D(0.754274, 0, 0.656559, 0, 1, 0, -0.656559, 0, 0.754274, 
 
 [node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup12"]
 script = ExtResource("3_uewq7")
-interactable_name = "BrilliBrilli"
+interactable_name = "Trozos de Titanita"
 input_names = Array[String](["Recoger"])
-info_title = "Brilli Brilli"
+info_title = "Trozos de Titanita"
 info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup12/Interactable"]
@@ -832,9 +832,9 @@ transform = Transform3D(0.754274, 0, 0.656559, 0, 1, 0, -0.656559, 0, 0.754274, 
 
 [node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup13"]
 script = ExtResource("3_uewq7")
-interactable_name = "BrilliBrilli"
+interactable_name = "Trozos de Titanita"
 input_names = Array[String](["Recoger"])
-info_title = "Brilli Brilli"
+info_title = "Trozos de Titanita"
 info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup13/Interactable"]
@@ -861,9 +861,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5141, -0.341413, -40.219)
 
 [node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup2"]
 script = ExtResource("3_uewq7")
-interactable_name = "BrilliBrilli"
+interactable_name = "Trozos de Titanita"
 input_names = Array[String](["Recoger"])
-info_title = "Brilli Brilli"
+info_title = "Trozos de Titanita"
 info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup2/Interactable"]
@@ -890,9 +890,9 @@ transform = Transform3D(-0.882456, 0, 0.470396, 0, 1, 0, -0.470396, 0, -0.882456
 
 [node name="Interactable" type="StaticBody3D" parent="Pickupables/Pickup3"]
 script = ExtResource("3_uewq7")
-interactable_name = "BrilliBrilli"
+interactable_name = "Trozos de Titanita"
 input_names = Array[String](["Recoger"])
-info_title = "Brilli Brilli"
+info_title = "Trozos de Titanita"
 info_details = "Tócalo, no duele, o bueno, eso dicen los que sobrevivieron."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickupables/Pickup3/Interactable"]
