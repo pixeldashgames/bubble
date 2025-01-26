@@ -11,6 +11,7 @@ static var Instance: PlayerHUD
 @export var interactable_name_label: RichTextLabel
 @export var interact_actions_labels: Array[RichTextLabel]
 @export var interact_input_actions: Array[GUIDEAction]
+@export var skip_preparation_action: GUIDEAction
 @export var interact_actions_spacers: Array[Control]
 @export var input_context: GUIDEMappingContext
 @export var interaction_progress_bar: ProgressBar
@@ -23,6 +24,8 @@ var hide_tween: Tween = null
 var trying_to_display_dialog := false
 var interact_input_texts: Array[String] = []
 
+var skip_prepation_input_text: String
+
 var interact_actions_compiled = false
 
 var input_formatter: GUIDEInputFormatter
@@ -30,13 +33,18 @@ var input_formatter: GUIDEInputFormatter
 func update_preparation_hud(seconds_remaining: int):
 	%WaveTitle.text = "Ola %d: Prepárate" % (GameController.Instance.current_wave + 1)
 	%WaveDescription.text = "%d segundos restantes" % seconds_remaining
+	%SkipLabel.show()
+	%SkipLabel.text = "Usa %s para iniciar antes de tiempo" % skip_prepation_input_text
 
 func update_wave_hud(enemies_remaining: int):
 	%WaveTitle.text = "Ola %d: Sobrevive" % (GameController.Instance.current_wave + 1)
 	%WaveDescription.text = "Enemigos restantes: %d" % enemies_remaining
+	%SkipLabel.hide()
 
 func _ready() -> void:
 	input_formatter = GUIDEInputFormatter.for_context(input_context)
+
+	skip_prepation_input_text = await input_formatter.action_as_richtext_async(skip_preparation_action)
 
 	for action in interact_input_actions:
 		var action_text := await input_formatter.action_as_richtext_async(action)

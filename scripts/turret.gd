@@ -10,6 +10,10 @@ class_name Turret extends Node3D
 @export var animation_tree: AnimationTree
 @export var shot_audio: AudioStreamPlayer3D
 @export var enabled := true
+@export var raycast_exclude_body: CollisionObject3D
+@export var raycast_origin: Node3D
+
+@export_flags_3d_physics var raycast_mask: int
 
 var targets: Array[Health]
 var current_target: Health = null
@@ -30,8 +34,12 @@ func check_nearest_target():
 	var remove_indexes: Array[int] = []
 	for i in targets.size():
 		var target := targets[i]
+		
 		if targets[i] == null or not is_instance_valid(targets[i]) or target.is_dead or not target.enabled:
 			remove_indexes.append(i)
+			continue
+		
+		if not can_see_target(target.get_parent_node_3d()):
 			continue
 		
 		var distance_sqr := (target.global_position - global_position).length_squared()
@@ -52,7 +60,7 @@ func _process(_delta: float) -> void:
 	if not enabled:
 		return
 		
-	if current_target == null or not is_instance_valid(current_target) or current_target.is_dead:
+	if current_target == null or not is_instance_valid(current_target) or current_target.is_dead or not can_see_target(current_target.get_parent_node_3d()):
 		check_nearest_target()
 	
 	if current_target == null:
@@ -95,7 +103,18 @@ func _on_turret_aggro_body_entered(body: Node3D) -> void:
 	if health_node == null or health_node.is_dead or not target_teams.has(health_node.team):
 		return
 	
+	if not can_see_target(body):
+		return
+	
 	targets.append(health_node)
+
+func can_see_target(target: Node3D) -> bool:
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(raycast_origin.global_position, target.global_position)
+	query.exclude = [ raycast_exclude_body.get_rid() ]
+	query.collision_mask = raycast_mask
+	var result := space_state.intersect_ray(query)
+	return result.collider == target
 
 func _on_turret_aggro_body_exited(body: Node3D) -> void:
 	var health_node = body.get_node_or_null("Health")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ufcrewj0mtbx"]
+[gd_scene load_steps=32 format=3 uid="uid://ufcrewj0mtbx"]
 
 [ext_resource type="AudioStream" uid="uid://d1k1wiungibv5" path="res://audio/Laser_Shoot16.wav" id="1_5xl2r"]
 [ext_resource type="Script" path="res://scripts/interactable.gd" id="4_cubaj"]
@@ -10,6 +10,8 @@
 [ext_resource type="Resource" uid="uid://bhcwmn3yhumwm" path="res://items/scrap_metal.tres" id="7_mrokp"]
 [ext_resource type="PackedScene" uid="uid://8p7bgdcpy5mc" path="res://art/3d/Torreta Upgrade 1(Fixed).glb" id="8_70lk3"]
 [ext_resource type="PackedScene" uid="uid://dioqpu4s25fdf" path="res://art/3d/Torreta Simple (Fixed).glb" id="8_hketm"]
+[ext_resource type="AudioStream" uid="uid://d2j2kt4fuh213" path="res://audio/NPC/ia torreta instalada.wav" id="9_rsk64"]
+[ext_resource type="AudioStream" uid="uid://c86mbuhnb24t8" path="res://audio/NPC/ia torreta destruida.wav" id="10_6tyjq"]
 [ext_resource type="PackedScene" uid="uid://5g5pt0o7yyoq" path="res://art/3d/Torreta Upgrade 2(Fixed).glb" id="10_i01ww"]
 [ext_resource type="PackedScene" uid="uid://cf23yn1r7h6w6" path="res://art/3d/Torreta Upgrade  3(Fixed).glb" id="11_hkpml"]
 
@@ -118,17 +120,19 @@ team = "turrets"
 max_health = 500.0
 enabled = false
 
-[node name="Turret" parent="." node_paths=PackedStringArray("turret_head", "beams_spawn_point", "animation_tree", "shot_audio") instance=ExtResource("5_m2f0q")]
+[node name="Turret" parent="." node_paths=PackedStringArray("turret_head", "beams_spawn_point", "animation_tree", "shot_audio", "raycast_exclude_body", "raycast_origin") instance=ExtResource("5_m2f0q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1, 0)
 fire_rate = 500.0
 damage = 50.0
-tracking_time = 2000.0
+tracking_time = 750.0
 turret_head = NodePath("../Torreta Simple (Fixed)/Armature_018/Skeleton3D/Reja")
 beams_spawn_point = NodePath("../Torreta Simple (Fixed)/Armature_018/Skeleton3D/Reja/BeamSpawnPoint")
 beam_scene = ExtResource("5_bv0n8")
 animation_tree = NodePath("../AnimationTree")
 shot_audio = NodePath("../ShotAudio")
 enabled = false
+raycast_exclude_body = NodePath("../Interactable")
+raycast_origin = NodePath("../RaycastOrigin")
 
 [node name="LongInteractable" type="Node" parent="." node_paths=PackedStringArray("interactable")]
 script = ExtResource("6_iwnys")
@@ -149,7 +153,7 @@ build_cost = 100
 upgrade_costs = Array[int]([400, 1000, 2000])
 fire_rates = Array[float]([400.0, 300.0, 200.0])
 damages = Array[float]([75.0, 100.0, 150.0])
-tracking_times = Array[float]([1000.0, 500.0, 250.0])
+tracking_times = Array[float]([450.0, 250.0, 50.0])
 healths = Array[float]([750.0, 1250.0, 2000.0])
 animation_tree = NodePath("../AnimationTree")
 upgrade_players = [NodePath("../Torreta Upgrade 1(Fixed)/AnimationPlayer"), NodePath("../Torreta Upgrade 2(Fixed)/AnimationPlayer"), NodePath("../Torreta Upgrade  3(Fixed)/AnimationPlayer")]
@@ -166,6 +170,9 @@ repair_cancel_name = "Cancelar Reparación"
 upgrade_time = 5000.0
 repair_time = 3000.0
 repair_fraction = 0.2
+turret_repaired_notif = ExtResource("9_rsk64")
+turret_created_notif = ExtResource("9_rsk64")
+turret_destroyed_notif = ExtResource("10_6tyjq")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../Torreta Simple (Fixed)")
@@ -183,10 +190,10 @@ parameters/Upgrade/Add2/add_amount = 1.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012, -0.049, -0.008)
 
 [node name="Skeleton3D" parent="Torreta Simple (Fixed)/Armature_018" index="0"]
-bones/0/position = Vector3(0, 0.128997, 0)
-bones/1/position = Vector3(-4.2466e-15, -2.97802e-08, 1.49993e-08)
+bones/0/position = Vector3(0, -0.436915, 3.49246e-10)
+bones/1/position = Vector3(-3.27169e-08, 0.000451816, 0.137225)
 bones/1/rotation = Quaternion(-0.70827, -1.00486e-14, -1.68865e-07, 0.705942)
-bones/2/position = Vector3(-0.00574717, 0.240407, -0.0472406)
+bones/2/position = Vector3(-0.00574717, 0.0948821, -0.0472406)
 
 [node name="BeamSpawnPoint" type="Node3D" parent="Torreta Simple (Fixed)/Armature_018/Skeleton3D/Reja" index="0"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.00685648, 0.207616, 0.364784)
@@ -249,6 +256,9 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.2
 [node name="Cube_022" parent="Torreta Upgrade  3(Fixed)" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 "blend_shapes/open " = 0.999841
+
+[node name="RaycastOrigin" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.688287, 0)
 
 [connection signal="death" from="Interactable/Health" to="TurretManagement" method="_on_health_death"]
 [connection signal="revive" from="Interactable/Health" to="TurretManagement" method="_on_health_revive"]

@@ -6,15 +6,15 @@
 
 [node name="Skeleton3D" parent="Empty_008/Armature_014" index="0"]
 bones/0/position = Vector3(0, 0, 0)
-bones/0/rotation = Quaternion(-0.0284675, 0, 9.28955e-18, 0.999595)
-bones/1/rotation = Quaternion(-0.0847333, 1.18703e-07, -1.09779e-08, 0.996404)
-bones/2/rotation = Quaternion(-0.0135403, 3.87775e-11, -1.13519e-08, 0.999908)
+bones/0/rotation = Quaternion(-0.0345872, 0, 5.31741e-18, 0.999402)
+bones/1/rotation = Quaternion(-0.12213, 1.19031e-07, -6.50779e-09, 0.992514)
+bones/2/rotation = Quaternion(0.0308849, -1.8681e-10, 1.21937e-08, 0.999523)
 bones/5/rotation = Quaternion(0.76511, 0.559945, 0.0517498, -0.313672)
 bones/8/rotation = Quaternion(-0.0925856, 0.0189449, 0.995524, -6.51497e-05)
-bones/9/rotation = Quaternion(-0.323659, -0.0012484, -0.0611011, 0.944198)
+bones/9/rotation = Quaternion(-0.395542, -0.00152559, -0.0745714, 0.915414)
 bones/10/rotation = Quaternion(-0.00038733, -1.11655e-07, 0.00206482, 0.999998)
 bones/11/rotation = Quaternion(0.0925801, 0.0288135, 0.995288, 0.000983002)
-bones/12/rotation = Quaternion(-0.225835, 0.00134733, 0.043637, 0.973187)
+bones/12/rotation = Quaternion(-0.255627, -0.00928621, 0.0479627, 0.96554)
 bones/13/rotation = Quaternion(-0.000387341, 1.05645e-07, -0.00206482, 0.999998)
 bones/14/position = Vector3(-2.13321e-16, 5.89672e-10, 0.277164)
 bones/14/rotation = Quaternion(-4.38526e-10, 0.999998, -0.00225223, 1.94707e-07)
@@ -28,10 +28,10 @@ bones/19/rotation = Quaternion(-0.00162809, -8.41128e-05, 0.103758, 0.994601)
 bones/20/rotation = Quaternion(0.0599557, -0.0679766, -0.707476, 0.700901)
 
 [node name="Cube_158" parent="Empty_008/Armature_014/Skeleton3D" index="0"]
-transform = Transform3D(3.05707, 0.0036831, 0.122582, -0.0261598, 3.00735, 0.56204, -0.119815, -0.562636, 3.00496, 0.0860124, 1.44395, -0.560079)
+transform = Transform3D(3.05707, 0.00368296, 0.122582, -0.0259903, 3.00814, 0.557793, -0.119852, -0.558386, 3.00575, 0.0860124, 1.43004, -0.616845)
 
 [node name="Icosphere_007" parent="Empty_008/Armature_014/Skeleton3D" index="1"]
-transform = Transform3D(-0.020559, -0.0280567, 0.0250055, 0.00719361, -0.0309132, -0.0287707, -0.0368878, 0.00960862, -0.0195473, 0.0195867, 1.79201, -0.0830325)
+transform = Transform3D(-0.020559, -0.0280567, 0.0250055, 0.00724573, -0.0309267, -0.0287431, -0.0368776, 0.00956493, -0.0195879, 0.0195866, 1.77742, -0.139307)
 
 [node name="AnimationPlayer" parent="." index="1"]
 autoplay = "IDLE"

@@ -1,17 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://c2dh4o820vpgu"]
+[gd_scene load_steps=8 format=3 uid="uid://c2dh4o820vpgu"]
 
 [ext_resource type="Script" path="res://scripts/interactable.gd" id="1_yedha"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_ogb0p"]
 [ext_resource type="Script" path="res://scripts/weakpoint.gd" id="3_yo4si"]
 [ext_resource type="Script" path="res://scripts/long_interactable.gd" id="4_um1l5"]
-
-[sub_resource type="PrismMesh" id="PrismMesh_7e2yd"]
+[ext_resource type="AudioStream" uid="uid://cbjpjkgx087ty" path="res://audio/NPC/ia nos atacan.wav" id="4_vwjdv"]
+[ext_resource type="AudioStream" uid="uid://4rkf3xe36p1p" path="res://audio/NPC/ia tropas rodeando la burbuja.wav" id="5_cwn7k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kj5m0"]
+size = Vector3(4.19614, 4.33615, 8.76752)
 
-[node name="Weakpoint" type="MeshInstance3D"]
+[node name="Weakpoint" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 2.45078, 0, 0, 0, 1, -9.20821, 1.2757, -2.25698)
-mesh = SubResource("PrismMesh_7e2yd")
 
 [node name="Interactable" type="StaticBody3D" parent="."]
 script = ExtResource("1_yedha")
@@ -34,6 +34,8 @@ long_interactable = NodePath("../LongInteractable")
 interactable = NodePath("../Interactable")
 repair_fraction = 0.1
 health = NodePath("../Interactable/Health")
+under_attack_sounds = Array[AudioStream]([ExtResource("4_vwjdv"), ExtResource("5_cwn7k")])
+under_attack_notification_frequency = 10000
 
 [node name="LongInteractable" type="Node" parent="." node_paths=PackedStringArray("interactable")]
 script = ExtResource("4_um1l5")
@@ -42,3 +44,5 @@ cancel_input_names = Array[String](["Cancelar Reparación"])
 interaction_names = Array[String](["Reparando..."])
 interaction_times = Array[float]([10000.0])
 intercept_actions = Array[bool]([true])
+
+[connection signal="damaged" from="Interactable/Health" to="Weakpoint" method="_on_health_damaged"]

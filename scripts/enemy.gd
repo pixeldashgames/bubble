@@ -99,7 +99,7 @@ func _process(_delta: float) -> void:
 	last_attack_time = time
 	
 	target.damage(attack_damage)
-	attack_audio.pitch_scale = attack_audio.pitch_scale + (randf() - 0.5) * 0.3
+	attack_audio.pitch_scale = attack_audio.pitch_scale + (randf() - 0.5) * 0.1
 	attack_audio.play()
 	animation_player.play(attack_animation_name)
 	
@@ -145,6 +145,7 @@ func _on_velocity_computed(safe_velocity: Vector3):
 		if moving:
 			moving = false
 			animation_player.play(idle_animation_name)
+			last_attack_time = Time.get_ticks_msec()
 		
 	move_and_slide()
 

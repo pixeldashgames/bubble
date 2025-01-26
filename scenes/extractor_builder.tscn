@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d3iiik7hema8m"]
+[gd_scene load_steps=14 format=3 uid="uid://d3iiik7hema8m"]
 
 [ext_resource type="Script" path="res://scripts/interactable.gd" id="3_ewyvc"]
 [ext_resource type="PackedScene" uid="uid://7popm8y0vc8t" path="res://scenes/extractor.tscn" id="4_2stya"]
@@ -6,9 +6,12 @@
 [ext_resource type="Script" path="res://scripts/long_interactable.gd" id="5_wbd1c"]
 [ext_resource type="Script" path="res://scripts/extractor_management.gd" id="6_41o34"]
 [ext_resource type="Resource" uid="uid://bhcwmn3yhumwm" path="res://items/scrap_metal.tres" id="7_l7elh"]
-[ext_resource type="PackedScene" uid="uid://bljr4gcuhu3p1" path="res://art/3d/Extractor Simple.glb" id="8_1lpn4"]
-[ext_resource type="PackedScene" uid="uid://bft24jrnqj2u6" path="res://art/3d/Extractor Pro.glb" id="9_r77kg"]
+[ext_resource type="AudioStream" uid="uid://cnxfdl7tkhxl8" path="res://audio/NPC/ia mineral extraido.wav" id="7_tgric"]
+[ext_resource type="PackedScene" uid="uid://c8e8wjs8a6u0" path="res://art/3d/EXTRACTOR normal.glb" id="8_222g5"]
+[ext_resource type="PackedScene" uid="uid://bf6rf7w5tre0d" path="res://art/3d/EXTRACTOR Upgrade 1.glb" id="9_c2v2q"]
+[ext_resource type="PackedScene" uid="uid://dxm8iket038nk" path="res://art/3d/EXTRACTOR Upgrade 2.glb" id="10_wxjm6"]
 [ext_resource type="PackedScene" uid="uid://jaxtf84ubvet" path="res://art/3d/minerales.glb" id="11_btlvw"]
+[ext_resource type="PackedScene" uid="uid://dffsmdp0xdjii" path="res://art/3d/EXTRACTOR Upgrade 3.glb" id="11_sm7n3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1m6m3"]
 size = Vector3(2.92438, 3.11768, 4.68996)
@@ -60,8 +63,8 @@ extraction_amounts = Array[int]([20, 35, 50])
 storages = Array[int]([100, 250, 500])
 healths = Array[float]([500.0, 750.0, 1000.0])
 extractor_health = NodePath("../Interactable/Health")
-animation_players = [NodePath("../Extractor Simple/AnimationPlayer"), null]
-extractor_meshes = [NodePath("../Extractor Simple"), NodePath("../Extractor Pro"), NodePath("../Extractor Pro"), NodePath("../Extractor Pro")]
+animation_players = [NodePath("../EXTRACTOR normal/AnimationPlayer"), NodePath("../EXTRACTOR Upgrade 1/AnimationPlayer"), NodePath("../EXTRACTOR Upgrade 2/AnimationPlayer"), NodePath("../EXTRACTOR Upgrade 3/AnimationPlayer")]
+extractor_meshes = [NodePath("../EXTRACTOR normal"), NodePath("../EXTRACTOR Upgrade 1"), NodePath("../EXTRACTOR Upgrade 2"), NodePath("../EXTRACTOR Upgrade 3")]
 interactable_name = "Extractor"
 upgrade_action_name = "Mejorar"
 repair_action_name = "Reparar"
@@ -72,36 +75,60 @@ upgrade_cancel_name = "Cancelar Mejora"
 repair_cancel_name = "Cancelar Reparación"
 upgrade_time = 10000.0
 repair_time = 5000.0
+running_animation_name = "EXTRACTOR LOOP"
+stopped_animation_name = "EXTRACTOR STATIC"
 repair_fraction = 0.2
-
-[node name="Extractor Simple" parent="." instance=ExtResource("8_1lpn4")]
-visible = false
-
-[node name="Plane_037" parent="Extractor Simple" index="1"]
-transform = Transform3D(-0.000468697, 0.443002, 0.0223055, -0.443562, -2.53716e-09, -0.00797683, 0.00860972, 0.0241161, -0.409743, -0.0483285, 1.00976, -1.42996)
-
-[node name="Plane_040" parent="Extractor Simple" index="2"]
-transform = Transform3D(0.320328, 0.317211, 0.00509057, 0.00876206, -3.22683e-07, -0.368525, 0.317131, -0.320409, 0.00504013, -0.0163313, 0.716596, -1.6934)
-
-[node name="Skeleton3D" parent="Extractor Simple/Armature_015" index="0"]
-bones/0/rotation = Quaternion(-0.596206, -0.376611, 0.372007, 0.603584)
-bones/1/rotation = Quaternion(-0.000610744, -0.0859419, -0.00612652, 0.996281)
-bones/2/rotation = Quaternion(-7.16823e-05, -0.0122608, -0.00614955, 0.999906)
-
-[node name="Plane_004" parent="Extractor Simple/Armature_015/Skeleton3D" index="0"]
-transform = Transform3D(0.99995, 0, -0.0100355, 0, 1, 0, 0.0100355, 0, 0.99995, 0, 0, 0)
-
-[node name="Plane_006" parent="Extractor Simple/Armature_015/Skeleton3D" index="1"]
-transform = Transform3D(-0.438079, 0.898894, 0.00877105, -0.898713, -0.438167, 0.0179937, 0.0200176, 0, 0.9998, 0.107726, -2.38419e-07, 0.000988781)
-
-[node name="Plane_007" parent="Extractor Simple/Armature_015/Skeleton3D" index="2"]
-transform = Transform3D(0.999695, 0, 0.0246764, 0, 1, 0, -0.0246764, 0, 0.999695, 0, 0, 0)
-
-[node name="Extractor Pro" parent="." instance=ExtResource("9_r77kg")]
-visible = false
+full_notification = ExtResource("7_tgric")
 
 [node name="minerales" parent="." instance=ExtResource("11_btlvw")]
 transform = Transform3D(0.704591, 0, 0.624247, 0, 0.941346, 0, -0.624247, 0, 0.704591, 0.113719, 0.40131, 0.459453)
+
+[node name="EXTRACTOR normal" parent="." instance=ExtResource("8_222g5")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.18161, 1.03464, -0.0478178)
+visible = false
+
+[node name="Plane_018" parent="EXTRACTOR normal/Armature_015" index="0"]
+transform = Transform3D(-0.999811, 4.37113e-08, 0.0194356, 4.83007e-08, 1, 5.2996e-07, -0.0194356, 5.32716e-07, -0.999811, -0.787315, -0.710459, -0.776772)
+
+[node name="Skeleton3D" parent="EXTRACTOR normal/Armature_015" index="1"]
+bones/0/rotation = Quaternion(-0.0190863, -0.71118, 0.702486, 0.0193225)
+bones/1/rotation = Quaternion(-0.00543255, -0.878063, -0.00301796, 0.478506)
+bones/2/rotation = Quaternion(-0.0051665, -0.840397, -0.00333608, 0.541937)
+
+[node name="EXTRACTOR Upgrade 1" parent="." instance=ExtResource("9_c2v2q")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.18161, 1.03464, -0.0478178)
+visible = false
+
+[node name="Skeleton3D" parent="EXTRACTOR Upgrade 1/Armature_025" index="0"]
+bones/0/rotation = Quaternion(-0.702745, -6.59645e-10, 0, 0.711442)
+bones/1/rotation = Quaternion(-7.17349e-05, -0.0122609, -0.00614955, 0.999906)
+
+[node name="AnimationPlayer" parent="EXTRACTOR Upgrade 1" index="2"]
+speed_scale = 1.25
+
+[node name="EXTRACTOR Upgrade 2" parent="." instance=ExtResource("10_wxjm6")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.18161, 1.03464, -0.0478178)
+visible = false
+
+[node name="Skeleton3D" parent="EXTRACTOR Upgrade 2/Armature_026" index="0"]
+bones/0/rotation = Quaternion(-0.699127, -0.072094, 0.0712127, 0.70778)
+bones/1/rotation = Quaternion(0.00214494, 0.361879, -0.00569262, 0.932205)
+bones/2/rotation = Quaternion(-0.00277424, -0.45163, -0.00548869, 0.892184)
+
+[node name="AnimationPlayer" parent="EXTRACTOR Upgrade 2" index="2"]
+speed_scale = 1.5
+
+[node name="EXTRACTOR Upgrade 3" parent="." instance=ExtResource("11_sm7n3")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.18161, 1.03464, -0.0478178)
+visible = false
+
+[node name="Skeleton3D" parent="EXTRACTOR Upgrade 3/Armature_027" index="0"]
+bones/0/rotation = Quaternion(-0.202583, -0.68124, 0.672912, 0.20509)
+bones/1/rotation = Quaternion(-0.00449127, -0.721906, -0.00431486, 0.691963)
+bones/2/rotation = Quaternion(0.00400347, 0.650502, -0.00466844, 0.75948)
+
+[node name="AnimationPlayer" parent="EXTRACTOR Upgrade 3" index="2"]
+speed_scale = 2.0
 
 [connection signal="interact" from="Interactable" to="ExtractorManagement" method="_on_interactable_interact"]
 [connection signal="death" from="Interactable/Health" to="ExtractorManagement" method="_on_health_death"]
@@ -109,5 +136,7 @@ transform = Transform3D(0.704591, 0, 0.624247, 0, 0.941346, 0, -0.624247, 0, 0.7
 [connection signal="long_interact" from="LongInteractable" to="." method="_on_long_interactable_long_interact"]
 [connection signal="long_interact" from="LongInteractable" to="ExtractorManagement" method="_on_long_interactable_long_interact"]
 
-[editable path="Extractor Simple"]
-[editable path="Extractor Pro"]
+[editable path="EXTRACTOR normal"]
+[editable path="EXTRACTOR Upgrade 1"]
+[editable path="EXTRACTOR Upgrade 2"]
+[editable path="EXTRACTOR Upgrade 3"]

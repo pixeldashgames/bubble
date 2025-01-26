@@ -6,6 +6,7 @@ static var Instance: GameController = null
 @export var waves: Array[WaveDefinition]
 @export var spawn_points: Array[EnemySpawner]
 @export var pause_action: GUIDEAction
+@export var skip_preparation_action: GUIDEAction
 
 @export var background_music_player: AudioStreamPlayer
 
@@ -25,6 +26,13 @@ func _ready() -> void:
 	GUIDE.enable_mapping_context(input_mapping_context)
 	preparation_end_time = Time.get_ticks_msec() + waves[0].preparation_time
 	pause_action.triggered.connect(on_pause)
+	skip_preparation_action.triggered.connect(skip_preparation)
+
+func skip_preparation():
+	if not in_preparation:
+		return
+	
+	preparation_end_time = Time.get_ticks_msec()
 
 func on_pause() -> void:
 	InGameMenus.Instance.show_pause_menu()
@@ -41,7 +49,7 @@ func change_background_music(music_stream: AudioStream) -> void:
 	await tween.tween_property(background_music_player, "volume_db", volume, 1).finished
 	
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if in_preparation:	
 		var time = Time.get_ticks_msec()
 		

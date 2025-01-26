@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://d2pfwry6bmgkr"]
+[gd_scene load_steps=64 format=3 uid="uid://d2pfwry6bmgkr"]
 
 [ext_resource type="PackedScene" uid="uid://biqd83slug8ur" path="res://scenes/player.tscn" id="1_3e3sr"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_ihkoc"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c5cbdvhuyr2sb" path="res://scenes/player_inventory.tscn" id="5_6bl4v"]
 [ext_resource type="Resource" uid="uid://b50khdwg4wssb" path="res://input/pause.tres" id="5_c4gxv"]
 [ext_resource type="AudioStream" uid="uid://duhn7qqaqdl70" path="res://audio/ambiente bueno y chil de cojones.wav" id="5_xhu3m"]
+[ext_resource type="Script" path="res://scripts/ai_assistant_voice.gd" id="6_253ym"]
 [ext_resource type="PackedScene" uid="uid://ufcrewj0mtbx" path="res://scenes/turret_builder.tscn" id="6_rjjmh"]
 [ext_resource type="Script" path="res://scripts/teleporter.gd" id="11_5654p"]
 [ext_resource type="PackedScene" uid="uid://dksn55e1gxbrx" path="res://scenes/InGameMenus.tscn" id="12_3jy1a"]
@@ -22,8 +23,9 @@
 [ext_resource type="Script" path="res://scripts/interactable_outline.gd" id="15_hjkye"]
 [ext_resource type="PackedScene" uid="uid://c2dh4o820vpgu" path="res://scenes/weakpoint.tscn" id="16_7xal1"]
 [ext_resource type="Material" uid="uid://4ftusght3jek" path="res://materials/outline_material.tres" id="16_gwu6i"]
-[ext_resource type="Script" path="res://scripts/health.gd" id="18_aoh4n"]
+[ext_resource type="PackedScene" uid="uid://cidx7n3mxb0en" path="res://art/3d/WINDMILL.glb" id="17_ax7od"]
 [ext_resource type="PackedScene" uid="uid://dismerdhl7ocr" path="res://art/3d/Ciudad de Last Hope .fbx" id="18_dhxsf"]
+[ext_resource type="PackedScene" uid="uid://bkxhk5mnpj8aj" path="res://art/3d/ENERGY STORE.glb" id="18_k1v2c"]
 [ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="18_mrggo"]
 [ext_resource type="AudioStream" uid="uid://0spmed6dvrbj" path="res://audio/compuerta.wav" id="23_7vqle"]
 [ext_resource type="PackedScene" uid="uid://d3iiik7hema8m" path="res://scenes/extractor_builder.tscn" id="23_ieyqq"]
@@ -37,6 +39,15 @@
 [ext_resource type="AudioStream" uid="uid://joegp1lhx5pv" path="res://audio/NPC/señor de la limpieza 4.wav" id="33_fwrax"]
 [ext_resource type="AudioStream" uid="uid://bsq16gdesq504" path="res://audio/NPC/señor de la limpieza 6.wav" id="35_i6vg1"]
 [ext_resource type="AudioStream" uid="uid://btfwbdnjg70f0" path="res://audio/NPC/señor de la limpieza.wav" id="37_gfks4"]
+[ext_resource type="PackedScene" uid="uid://np121i5docau" path="res://scenes/npc_3_cientifico.tscn" id="40_8h4qk"]
+[ext_resource type="PackedScene" uid="uid://jwse5egmsvld" path="res://scenes/npc_2.tscn" id="40_fge4o"]
+[ext_resource type="AudioStream" uid="uid://ben36x8clvbrs" path="res://audio/NPC/cientifico todo junto.wav" id="41_l7m38"]
+[ext_resource type="AudioStream" uid="uid://cjsusb027wacn" path="res://audio/imigrante.wav" id="41_regh4"]
+[ext_resource type="PackedScene" uid="uid://c2qdpebvrcef8" path="res://scenes/npc_4_abuela.tscn" id="42_agvwd"]
+[ext_resource type="PackedScene" uid="uid://c7xww57356p73" path="res://scenes/npc_1.tscn" id="42_xxe0o"]
+[ext_resource type="AudioStream" uid="uid://b6de4wi7byne4" path="res://audio/awelitah panico a arañas.wav" id="43_kp2re"]
+[ext_resource type="AudioStream" uid="uid://y83x0qkinrq7" path="res://audio/marikita emo  .wav" id="43_qmf2n"]
+[ext_resource type="AudioStream" uid="uid://v70r2pc2upot" path="res://audio/piromano.wav" id="45_h5gyx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ptx60"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -50,8 +61,6 @@ sky_material = SubResource("ProceduralSkyMaterial_ptx60")
 background_mode = 2
 sky = SubResource("Sky_s5d05")
 tonemap_mode = 2
-ssao_enabled = true
-sdfgi_enabled = true
 glow_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_iu3bf"]
@@ -83,7 +92,8 @@ disable_receive_shadows = true
 material = SubResource("StandardMaterial3D_3t1b8")
 size = Vector2(60, 60)
 
-[sub_resource type="PrismMesh" id="PrismMesh_7e2yd"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_74au8"]
+size = Vector3(3.73314, 2.59961, 3.33496)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ayq12"]
 radius = 0.275763
@@ -102,16 +112,23 @@ spawn_points = [NodePath("Spawners/EnemySpawner"), NodePath("Spawners/EnemySpawn
 pause_action = ExtResource("5_c4gxv")
 background_music_player = NodePath("BackgroundMusic")
 
+[node name="AIAssistantVoice" type="Node" parent="." node_paths=PackedStringArray("voice_source")]
+script = ExtResource("6_253ym")
+voice_source = NodePath("../AIAssistantVoiceSource")
+
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_xhu3m")
 volume_db = -25.109
+autoplay = true
+
+[node name="AIAssistantVoiceSource" type="AudioStreamPlayer" parent="."]
 autoplay = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mii8t")
 
 [node name="Player" parent="." node_paths=PackedStringArray("player_pov") instance=ExtResource("1_3e3sr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3818, -0.222234, 3.07724)
+transform = Transform3D(-0.288781, 0, 0.957395, 0, 1, 0, -0.957395, 0, -0.288781, 3.93263, -0.222234, 5.91338)
 player_pov = NodePath("../PlayerPOV")
 
 [node name="DialogSystem" type="Node" parent="." node_paths=PackedStringArray("hud")]
@@ -137,6 +154,7 @@ dialog_box_show_time = 0.5
 [node name="InGameMenus" parent="PlayerPOV/Camera3D" instance=ExtResource("12_3jy1a")]
 
 [node name="PlayerInventory" parent="." instance=ExtResource("5_6bl4v")]
+initial_resources_amounts = Array[int]([99999])
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -358,58 +376,55 @@ polygon = PackedVector2Array(3.54018, -0.688888, 6.98223, -1.66843, 2.77797, -1.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.92761, 0, -22.5124)
 
 [node name="TurretBuilder2" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(-0.977287, 0, 0.211922, 0, 1, 0, -0.211922, 0, -0.977287, -14.6832, 9.53674e-07, -22.4497)
+transform = Transform3D(-0.264631, 0, -0.96435, 0, 1, 0, 0.96435, 0, -0.264631, -14.6832, 9.53674e-07, -22.4497)
 
 [node name="TurretBuilder6" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(0.578641, 0, -0.815583, 0, 1, 0, 0.815583, 0, 0.578641, 7.26989, 7.15256e-07, -16.7783)
+transform = Transform3D(-0.788312, 0, -0.615277, 0, 1, 0, 0.615277, 0, -0.788312, 7.26989, 7.15256e-07, -16.7783)
 
 [node name="TurretBuilder7" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(0.884605, 0, 0.46634, 0, 1, 0, -0.46634, 0, 0.884605, -6.78744, 1.66893e-06, -17.4491)
+transform = Transform3D(-0.586386, 0, 0.810031, 0, 1, 0, -0.810031, 0, -0.586386, -6.78744, 1.66893e-06, -17.4491)
 
 [node name="TurretBuilder8" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(-0.135646, 0, -0.990757, 0, 1, 0, 0.990757, 0, -0.135646, -6.14434, 1.66893e-06, 10.158)
+transform = Transform3D(0.600183, 0, -0.799862, 0, 1, 0, 0.799862, 0, 0.600183, -24.7829, 1.66893e-06, 0.238646)
 
 [node name="TurretBuilder9" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(0.105882, 0, 0.994379, 0, 1, 0, -0.994379, 0, 0.105882, -0.880545, 1.66893e-06, 9.97684)
+transform = Transform3D(-0.985961, 0, 0.166975, 0, 1, 0, -0.166975, 0, -0.985961, 23.3572, 7.15256e-07, 26.7344)
 
 [node name="TurretBuilder4" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(-0.619697, 0, 0.784841, 0, 1, 0, -0.784841, 0, -0.619697, 15.2233, 0, 23.0721)
+transform = Transform3D(-0.619697, 0, 0.784841, 0, 1, 0, -0.784841, 0, -0.619697, 13.3575, 0, 22.1283)
 
 [node name="TurretBuilder10" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(-0.14002, 0, 0.990149, 0, 1, 0, -0.990149, 0, -0.14002, 7.10723, 0, 16.5992)
+transform = Transform3D(-0.773929, 0, 0.633273, 0, 1, 0, -0.633273, 0, -0.773929, 5.85272, 0, 15.3332)
 
 [node name="TurretBuilder19" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(-0.14002, 0, 0.990149, 0, 1, 0, -0.990149, 0, -0.14002, 13.7016, 0, 17.2383)
+transform = Transform3D(-0.749418, 0, 0.662097, 0, 1, 0, -0.662097, 0, -0.749418, 12.0805, 0, 15.4951)
 
 [node name="TurretBuilder20" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(0.110255, 0, 0.993904, 0, 1, 0, -0.993904, 0, 0.110255, -14.2207, 0, 16.6905)
+transform = Transform3D(0.151744, 0, -0.988421, 0, 1, 0, 0.988421, 0, 0.151744, -19.5178, 9.53674e-07, 14.4735)
 
 [node name="TurretBuilder13" parent="Buildables" instance=ExtResource("6_rjjmh")]
 transform = Transform3D(0.94211, 0, 0.335304, 0, 1, 0, -0.335304, 0, 0.94211, -34.9754, 0, -10.5824)
 
-[node name="TurretBuilder3" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8799, 0, 9.35834)
-
 [node name="TurretBuilder15" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(0.452917, 0, -0.891553, 0, 1, 0, 0.891553, 0, 0.452917, -15.0949, 0, -11.6675)
+transform = Transform3D(-0.44232, 0, -0.896857, 0, 1, 0, 0.896857, 0, -0.44232, -15.0949, 0, -11.6675)
 
 [node name="TurretBuilder16" parent="Buildables" instance=ExtResource("6_rjjmh")]
 transform = Transform3D(0.452917, 0, -0.891553, 0, 1, 0, 0.891553, 0, 0.452917, -1.28861, 0, -4.23594)
 
 [node name="TurretBuilder17" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(-0.631921, 0, -0.775033, 0, 1, 0, 0.775033, 0, -0.631921, -27.4445, -1.90735e-06, 5.62446)
+transform = Transform3D(-0.631921, 0, -0.775033, 0, 1, 0, 0.775033, 0, -0.631921, -28.6646, -1.90735e-06, 13.9032)
 
 [node name="TurretBuilder11" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.7126, 0, 2.78823)
+transform = Transform3D(0.998407, 0, 0.0564313, 0, 1, 0, -0.0564313, 0, 0.998407, 19.7126, 0, 2.78823)
 
 [node name="TurretBuilder18" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.9573, 0, -5.70484)
+transform = Transform3D(-0.0905457, 0, -0.995892, 0, 1, 0, 0.995892, 0, -0.0905457, 29.9573, 0, -5.70484)
 
 [node name="TurretBuilder12" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(0.221566, 0, -0.975145, 0, 1, 0, 0.975145, 0, 0.221566, 32.4796, 0, 12.9863)
+transform = Transform3D(-0.830275, 0, -0.557354, 0, 1, 0, 0.557354, 0, -0.830275, 32.4796, 0, 12.9863)
 
 [node name="TurretBuilder5" parent="Buildables" instance=ExtResource("6_rjjmh")]
-transform = Transform3D(-0.927282, 0, 0.374364, 0, 1, 0, -0.374364, 0, -0.927282, -22.9453, 0, 20.7358)
+transform = Transform3D(-0.717154, 0, -0.696915, 0, 1, 0, 0.696915, 0, -0.717154, -22.9453, 0, 20.7358)
 
 [node name="TurretBuilder14" parent="Buildables" instance=ExtResource("6_rjjmh")]
 transform = Transform3D(-0.927282, 0, 0.374364, 0, 1, 0, -0.374364, 0, -0.927282, -39.9108, 0, 18.9278)
@@ -441,8 +456,7 @@ transform = Transform3D(-0.902931, 0, 0.429786, 0, 1, 0, -0.429786, 0, -0.902931
 [node name="ExtractorBuilder8" parent="Buildables" instance=ExtResource("23_ieyqq")]
 transform = Transform3D(-0.0175572, 0, 0.999846, 0, 1, 0, -0.999846, 0, -0.0175572, -29.3247, -0.350837, 21.1272)
 
-[node name="ExtractorManagement" parent="Buildables/ExtractorBuilder8" index="3" node_paths=PackedStringArray("animation_players")]
-animation_players = [NodePath("../Extractor Simple/AnimationPlayer"), null]
+[node name="ExtractorManagement" parent="Buildables/ExtractorBuilder8" index="3"]
 start_built = true
 
 [node name="ExtractorBuilder9" parent="Buildables" instance=ExtResource("23_ieyqq")]
@@ -453,16 +467,33 @@ transform = Transform3D(-0.848427, 0, -0.529312, 0, 1, 0, 0.529312, 0, -0.848427
 
 [node name="EnemyObjectives" type="Node3D" parent="."]
 
-[node name="Weakpoint" parent="EnemyObjectives" instance=ExtResource("16_7xal1")]
+[node name="WeakpointA" parent="EnemyObjectives" instance=ExtResource("16_7xal1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.20821, 1.2757, -2.25698)
 
-[node name="WeakpointB" type="MeshInstance3D" parent="EnemyObjectives"]
-transform = Transform3D(1, 0, 0, 0, 2.45078, 0, 0, 0, 1, 15.1363, 1.2757, -0.998057)
-mesh = SubResource("PrismMesh_7e2yd")
+[node name="Health" parent="EnemyObjectives/WeakpointA/Interactable" index="0"]
+max_health = 50000.0
 
-[node name="Health" type="Node3D" parent="EnemyObjectives/WeakpointB"]
-script = ExtResource("18_aoh4n")
-team = "weakpoints"
-max_health = 15000.0
+[node name="CollisionShape3D" parent="EnemyObjectives/WeakpointA/Interactable" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.29421, 0.278063, 1.79515)
+
+[node name="WINDMILL" parent="EnemyObjectives/WeakpointA" instance=ExtResource("17_ax7od")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.778486, 0, -1.35579)
+
+[node name="AnimationPlayer" parent="EnemyObjectives/WeakpointA/WINDMILL" index="2"]
+autoplay = "Windmill LOOP"
+
+[node name="WeakpointB" parent="EnemyObjectives" instance=ExtResource("16_7xal1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0323, 0.802446, -0.749671)
+
+[node name="Health" parent="EnemyObjectives/WeakpointB/Interactable" index="0"]
+max_health = 50000.0
+
+[node name="CollisionShape3D" parent="EnemyObjectives/WeakpointB/Interactable" index="1"]
+transform = Transform3D(0.805918, 0, -0.592027, 0, 1, 0, 0.592027, 0, 0.805918, -0.931947, -0.118528, -1.01844)
+shape = SubResource("BoxShape3D_74au8")
+
+[node name="ENERGY STORE" parent="EnemyObjectives/WeakpointB" instance=ExtResource("18_k1v2c")]
+transform = Transform3D(0.938348, 0, 0.345691, 0, 1, 0, -0.345691, 0, 0.938348, 0.479129, -0.0857804, -1.10034)
 
 [node name="Spawners" type="Node3D" parent="."]
 
@@ -470,25 +501,25 @@ max_health = 15000.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.0612, 0, -18.5781)
 script = ExtResource("18_mrggo")
 spawner_radius = 0.25
-general_enemy_objective = NodePath("")
+general_enemy_objective = NodePath("../../EnemyObjectives/WeakpointA/Interactable/Health")
 
 [node name="EnemySpawner2" type="Node3D" parent="Spawners" node_paths=PackedStringArray("general_enemy_objective")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5846, -1.90735e-06, -54.3525)
 script = ExtResource("18_mrggo")
 spawner_radius = 0.25
-general_enemy_objective = NodePath("")
+general_enemy_objective = NodePath("../../EnemyObjectives/WeakpointA/Interactable/Health")
 
 [node name="EnemySpawner4" type="Node3D" parent="Spawners" node_paths=PackedStringArray("general_enemy_objective")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.413058, -1.90735e-06, -53.8899)
 script = ExtResource("18_mrggo")
 spawner_radius = 0.25
-general_enemy_objective = NodePath("../../EnemyObjectives/WeakpointB/Health")
+general_enemy_objective = NodePath("../../EnemyObjectives/WeakpointB/Interactable/Health")
 
 [node name="EnemySpawner3" type="Node3D" parent="Spawners" node_paths=PackedStringArray("general_enemy_objective")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.2019, -1.90735e-06, -44.5267)
 script = ExtResource("18_mrggo")
 spawner_radius = 0.25
-general_enemy_objective = NodePath("../../EnemyObjectives/WeakpointB/Health")
+general_enemy_objective = NodePath("../../EnemyObjectives/WeakpointB/Interactable/Health")
 
 [node name="Pickupables" type="Node3D" parent="."]
 
@@ -812,7 +843,7 @@ mesh = NodePath("../mineral peque/Icosphere_011")
 outline_material = ExtResource("16_gwu6i")
 
 [node name="Pickup2" type="Node3D" parent="Pickupables"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.07767, -0.341413, -35.6421)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5141, -0.341413, -40.219)
 
 [node name="mineral peque" parent="Pickupables/Pickup2" instance=ExtResource("14_fjlco")]
 
@@ -841,7 +872,7 @@ mesh = NodePath("../mineral peque/Icosphere_011")
 outline_material = ExtResource("16_gwu6i")
 
 [node name="Pickup3" type="Node3D" parent="Pickupables"]
-transform = Transform3D(-0.549285, 0, -0.835635, 0, 1, 0, 0.835635, 0, -0.549285, -8.47659, -0.341413, -35.1382)
+transform = Transform3D(-0.882456, 0, 0.470396, 0, 1, 0, -0.470396, 0, -0.882456, -17.4569, -0.341413, -40.0257)
 
 [node name="mineral peque" parent="Pickupables/Pickup3" instance=ExtResource("14_fjlco")]
 
@@ -1008,16 +1039,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.30462, -0.155762, -0.947092
 
 [node name="Interactable" type="StaticBody3D" parent="NPC 5 EL barrista"]
 script = ExtResource("3_uewq7")
-interactable_name = "El Barrista"
+interactable_name = "Joe"
 input_names = Array[String](["Hablar"])
 offer_info = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NPC 5 EL barrista/Interactable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.296078, 0)
 shape = SubResource("CylinderShape3D_j66uc")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="NPC 5 EL barrista"]
-volume_db = -10.0
 
 [node name="NPCDialog" type="Node" parent="NPC 5 EL barrista" node_paths=PackedStringArray("intectable", "dialog_sound_source")]
 script = ExtResource("30_j50ir")
@@ -1026,11 +1054,135 @@ dialogs = Array[String](["¡La araña también es un ser vivo!", "Las arañas so
 dialog_sounds = Array[AudioStream]([ExtResource("31_ddllv"), ExtResource("32_0fef0"), ExtResource("33_fwrax"), ExtResource("35_i6vg1"), ExtResource("30_0ul3i"), ExtResource("37_gfks4")])
 dialog_sound_source = NodePath("../AudioStreamPlayer3D")
 
-[connection signal="death" from="EnemyObjectives/WeakpointB/Health" to="." method="on_base_destruction"]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="NPC 5 EL barrista"]
+volume_db = -10.0
+
+[node name="NPC 3 Cientifico" parent="." instance=ExtResource("40_8h4qk")]
+transform = Transform3D(0.60944, 0, -0.792832, 0, 1, 0, 0.792832, 0, 0.60944, 2.29664, 0, 6.91457)
+
+[node name="Interactable" type="StaticBody3D" parent="NPC 3 Cientifico"]
+script = ExtResource("3_uewq7")
+interactable_name = "Dr. Elton"
+input_names = Array[String](["Hablar"])
+offer_info = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPC 3 Cientifico/Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.296078, 0)
+shape = SubResource("CylinderShape3D_j66uc")
+
+[node name="NPCDialog" type="Node" parent="NPC 3 Cientifico" node_paths=PackedStringArray("intectable", "dialog_sound_source")]
+script = ExtResource("30_j50ir")
+intectable = NodePath("../Interactable")
+dialogs = Array[String](["Se nos acercan los aráneus, activa las defensas terrestres, deberás proveer a los ingenieros de titanita. Es un mineral que solo podrás encontrar en las rocas del exterior"])
+dialog_sounds = Array[AudioStream]([ExtResource("41_l7m38")])
+dialog_sound_source = NodePath("../AudioStreamPlayer3D")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="NPC 3 Cientifico"]
+volume_db = -10.0
+
+[node name="NPC 4 ABUELA" parent="." instance=ExtResource("42_agvwd")]
+transform = Transform3D(-0.884589, 0, -0.466371, 0, 1, 0, 0.466371, 0, -0.884589, 2.20616, 0.530874, 82.0723)
+
+[node name="Interactable" type="StaticBody3D" parent="NPC 4 ABUELA"]
+script = ExtResource("3_uewq7")
+interactable_name = "Ancianita Sabia"
+input_names = Array[String](["Escuchar"])
+offer_info = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPC 4 ABUELA/Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.296078, 0)
+shape = SubResource("CylinderShape3D_j66uc")
+
+[node name="NPCDialog" type="Node" parent="NPC 4 ABUELA" node_paths=PackedStringArray("intectable", "dialog_sound_source")]
+script = ExtResource("30_j50ir")
+intectable = NodePath("../Interactable")
+dialogs = Array[String](["¿Es un mal momento para decir que tengo pánico a las arañas?"])
+dialog_sounds = Array[AudioStream]([ExtResource("43_kp2re")])
+dialog_sound_source = NodePath("../AudioStreamPlayer3D")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="NPC 4 ABUELA"]
+volume_db = -10.0
+
+[node name="NPC 2" parent="." instance=ExtResource("40_fge4o")]
+transform = Transform3D(0.274396, 0, -0.961617, 0, 1, 0, 0.961617, 0, 0.274396, -4.05201, -0.212241, 9.38192)
+
+[node name="Interactable" type="StaticBody3D" parent="NPC 2"]
+script = ExtResource("3_uewq7")
+interactable_name = "Pablo"
+input_names = Array[String](["Hablar"])
+offer_info = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPC 2/Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.296078, 0)
+shape = SubResource("CylinderShape3D_j66uc")
+
+[node name="NPCDialog" type="Node" parent="NPC 2" node_paths=PackedStringArray("intectable", "dialog_sound_source")]
+script = ExtResource("30_j50ir")
+intectable = NodePath("../Interactable")
+dialogs = Array[String](["Mi familia vino de inmigrantes a este sitio, estaban buscando una vida mejor en un lugar tranquilo, pero nos encontramos con el apocalipsis... ¡Muerte y destrucción!"])
+dialog_sounds = Array[AudioStream]([ExtResource("41_regh4")])
+dialog_sound_source = NodePath("../AudioStreamPlayer3D")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="NPC 2"]
+volume_db = -10.0
+
+[node name="NPC 1" parent="." instance=ExtResource("42_xxe0o")]
+transform = Transform3D(-0.457967, 0, -0.888969, 0, 1, 0, 0.888969, 0, -0.457967, -7.67273, -0.194941, 14.9678)
+
+[node name="Interactable" type="StaticBody3D" parent="NPC 1"]
+script = ExtResource("3_uewq7")
+interactable_name = "Ángelo"
+input_names = Array[String](["Hablar"])
+offer_info = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPC 1/Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.296078, 0)
+shape = SubResource("CylinderShape3D_j66uc")
+
+[node name="NPCDialog" type="Node" parent="NPC 1" node_paths=PackedStringArray("intectable", "dialog_sound_source")]
+script = ExtResource("30_j50ir")
+intectable = NodePath("../Interactable")
+dialogs = Array[String](["Hmmmm.... No hay esperanza para ninguno de nosotros, no te creas las mentiras que te cuentan. Nos pronostica un futuro negro, muy neeegro... como mi alma"])
+dialog_sounds = Array[AudioStream]([ExtResource("43_qmf2n")])
+dialog_sound_source = NodePath("../AudioStreamPlayer3D")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="NPC 1"]
+volume_db = -10.0
+
+[node name="NPC 3" parent="." instance=ExtResource("42_xxe0o")]
+transform = Transform3D(0.248301, 0, 0.968683, 0, 1, 0, -0.968683, 0, 0.248301, 10.5437, -0.19494, 10.0962)
+
+[node name="Interactable" type="StaticBody3D" parent="NPC 3"]
+script = ExtResource("3_uewq7")
+interactable_name = "Antonio"
+input_names = Array[String](["Hablar"])
+offer_info = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPC 3/Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.296078, 0)
+shape = SubResource("CylinderShape3D_j66uc")
+
+[node name="NPCDialog" type="Node" parent="NPC 3" node_paths=PackedStringArray("intectable", "dialog_sound_source")]
+script = ExtResource("30_j50ir")
+intectable = NodePath("../Interactable")
+dialogs = Array[String](["¿Has visto por ahí algún barril de gasolina? Yo quemo cosas. Me encanta quemar cosas. Estoy deseando de que vengan esas arañas para quemaaaarlas..."])
+dialog_sounds = Array[AudioStream]([ExtResource("45_h5gyx")])
+dialog_sound_source = NodePath("../AudioStreamPlayer3D")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="NPC 3"]
+volume_db = -10.0
+
+[connection signal="death" from="EnemyObjectives/WeakpointA/Interactable/Health" to="." method="on_base_destruction"]
+[connection signal="death" from="EnemyObjectives/WeakpointB/Interactable/Health" to="." method="on_base_destruction"]
 
 [editable path="Buildables/ExtractorBuilder8"]
-[editable path="Buildables/ExtractorBuilder8/Extractor Simple"]
-[editable path="Buildables/ExtractorBuilder8/Extractor Pro"]
+[editable path="Buildables/ExtractorBuilder8/EXTRACTOR normal"]
+[editable path="Buildables/ExtractorBuilder8/EXTRACTOR Upgrade 1"]
+[editable path="Buildables/ExtractorBuilder8/EXTRACTOR Upgrade 2"]
+[editable path="Buildables/ExtractorBuilder8/EXTRACTOR Upgrade 3"]
+[editable path="EnemyObjectives/WeakpointA"]
+[editable path="EnemyObjectives/WeakpointA/WINDMILL"]
+[editable path="EnemyObjectives/WeakpointB"]
 [editable path="Pickupables/Pickup/mineral peque"]
 [editable path="Pickupables/Pickup4/mineral peque"]
 [editable path="Pickupables/Pickup5/mineral peque"]

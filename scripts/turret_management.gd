@@ -29,6 +29,10 @@ extends Node
 
 @export var repair_fraction: float
 
+@export var turret_repaired_notif: AudioStream
+@export var turret_created_notif: AudioStream
+@export var turret_destroyed_notif: AudioStream
+
 var current_level = -1
 var upgrading = false
 
@@ -36,6 +40,9 @@ func _ready() -> void:
 	turret_interactable.input_names = [turret_interactable.input_names[0] + " (x%d[img=32]%s[/img])" % [build_cost, scrap_resource.icon.resource_path]]
 
 func _process(_delta: float) -> void:
+	if current_level >= 0:
+		turret_interactable.info_details = get_turret_info()
+	
 	if upgrading or turret_long_interactable.running:
 		return
 	
@@ -44,12 +51,10 @@ func _process(_delta: float) -> void:
 	if current_level < 0:
 		turret_interactable.interactions_enabled[0] = scrap >= build_cost
 	elif current_level < fire_rates.size():
-		turret_interactable.interactions_enabled[0] = scrap >= upgrade_costs[current_level]
+		turret_interactable.interactions_enabled[0] = scrap >= upgrade_costs[current_level] and not turret_health.is_dead
 		turret_interactable.interactions_enabled[1] = turret_health.health < turret_health.max_health
-		turret_interactable.info_details = get_turret_info()
 	else:
 		turret_interactable.interactions_enabled[0] = turret_health.health < turret_health.max_health
-		turret_interactable.info_details = get_turret_info()	
 
 
 func get_turret_info() -> String:
@@ -86,6 +91,8 @@ func _on_long_interactable_long_interact(action_index: int) -> void:
 		if current_level < 0:
 			PlayerInventory.Instance.extract_resource(scrap_resource, build_cost)
 			
+			AIAssistantVoice.Instance.enqueue_notif(turret_created_notif)
+			
 			animation_tree.set("parameters/conditions/build", true)
 			turret_interactable.can_interact = false
 			
@@ -115,6 +122,7 @@ func _on_long_interactable_long_interact(action_index: int) -> void:
 			
 			turret_interactable.can_interact = false
 			turret.enabled = false
+			turret_health.enabled = false
 			
 			animation_tree.set("parameters/conditions/upgrade", true)
 			
@@ -160,6 +168,7 @@ func _on_long_interactable_long_interact(action_index: int) -> void:
 				turret_interactable.input_names[0] = upgrade_action_name + " (x%d[img=32]%s[/img])" % [upgrade_costs[current_level], scrap_resource.icon.resource_path] 
 			turret_interactable.can_interact = true
 			turret.enabled = true
+			turret_health.enabled = true
 			
 			turret_interactable.info_details = get_turret_info()
 		else:
@@ -171,7 +180,25 @@ func _on_long_interactable_long_interact(action_index: int) -> void:
 
 func _on_health_death() -> void:
 	turret.enabled = false
+	AIAssistantVoice.Instance.enqueue_notif(turret_destroyed_notif)
+	
+	animation_tree.set("parameters/conditions/upgrade", true)
 
+	await animation_tree.animation_finished
+	
+	animation_tree.set("parameters/conditions/upgrade", false)
+	
 
 func _on_health_revive() -> void:
-	turret.enabled = true
+	AIAssistantVoice.Instance.enqueue_notif(turret_repaired_notif)
+	
+	turret_health.enabled = false
+	
+	animation_tree.set("parameters/conditions/build", true)
+
+	await animation_tree.animation_finished
+	
+	animation_tree.set("parameters/conditions/build", false)
+	
+	turret_health.enabled = true
+	turret.enabled = true	

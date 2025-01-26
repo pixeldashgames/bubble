@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://caev6otsfk014"]
+[gd_scene load_steps=17 format=3 uid="uid://caev6otsfk014"]
 
 [ext_resource type="Texture2D" uid="uid://qiotkea8hn53" path="res://icon.svg" id="1_dr6l8"]
 [ext_resource type="Script" path="res://scripts/player_hud.gd" id="1_ttdc3"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://bltfb8kk6gfor" path="res://input/interact_2nd.tres" id="4_fqcan"]
 [ext_resource type="Resource" uid="uid://bbq5fkkhhy4dh" path="res://input/interact_3rd.tres" id="5_fwv5t"]
 [ext_resource type="Resource" uid="uid://dkbql6i8l6tit" path="res://input/default_input_map.tres" id="6_s80km"]
+[ext_resource type="Resource" uid="uid://cce0upekf2w1b" path="res://input/skip_preparation.tres" id="7_fsl5v"]
 [ext_resource type="Texture2D" uid="uid://bshgbadvi3dow" path="res://art/ui/wave_status_backdrop.png" id="8_unpod"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ssshh"]
@@ -41,6 +42,7 @@ dialog_min_time = 1.0
 interactable_name_label = NodePath("MarginContainer/InteractPrompts/Label")
 interact_actions_labels = [NodePath("MarginContainer/InteractPrompts/Inputs/FirstInputLabel"), NodePath("MarginContainer/InteractPrompts/Inputs/SecondInteractLabel"), NodePath("MarginContainer/InteractPrompts/Inputs/ThirdInteractLabel")]
 interact_input_actions = Array[ExtResource("2_1ea55")]([ExtResource("3_0cu54"), ExtResource("4_fqcan"), ExtResource("5_fwv5t")])
+skip_preparation_action = ExtResource("7_fsl5v")
 interact_actions_spacers = [NodePath("MarginContainer/InteractPrompts/Inputs/Spacing"), NodePath("MarginContainer/InteractPrompts/Inputs/Spacing2")]
 input_context = ExtResource("6_s80km")
 interaction_progress_bar = NodePath("MarginContainer/InteractPrompts/ProgressBar")
@@ -82,6 +84,19 @@ layout_mode = 2
 text = "579 enemies remaining!"
 label_settings = SubResource("LabelSettings_urna0")
 horizontal_alignment = 1
+
+[node name="SkipLabel" type="RichTextLabel" parent="WaveInfo/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Usa RB para iniciar antes de tiempo"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 
 [node name="InfoPanel" type="Control" parent="."]
 unique_name_in_owner = true

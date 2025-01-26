@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://y83x0qkinrq7"
+path="res://.godot/imported/marikita emo  .wav-1cca3ff8b0b9c16656a445f3a50ce7b9.sample"
+
+[deps]
+
+source_file="res://audio/marikita emo  .wav"
+dest_files=["res://.godot/imported/marikita emo  .wav-1cca3ff8b0b9c16656a445f3a50ce7b9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
