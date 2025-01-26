@@ -1,37 +1,100 @@
 [gd_scene load_steps=6 format=3 uid="uid://b8cl3thkam01k"]
 
-[ext_resource type="Script" path="res://scripts/destroyer.gd" id="1_kxwgr"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_kxwgr"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_xavrx"]
+[ext_resource type="PackedScene" uid="uid://bnl5mvvytme77" path="res://art/3d/ARANIA BASICA fixed.glb" id="3_hklg8"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_15054"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vblri"]
+height = 0.682743
+radius = 0.409227
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4cqxd"]
-albedo_color = Color(0.51, 0.0561, 0.0561, 1)
+[sub_resource type="SphereShape3D" id="SphereShape3D_kqtbl"]
+radius = 10.0
 
-[sub_resource type="PrismMesh" id="PrismMesh_ety27"]
-material = SubResource("StandardMaterial3D_4cqxd")
-
-[node name="Enemy" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.40934, 0.5, 5.82058)
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("animation_player")]
+collision_layer = 2
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_kxwgr")
-movement_speed = 3.0
+attack_damage = 50.0
+attack_interval = 1000.0
+target_teams = Array[String](["turrets", "extractors"])
+team_priorities = Array[int]([3, 2])
+avoidance_distance_range = Vector2(0.2, 0.35)
+movement_speed = 5.0
+death_animation_name = "MUERTE ARANIA"
+idle_animation_name = "IDLE Spider Basic"
+attack_animation_name = "Atack  SpiderBasic"
+move_animation_name = "Caminar Spider basica 2"
+animation_player = NodePath("ARANIA BASICA fixed/AnimationPlayer")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 2.0
+path_max_distance = 10.01
 avoidance_enabled = true
-radius = 0.6
+radius = 0.35
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_15054")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00030899, 0.00646305, -0.00275278)
-mesh = SubResource("PrismMesh_ety27")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.160243, 0)
+shape = SubResource("CylinderShape3D_vblri")
 
 [node name="Health" type="Node3D" parent="."]
 script = ExtResource("2_xavrx")
 team = "bugs"
 max_health = 100.0
 
+[node name="EnemyAggro" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyAggro"]
+shape = SubResource("SphereShape3D_kqtbl")
+
+[node name="ARANIA BASICA fixed" parent="." instance=ExtResource("3_hklg8")]
+
+[node name="blood" parent="ARANIA BASICA fixed/Huesos Arania basica" index="0"]
+visible = false
+"blend_shapes/Key 1" = 0.722353
+
+[node name="Skeleton3D" parent="ARANIA BASICA fixed/Huesos Arania basica" index="1"]
+bones/0/position = Vector3(0.0985302, 0.00699935, 0.391881)
+bones/0/rotation = Quaternion(-0.513316, 0.471557, -0.437201, 0.568328)
+bones/1/rotation = Quaternion(0.0743653, 0.454791, -0.248494, 0.851989)
+bones/2/position = Vector3(-0.114737, 0.271798, 0.114052)
+bones/2/rotation = Quaternion(0.111396, -0.0668102, 0.0077329, 0.991498)
+bones/3/position = Vector3(0.0989232, 0.272201, -0.104091)
+bones/3/rotation = Quaternion(0.089314, 0.745535, -0.148235, 0.643604)
+bones/4/rotation = Quaternion(-0.45486, 0.594431, 0.656591, 0.0929689)
+bones/5/rotation = Quaternion(0.679523, -0.609747, 0.365451, -0.18139)
+bones/6/rotation = Quaternion(0.0439324, 0.100858, -0.158493, 0.981212)
+bones/7/rotation = Quaternion(-0.365021, 0.738484, 0.553676, 0.121839)
+bones/8/rotation = Quaternion(0.660185, -0.640059, 0.388967, 0.056434)
+bones/9/rotation = Quaternion(0.123421, 0.137995, -0.0965994, 0.977953)
+bones/10/rotation = Quaternion(-0.341757, 0.793249, 0.459341, 0.207277)
+bones/11/rotation = Quaternion(0.745147, -0.451863, 0.349306, 0.344326)
+bones/12/rotation = Quaternion(0.0797727, 0.184431, -0.00877785, 0.979563)
+bones/13/rotation = Quaternion(-0.547414, 0.239951, 0.574985, 0.558707)
+bones/14/rotation = Quaternion(0.694512, 0.579827, -0.382998, -0.186456)
+bones/15/rotation = Quaternion(0.0575469, -0.0992434, 0.179166, 0.977107)
+bones/16/position = Vector3(0.0101674, 0.252607, -0.250185)
+bones/16/rotation = Quaternion(-0.469927, 0.257837, 0.466734, 0.703455)
+bones/17/rotation = Quaternion(0.668166, 0.630697, -0.389836, 0.0616645)
+bones/18/rotation = Quaternion(0.12531, -0.138494, 0.102953, 0.976994)
+bones/19/rotation = Quaternion(-0.394169, 0.354841, 0.397254, 0.748938)
+bones/20/rotation = Quaternion(0.738327, 0.462812, -0.350708, 0.343047)
+bones/21/rotation = Quaternion(0.0733033, -0.184107, 0.00287298, 0.980165)
+bones/22/position = Vector3(-0.0438172, -0.0185252, 0.00894158)
+bones/22/rotation = Quaternion(-0.323927, 0.119149, 0.917059, 0.199692)
+bones/23/position = Vector3(-0.665171, -0.304325, -0.39037)
+bones/24/position = Vector3(-0.819342, -0.282534, 0.0914782)
+bones/25/position = Vector3(-0.710958, -0.306263, 0.500261)
+bones/26/position = Vector3(0.842132, -0.30984, -0.386864)
+bones/27/position = Vector3(1.02364, -0.310491, 0.138994)
+bones/28/position = Vector3(0.944022, -0.349848, 0.498123)
+
+[node name="AnimationPlayer" parent="ARANIA BASICA fixed" index="1"]
+speed_scale = 0.7
+
 [connection signal="death" from="Health" to="." method="_on_health_death"]
+[connection signal="body_entered" from="EnemyAggro" to="." method="_on_enemy_aggro_body_entered"]
+[connection signal="body_exited" from="EnemyAggro" to="." method="_on_enemy_aggro_body_exited"]
+
+[editable path="ARANIA BASICA fixed"]

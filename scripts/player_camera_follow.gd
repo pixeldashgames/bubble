@@ -1,4 +1,4 @@
-extends Node3D
+class_name PlayerPOV extends Node3D
 
 @export var player: Node3D
 @export var offset: Vector3

@@ -1,6 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://biqd83slug8ur"]
+[gd_scene load_steps=23 format=3 uid="uid://biqd83slug8ur"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_lbjs0"]
+[ext_resource type="PackedScene" uid="uid://tnnlyd68om05" path="res://art/3d/char.fbx" id="2_gym36"]
+[ext_resource type="Resource" uid="uid://bscjkt0jyxrqj" path="res://input/move.tres" id="2_noxsf"]
+[ext_resource type="Resource" uid="uid://jrxta1mia7dk" path="res://input/sprint.tres" id="2_vhhhd"]
 [ext_resource type="Script" path="res://addons/guide/guide_action.gd" id="3_0o0e0"]
 [ext_resource type="Resource" uid="uid://carlgot4k511r" path="res://input/interact_1st.tres" id="4_m02wa"]
 [ext_resource type="Script" path="res://scripts/interaction_system.gd" id="5_2y1bu"]
@@ -8,25 +11,113 @@
 [ext_resource type="Resource" uid="uid://bbq5fkkhhy4dh" path="res://input/interact_3rd.tres" id="6_7ugyo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5qwvj"]
+height = 1.5
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_knf0s"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t4ac2"]
+animation = &"IDLE"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k48l5"]
+animation = &"RUN"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_54aai"]
+animation = &"WALK"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x4rhk"]
+xfade_time = 0.15
+break_loop_at_end = true
+advance_mode = 2
+advance_condition = &"walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mjh2w"]
+xfade_time = 0.15
+break_loop_at_end = true
+advance_mode = 2
+advance_condition = &"running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6bojd"]
+xfade_time = 0.15
+break_loop_at_end = true
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rkvs7"]
+xfade_time = 0.15
+break_loop_at_end = true
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xnuuk"]
+xfade_time = 0.15
+break_loop_at_end = true
+advance_mode = 2
+advance_condition = &"running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y4b5v"]
+xfade_time = 0.15
+break_loop_at_end = true
+advance_mode = 2
+advance_condition = &"walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u1y27"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hu0w8"]
+states/IDLE/node = SubResource("AnimationNodeAnimation_t4ac2")
+states/IDLE/position = Vector2(378.4, 100.52)
+states/RUN/node = SubResource("AnimationNodeAnimation_k48l5")
+states/RUN/position = Vector2(566.4, 49)
+states/Start/position = Vector2(244, 99.904)
+states/WALK/node = SubResource("AnimationNodeAnimation_54aai")
+states/WALK/position = Vector2(489.6, 222.6)
+transitions = ["IDLE", "WALK", SubResource("AnimationNodeStateMachineTransition_x4rhk"), "WALK", "RUN", SubResource("AnimationNodeStateMachineTransition_mjh2w"), "RUN", "IDLE", SubResource("AnimationNodeStateMachineTransition_6bojd"), "WALK", "IDLE", SubResource("AnimationNodeStateMachineTransition_rkvs7"), "IDLE", "RUN", SubResource("AnimationNodeStateMachineTransition_xnuuk"), "RUN", "WALK", SubResource("AnimationNodeStateMachineTransition_y4b5v"), "Start", "IDLE", SubResource("AnimationNodeStateMachineTransition_u1y27")]
+graph_offset = Vector2(-92, -45)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1oqna"]
 radius = 2.0
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_lbjs0")
-move_speed = 5.0
+move_speed = 4.0
 max_speed_delta = 15.0
+player_movement_input = ExtResource("2_noxsf")
+sprint_action = ExtResource("2_vhhhd")
+sprint_speed = 6.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CapsuleShape3D_5qwvj")
 
-[node name="PlayerModel" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_knf0s")
-skeleton = NodePath("")
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../char")
+tree_root = SubResource("AnimationNodeStateMachine_hu0w8")
+anim_player = NodePath("../char/AnimationPlayer")
+parameters/conditions/idle = false
+parameters/conditions/running = false
+parameters/conditions/walking = false
+
+[node name="char" parent="." instance=ExtResource("2_gym36")]
+
+[node name="Skeleton3D" parent="char/Armature_001" index="0"]
+bones/0/position = Vector3(0, 0, 0)
+bones/0/rotation = Quaternion(0.682978, -3.79581e-18, 3.7235e-18, 0.730439)
+bones/1/rotation = Quaternion(-0.0305495, -1.00967e-19, -6.85679e-21, 0.999533)
+bones/2/rotation = Quaternion(0.0248362, 1.19187e-07, -2.28571e-09, 0.999692)
+bones/4/rotation = Quaternion(-0.0922171, 0.106887, 0.989951, -0.00825058)
+bones/5/rotation = Quaternion(-0.396798, -0.00153886, -0.0747542, 0.914855)
+bones/6/rotation = Quaternion(-0.000387348, -9.31324e-08, 0.00206482, 0.999998)
+bones/8/rotation = Quaternion(0.0921308, 0.116696, 0.988843, 0.0091644)
+bones/9/rotation = Quaternion(-0.257233, -0.0103543, 0.0484082, 0.965081)
+bones/10/rotation = Quaternion(-0.000387337, 9.22011e-08, -0.00206482, 0.999998)
+bones/12/position = Vector3(-6.46235e-29, 0, 0.00277164)
+bones/12/rotation = Quaternion(-5.77144e-10, 0.999997, -0.00225223, 1.3316e-07)
+bones/14/position = Vector3(0.00170545, -2.97969e-06, 5.25237e-06)
+bones/14/rotation = Quaternion(0.486115, -0.512968, 0.474924, -0.524407)
+bones/15/rotation = Quaternion(0.0244221, 0.00186283, -0.134132, 0.990661)
+bones/16/rotation = Quaternion(-0.0142161, 0.117309, 0.750262, 0.650495)
+bones/18/position = Vector3(-0.00171294, -2.97969e-06, 5.25237e-06)
+bones/18/rotation = Quaternion(-0.486115, -0.512968, 0.474924, 0.524407)
+bones/19/rotation = Quaternion(-0.00162809, -8.41118e-05, 0.103758, 0.994601)
+bones/20/rotation = Quaternion(0.0599557, -0.0679766, -0.707476, 0.700901)
 
 [node name="InteractionSystem" type="Area3D" parent="." node_paths=PackedStringArray("player_movement")]
 script = ExtResource("5_2y1bu")
@@ -39,3 +130,5 @@ shape = SubResource("SphereShape3D_1oqna")
 
 [connection signal="body_entered" from="InteractionSystem" to="InteractionSystem" method="_on_body_entered"]
 [connection signal="body_exited" from="InteractionSystem" to="InteractionSystem" method="_on_body_exited"]
+
+[editable path="char"]

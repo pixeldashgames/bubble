@@ -41,8 +41,10 @@ func update_interactables():
 				highest_priority = interactable.interactable_priority
 				selected_interactable = interactable
 		
+		var removed := 0
 		for index in remove_indexes:
-			current_interactables.remove_at(index)
+			current_interactables.remove_at(index - removed)
+			removed += 1
 	
 	if last_selected != selected_interactable:
 		if last_selected != null:
@@ -51,8 +53,11 @@ func update_interactables():
 			selected_interactable.on_select()
 	
 	if selected_interactable != null:
+		if selected_interactable.offer_info:
+			PlayerHUD.Instance.show_info_panel(selected_interactable.info_title, selected_interactable.info_details)
 		PlayerHUD.Instance.show_interactable(selected_interactable.interactable_name, selected_interactable.input_names, selected_interactable.interactions_enabled)
 	else:
+		PlayerHUD.Instance.hide_info_panel()
 		PlayerHUD.Instance.hide_interactable()
 
 

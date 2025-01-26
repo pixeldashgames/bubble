@@ -12,6 +12,10 @@ signal deselect
 @export var disable_interaction_system_on_interaction: bool = false
 @export var can_interact: bool = true
 
+@export var offer_info := true
+@export var info_title: String
+@export var info_details: String
+
 var interactions_enabled: Array[bool] = []
 
 func _ready() -> void:

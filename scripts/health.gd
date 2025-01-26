@@ -1,6 +1,7 @@
 class_name Health extends Node3D
 
 signal death
+signal revive
 
 @export var team: String
 @export var max_health: float
@@ -22,6 +23,8 @@ func damage(amount: float):
 		death.emit()
 
 func heal(amount: float):
-	if is_dead:
-		return
+	if health == 0 and amount > 0 and max_health > 0:
+		revive.emit()
+		is_dead = false
+		
 	health = clampf(health + amount, 0, max_health)

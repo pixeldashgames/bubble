@@ -15,6 +15,8 @@ static var Instance: PlayerHUD
 @export var input_context: GUIDEMappingContext
 @export var interaction_progress_bar: ProgressBar
 @export var disabled_interaction_color: Color
+@export var screen_fade_out_time: float
+@export var screen_fade_in_time: float
 
 var dialog_tween: Tween = null
 var hide_tween: Tween = null
@@ -25,6 +27,14 @@ var interact_actions_compiled = false
 
 var input_formatter: GUIDEInputFormatter
 
+func update_preparation_hud(seconds_remaining: int):
+	%WaveTitle.text = "Ola %d: Prepárate" % (GameController.Instance.current_wave + 1)
+	%WaveDescription.text = "%d segundos restantes" % seconds_remaining
+
+func update_wave_hud(enemies_remaining: int):
+	%WaveTitle.text = "Ola %d: Sobrevive" % (GameController.Instance.current_wave + 1)
+	%WaveDescription.text = "Enemigos restantes: %d" % enemies_remaining
+
 func _ready() -> void:
 	input_formatter = GUIDEInputFormatter.for_context(input_context)
 
@@ -33,6 +43,24 @@ func _ready() -> void:
 		interact_input_texts.append(action_text)
 	
 	interact_actions_compiled = true
+
+func fade_screen():
+	var tween = create_tween()
+	tween.tween_property(%ScreenFade, "color", Color(0, 0, 0, 1), screen_fade_out_time)
+	return tween.finished
+
+func unfade_screen():
+	var tween = create_tween()
+	tween.tween_property(%ScreenFade, "color", Color(0, 0, 0, 0), screen_fade_in_time)
+	return tween.finished
+
+func show_info_panel(info_title: String, info_details: String):
+	%InfoPanel.show()
+	%InfoTitle.text = info_title
+	%InfoDescription.text = info_details
+
+func hide_info_panel():
+	%InfoPanel.hide()
 
 func _enter_tree() -> void:
 	assert(Instance == null, "Another HUD instance already exists")
