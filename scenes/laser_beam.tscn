@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bu5qrdssn0afb"]
 
-[ext_resource type="Script" path="res://scripts/laser_beam.gd" id="1_0cwbw"]
+[ext_resource type="Script" uid="uid://5aeu7gn1usq5" path="res://scripts/laser_beam.gd" id="1_0cwbw"]
 [ext_resource type="Material" uid="uid://pdxqh48yk13m" path="res://materials/laser_beam.tres" id="1_m2m2t"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_0m2jr"]

@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://b8cl3thkam01k"]
 
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_kxwgr"]
+[ext_resource type="Script" uid="uid://doeqxyg0ka74w" path="res://scripts/enemy.gd" id="1_kxwgr"]
 [ext_resource type="AudioStream" uid="uid://b0cye4lsaufaf" path="res://audio/aguijonazo enemy.wav" id="2_47eyo"]
-[ext_resource type="Script" path="res://scripts/health.gd" id="2_xavrx"]
+[ext_resource type="Script" uid="uid://bd58503pwrfhc" path="res://scripts/health.gd" id="2_xavrx"]
 [ext_resource type="PackedScene" uid="uid://bnl5mvvytme77" path="res://art/3d/ARANIA BASICA fixed.glb" id="3_hklg8"]
 [ext_resource type="AudioStream" uid="uid://cwpvy7drrj8ac" path="res://audio/muerte de bichos.wav" id="3_x1ebb"]
 

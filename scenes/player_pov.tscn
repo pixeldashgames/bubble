@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cniq1400kw76k"]
 
-[ext_resource type="Script" path="res://scripts/player_camera_follow.gd" id="1_787y6"]
+[ext_resource type="Script" uid="uid://djywkc82wgwpe" path="res://scripts/player_camera_follow.gd" id="1_787y6"]
 
 [node name="PlayerPOV" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -1)

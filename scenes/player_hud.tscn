@@ -1,8 +1,8 @@
 [gd_scene load_steps=18 format=3 uid="uid://caev6otsfk014"]
 
 [ext_resource type="Texture2D" uid="uid://qiotkea8hn53" path="res://icon.svg" id="1_dr6l8"]
-[ext_resource type="Script" path="res://scripts/player_hud.gd" id="1_ttdc3"]
-[ext_resource type="Script" path="res://addons/guide/guide_action.gd" id="2_1ea55"]
+[ext_resource type="Script" uid="uid://ddl31wcdck4k7" path="res://scripts/player_hud.gd" id="1_ttdc3"]
+[ext_resource type="Script" uid="uid://c2nl6e6y0so3o" path="res://addons/guide/guide_action.gd" id="2_1ea55"]
 [ext_resource type="Resource" uid="uid://bhcwmn3yhumwm" path="res://items/scrap_metal.tres" id="2_m5h20"]
 [ext_resource type="Resource" uid="uid://carlgot4k511r" path="res://input/interact_1st.tres" id="3_0cu54"]
 [ext_resource type="Texture2D" uid="uid://c44r6gjupj2pp" path="res://art/ui/text_backdrop.png" id="3_htlpa"]

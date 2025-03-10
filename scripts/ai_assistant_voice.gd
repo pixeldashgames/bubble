@@ -13,7 +13,7 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
 	Instance = null
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if notifications_queue.size() == 0:
 		return
 	
@@ -25,5 +25,5 @@ func _process(delta: float) -> void:
 		
 		await voice_source.finished
 
-func enqueue_notif(notification: AudioStream):
-	notifications_queue.append(notification)
+func enqueue_notif(notif: AudioStream):
+	notifications_queue.append(notif)

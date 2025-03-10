@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="GameResource" load_steps=3 format=3 uid="uid://bhcwmn3yhumwm"]
 
-[ext_resource type="Script" path="res://scripts/game_resource.gd" id="1_cxp3x"]
+[ext_resource type="Script" uid="uid://bil383slreeed" path="res://scripts/game_resource.gd" id="1_cxp3x"]
 [ext_resource type="Texture2D" uid="uid://bki30wpv072a1" path="res://art/ui/Mineral.png" id="1_gu1ts"]
 
 [resource]

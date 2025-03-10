@@ -2,12 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://biqd83slug8ur" path="res://scenes/player.tscn" id="3_hmcrv"]
 [ext_resource type="Material" uid="uid://4ftusght3jek" path="res://materials/outline_material.tres" id="4_217e3"]
-[ext_resource type="Script" path="res://scripts/interactable.gd" id="4_lo67t"]
+[ext_resource type="Script" uid="uid://bjh4armnahpnu" path="res://scripts/interactable.gd" id="4_lo67t"]
 [ext_resource type="PackedScene" uid="uid://cniq1400kw76k" path="res://scenes/player_pov.tscn" id="4_yerw1"]
-[ext_resource type="Script" path="res://scripts/interactable_outline.gd" id="5_bipst"]
+[ext_resource type="Script" uid="uid://c0hbbon60nma2" path="res://scripts/interactable_outline.gd" id="5_bipst"]
 [ext_resource type="Resource" uid="uid://bhcwmn3yhumwm" path="res://items/scrap_metal.tres" id="5_vf7b7"]
 [ext_resource type="SphereMesh" uid="uid://cfjcoubychlji" path="res://materials/test_interactable_material.tres" id="8_ucp3a"]
-[ext_resource type="Script" path="res://scripts/pickupable.gd" id="11_einyw"]
+[ext_resource type="Script" uid="uid://cainpbmcdnb8j" path="res://scripts/pickupable.gd" id="11_einyw"]
 [ext_resource type="PackedScene" uid="uid://b8cl3thkam01k" path="res://scenes/enemy.tscn" id="13_dhiyv"]
 [ext_resource type="PackedScene" uid="uid://bf0hydilsdven" path="res://scenes/turret.tscn" id="13_rkh1s"]
 

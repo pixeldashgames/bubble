@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://c2dh4o820vpgu"]
 
-[ext_resource type="Script" path="res://scripts/interactable.gd" id="1_yedha"]
-[ext_resource type="Script" path="res://scripts/health.gd" id="2_ogb0p"]
-[ext_resource type="Script" path="res://scripts/weakpoint.gd" id="3_yo4si"]
-[ext_resource type="Script" path="res://scripts/long_interactable.gd" id="4_um1l5"]
+[ext_resource type="Script" uid="uid://bjh4armnahpnu" path="res://scripts/interactable.gd" id="1_yedha"]
+[ext_resource type="Script" uid="uid://bd58503pwrfhc" path="res://scripts/health.gd" id="2_ogb0p"]
+[ext_resource type="Script" uid="uid://dcwpdotqyimso" path="res://scripts/weakpoint.gd" id="3_yo4si"]
+[ext_resource type="Script" uid="uid://cmklt6i5qk2un" path="res://scripts/long_interactable.gd" id="4_um1l5"]
 [ext_resource type="AudioStream" uid="uid://cbjpjkgx087ty" path="res://audio/NPC/ia nos atacan.wav" id="4_vwjdv"]
 [ext_resource type="AudioStream" uid="uid://4rkf3xe36p1p" path="res://audio/NPC/ia tropas rodeando la burbuja.wav" id="5_cwn7k"]
 

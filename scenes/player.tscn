@@ -1,12 +1,12 @@
 [gd_scene load_steps=23 format=3 uid="uid://biqd83slug8ur"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_lbjs0"]
+[ext_resource type="Script" uid="uid://cyd51d2nrf3a7" path="res://scripts/player.gd" id="1_lbjs0"]
 [ext_resource type="PackedScene" uid="uid://tnnlyd68om05" path="res://art/3d/char.fbx" id="2_gym36"]
 [ext_resource type="Resource" uid="uid://bscjkt0jyxrqj" path="res://input/move.tres" id="2_noxsf"]
 [ext_resource type="Resource" uid="uid://jrxta1mia7dk" path="res://input/sprint.tres" id="2_vhhhd"]
-[ext_resource type="Script" path="res://addons/guide/guide_action.gd" id="3_0o0e0"]
+[ext_resource type="Script" uid="uid://c2nl6e6y0so3o" path="res://addons/guide/guide_action.gd" id="3_0o0e0"]
 [ext_resource type="Resource" uid="uid://carlgot4k511r" path="res://input/interact_1st.tres" id="4_m02wa"]
-[ext_resource type="Script" path="res://scripts/interaction_system.gd" id="5_2y1bu"]
+[ext_resource type="Script" uid="uid://c0m38yrjbjl08" path="res://scripts/interaction_system.gd" id="5_2y1bu"]
 [ext_resource type="Resource" uid="uid://bltfb8kk6gfor" path="res://input/interact_2nd.tres" id="5_a2hki"]
 [ext_resource type="Resource" uid="uid://bbq5fkkhhy4dh" path="res://input/interact_3rd.tres" id="6_7ugyo"]
 

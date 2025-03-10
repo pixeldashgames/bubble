@@ -1,9 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://3a76bq17lehl"]
 
-[ext_resource type="PackedScene" uid="uid://b4gl5yssugjbg" path="res://art/3d/BIG FBX SCENE HUGE.fbx" id="1_bepab"]
-[ext_resource type="Material" uid="uid://bj6i3y3fido3t" path="res://materials/glass_cupula.tres" id="2_g5ueb"]
+[ext_resource type="Material" uid="uid://bj6i3y3fido3t" path="res://materials/shield.tres" id="2_g5ueb"]
 
-[node name="BIG FBX SCENE HUGE" instance=ExtResource("1_bepab")]
+[sub_resource type="Resource" id="Resource_nnsk1"]
+metadata/__load_path__ = "res://art/3d/BIG FBX SCENE HUGE.fbx"
+
+[node name="BIG FBX SCENE HUGE"]
 
 [node name="Plane_001" parent="." index="0"]
 transform = Transform3D(1564.01, 0, 0, 0, -4.03922e-05, 915.068, 0, -924.065, -3.99989e-05, 1.35652, -0.378904, 9.22115)

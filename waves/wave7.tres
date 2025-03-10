@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://f07yehnktbnp" path="res://scenes/scorpion.tscn" id="1_4ksjd"]
 [ext_resource type="PackedScene" uid="uid://b8cl3thkam01k" path="res://scenes/enemy.tscn" id="2_ljcyh"]
-[ext_resource type="Script" path="res://scripts/wave_definition.gd" id="3_sdkyv"]
+[ext_resource type="Script" uid="uid://bs0liwaqsa3dh" path="res://scripts/wave_definition.gd" id="3_sdkyv"]
 
 [resource]
 script = ExtResource("3_sdkyv")

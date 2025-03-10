@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dksn55e1gxbrx"]
 
-[ext_resource type="Script" path="res://scripts/in_game_menus.gd" id="1_da7uh"]
+[ext_resource type="Script" uid="uid://c8fpymk25n3kk" path="res://scripts/in_game_menus.gd" id="1_da7uh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_moakp"]
 font_size = 32

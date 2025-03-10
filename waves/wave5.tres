@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WaveDefinition" load_steps=3 format=3 uid="uid://dctp6gqw6ep5d"]
 
 [ext_resource type="PackedScene" uid="uid://b8cl3thkam01k" path="res://scenes/enemy.tscn" id="2_vd8k6"]
-[ext_resource type="Script" path="res://scripts/wave_definition.gd" id="3_5tsop"]
+[ext_resource type="Script" uid="uid://bs0liwaqsa3dh" path="res://scripts/wave_definition.gd" id="3_5tsop"]
 
 [resource]
 script = ExtResource("3_5tsop")
