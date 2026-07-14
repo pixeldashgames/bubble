@@ -1,6 +1,6 @@
 # Bubble
 
-A 3D base-defense game built in **Godot 4.4** in 48 hours for **Global Game Jam 2025** (theme: *Bubble*) by the Pixel Dash Games team.
+A 3D base-defense game built in **Godot 4.4** in 48 hours for **Global Game Jam 2025** (theme: *Bubble*) by team **Wixell**.
 
 Set in the city of **Last Hope**, you place extractors to harvest resources, build turrets to fend off waves of enemies, and talk to the city's inhabitants along the way.
 
